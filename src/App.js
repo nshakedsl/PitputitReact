@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import BackgroundLogo from './/components/Background-logo.js'
 import './App.css';
 
 function App() {
