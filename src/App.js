@@ -1,14 +1,11 @@
 import logo from './logo.svg';
-import LoginPage from './LoginPage.js';
+import LoginPage from './pages/LoginPage';
 
 import './App.css';
 
 function App() {
   return (
-  
-
-
-<LoginPage></LoginPage>
+  <LoginPage />
 
     // <div className="App">
     //   <header className="App-header">
