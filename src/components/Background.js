@@ -1,4 +1,3 @@
-
 import './../styles/login.css'
 
 function Background() {
