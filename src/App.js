@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage';
 import './App.css';
 import RegisterPage from './pages/RegisterPage';
 import ChatPage from './pages/ChatPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
