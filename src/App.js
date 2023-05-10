@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import LoginPage from './pages/LoginPage';
-
 import './App.css';
 import RegisterPage from './pages/RegisterPage';
 
