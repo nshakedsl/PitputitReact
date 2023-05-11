@@ -6,7 +6,7 @@ import ChatPage from './pages/ChatPage';
 
 function App() {
   return (
-  <LoginPage />
+  <ChatPage />
 
     // <div className="App">
     //   <header className="App-header">
