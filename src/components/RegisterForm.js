@@ -16,62 +16,74 @@ function RegisterForm() {
   const [error, setError] = useState('');
 
 
- const handleRegisterClick = () => {
-  if ( username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '') {
+  const handleRegisterClick = () => {
+
+    console.log(' username.trim(): ', username);
+    console.log('nickname.trim(): ', nickname);
+    console.log('password.trim(): ', password.trim());
+    console.log(' verifyPassword.trim(): ', verifyPassword.trim());
+    if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '') {
       setError('All fields are mandatory');
     } else if (password.length < 8) {
-      if (password.length < 8) {
-      setError('');
-      setError('Password should be at least 8 characters long');
+      setError('Password should cintain at least 8 characters');
     } else if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
-      setError('');
       setError('Password should contain a combination of letters and numbers');
     } else if (password !== verifyPassword) {
-      setError('');
       setError('Passwords do not match');
     } else {
       setError(''); // Clear the error message
       navigate('/');
-    }}
-}
-
-const handleHerfClick = () => {
-  navigate('/');
-};
+    }
+  }
 
 
-return (
+  const handleHerfClick = () => {
+    navigate('/');
+  };
+
+
+  return (
+
     <div className="element_width slide-in-right">
+
+      <text className="textError">{error}</text>
       <RegularInput
         placeholder="Username"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        setValue={setUsername}
+
       />
       <RegularInput
         placeholder="Nickname"
         value={nickname}
-        onChange={(e) => setNickname(e.target.value)}
+        setValue={setNickname}
       />
+
       <PasswordInput
         placeholder="Password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        setValue={setPassword}
       />
+
       <PasswordInput
+
         placeholder="Verify Password"
         value={verifyPassword}
-        onChange={(e) => setVerifyPassword(e.target.value)}
+        setValue={setVerifyPassword}
       />
+
+
+
       <button type="button" onClick={handleRegisterClick} className="btn btn-info">Register</button>
       {/* {error && <p className="error">{error}</p>} */}
-      <text>{error}</text>
+
       <text>Already registered? <a href="#" onClick={handleHerfClick} >Click here</a> to login</text>
     </div>
 
   );
- 
-     };
-  
+
+};
+
 export default RegisterForm;
 
 
