@@ -1,5 +1,7 @@
 import './../styles/login.css'
 import './../styles/chats.css'
+import MessageInput from '../chatComponents/MessageInput';
+import TopBar from '../chatComponents/Topbar';
 
 function ChatPage() {
     return (
@@ -7,40 +9,7 @@ function ChatPage() {
 
 
             <div class="main">
-                <div class="topBar">
-                    <div class="left_topbar">
-                        <button type="button" class="transparent-btn button4 btn-img-self ">
-                            <img src="https://www.lbscience.org/wp-content/uploads/2018/07/1-1-e1531677297836-1.jpg" alt="buttonpng"
-                                class="btn-img image-cropper ico" />
-                        </button>
-
-                        <div class="add">
-
-                            <button type="button" class="transparent-btn btn-bar-size" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"><img src="../pictures/add-contact.png" alt="buttonpng" class="btn-img" />
-                            </button>
-                        </div>
-                    </div>
-                    <div class="right_topbar">
-                        <div class="image_and_name">
-                            <button type="button" class="transparent-btn button5" data-bs-toggle="modal" data-bs-target="#PicModal">
-                                <img
-                                    src="https://play-lh.googleusercontent.com/TxjQBGYHvMJsBX5dCvxQ4R-_4N-XrVhW6-p7D7TXanXKZMD8L-UkeMBWO1dtubGVNqU"
-                                    alt="buttonpng" width="60" class="btn-img image-cropper" />
-                            </button>
-                            <text> CSS</text>
-                        </div>
-                        <div class="image_and_name">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input " type="checkbox" id="flexSwitchCheckChecked" checked />
-                            </div>
-                            <img class="logo" src="../pictures/logo-color.svg" />
-                        </div>
-                    </div>
-
-
-
-                </div>
+                <TopBar nameMe="me" nameOther="CSS" myImg="https://www.lbscience.org/wp-content/uploads/2018/07/1-1-e1531677297836-1.jpg" otherImg="https://play-lh.googleusercontent.com/TxjQBGYHvMJsBX5dCvxQ4R-_4N-XrVhW6-p7D7TXanXKZMD8L-UkeMBWO1dtubGVNqU"/>
                 <div class="content">
                     <div class="contacts">
                         <div class="chat_box">
@@ -77,14 +46,7 @@ function ChatPage() {
                             </div>
                             <div class="triangle triangle_other"></div>
                         </div>
-                        <footer class="footer">
-                            <input class="message" placeholder="Type a message" />
-                            <svg class="send" viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet"
-                                version="1.1" x="0px" y="0px" enable-background="new 0 0 24 24">
-                                <path fill="#54656f"
-                                    d="M1.101,21.757L23.8,12.028L1.101,2.3l0.011,7.912l13.623,1.816L1.112,13.845 L1.101,21.757z"></path>
-                            </svg>
-                        </footer>
+                        <MessageInput/>
                     </div>
 
 
