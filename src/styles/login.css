@@ -183,6 +183,30 @@ input[type="file"] {
     text-shadow: #00000029;
     font-weight: bold;
 }
+  
+@keyframes shake {
+    0% { 
+      transform: rotate(2deg);
+    }
+    50% {
+     transform: rotate(-4deg);
+    }
+    70% {
+      transform: rotate(4deg);
+    }
+  
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  
+
+  .shake {
+    animation: shake 500ms ease-in-out forwards;
+  }
+  #anim:hover {
+    animation: shake 500ms ease-in-out forwards;
+  }
 
 
 /* ----------------------------------------------

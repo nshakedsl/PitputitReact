@@ -9,6 +9,7 @@ function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [shakeError, setShakeError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -16,13 +17,22 @@ function LoginForm() {
     navigate('/register');
   };
 
+  const shakeAction = () => {
+    setShakeError(true);
+    setTimeout(() => { setShakeError(false); }, 500);}
+
   const handleRegisterClick = () => {
     if (username.trim() === '' || password.trim() === '') {
-      setError('All fields are mandatory');
+      setError('All fields are mandatory❗');
+      shakeAction();
+
     } else if (password.length < 8) {
-        setError('uncorrect password');
+        setError('incorrect password❗');
+        shakeAction();
+
      } else {
         setError(''); // Clear the error message
+        setShakeError(false); // Clear the shake animation
         navigate('/chats');
       }
 
@@ -32,7 +42,12 @@ function LoginForm() {
     <form>
     <div className="element_width slide-in-right">
       <h3 className="title"> Welcome Back👋</h3>
-      <text className="textError">{error}</text>
+      
+      <div id="anim" className={shakeError ? 'shake' : ''}>
+        <text className="textError">{error}</text>
+      </div>
+
+
       <RegularInput
        placeholder="Username"
         value={username}
