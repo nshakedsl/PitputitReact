@@ -22,6 +22,7 @@ function PasswordInput({ placeholder, value, setValue }) {
           onChange={(e) => setValue(e.target.value)}
         />
       )}
+      
       <img
         className="eye"
         src={showPassword ? "images/Picture6.png" : "images/Picture13.png"}

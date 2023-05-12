@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import LoginPage from './pages/LoginPage';
 import './App.css';
 import RegisterPage from './pages/RegisterPage';
@@ -11,12 +10,12 @@ function App() {
 
   return (
     <Router>
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/chats" element={<ChatPage />} />
-    </Routes>
-  </Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/chats" element={<ChatPage />} />
+      </Routes>
+    </Router>
 
   );
 }
