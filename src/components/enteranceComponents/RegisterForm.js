@@ -14,64 +14,120 @@ function RegisterForm() {
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
   const [error, setError] = useState('');
+  const [shakeError, setShakeError] = useState(false);
 
 
- const handleRegisterClick = () => {
-  if ( username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '') {
-      setError('All fields are mandatory');
+  // const handleRegisterClick = () => {
+
+  //   console.log(' username.trim(): ', username);
+  //   console.log('nickname.trim(): ', nickname);
+  //   console.log('password.trim(): ', password.trim());
+  //   console.log(' verifyPassword.trim(): ', verifyPassword.trim());
+  //   if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '') {
+  //     setError('All fields are mandatory❗');
+  //   } else if (password.length < 8) {
+  //     setError('Password must contain at least 8 characters❗');
+  //   } else if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
+  //     setError('Password must contain a combination of letters and numbers❗');
+  //   } else if (password !== verifyPassword) {
+  //     setError('Passwords do not match❗');
+  //   } else {
+  //     setError(''); // Clear the error message
+  //     navigate('/');
+  //   }
+  // }
+
+  const shakeAction = () => {
+    setShakeError(true);
+    setTimeout(() => { setShakeError(false); }, 500);}
+
+  const handleRegisterClick = () => {
+    // ...
+    if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '') {
+      setError('All fields are mandatory❗');
+      shakeAction();
+
+    } else if (username.length < 2  || nickname.length < 2) {
+      setError('inputs must contain at least 2 characters❗');
+      shakeAction();
+    
+    } else if (username.length > 32  || nickname.length > 32 || password.length > 32 || verifyPassword.length > 32) {
+      setError('inputs must contain maximun 32 characters❗');
+      shakeAction();
+
     } else if (password.length < 8) {
-      if (password.length < 8) {
-      setError('');
-      setError('Password should be at least 8 characters long');
+      setError('Password must contain at least 8 characters❗');
+      shakeAction();
+
     } else if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
-      setError('');
-      setError('Password should contain a combination of letters and numbers');
+      setError('Password must contain a combination of letters and numbers❗');
+      shakeAction();
+
     } else if (password !== verifyPassword) {
-      setError('');
-      setError('Passwords do not match');
+      setError('Passwords do not match❗');
+      shakeAction();
+
     } else {
-      setError(''); // Clear the error message
+      setError('');
+      setShakeError(false); // Clear the shake animation
       navigate('/');
-    }}
-}
-
-const handleHerfClick = () => {
-  navigate('/');
-};
+    }
+  };
 
 
-return (
+  const handleHerfClick = () => {
+    navigate('/');
+  };
+
+
+  return (
+
     <div className="element_width slide-in-right">
-      <RegularInput
+    {/* <div id="anim">
+      <text className="textError">{error}</text>
+    </div> */}
+
+      <div id="anim" className={shakeError ? 'shake' : ''}>
+        <text className="textError">{error}</text>
+      </div>
+
+      <RegularInput 
         placeholder="Username"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        setValue={setUsername}
+
       />
       <RegularInput
         placeholder="Nickname"
         value={nickname}
-        onChange={(e) => setNickname(e.target.value)}
+        setValue={setNickname}
       />
+
       <PasswordInput
         placeholder="Password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        setValue={setPassword}
       />
+
       <PasswordInput
+
         placeholder="Verify Password"
         value={verifyPassword}
-        onChange={(e) => setVerifyPassword(e.target.value)}
+        setValue={setVerifyPassword}
       />
+
+
       <button type="button" onClick={handleRegisterClick} className="btn btn-info">Register</button>
-      {/* {error && <p className="error">{error}</p>} */}
-      <text>{error}</text>
+
+
+
       <text>Already registered? <a href="#" onClick={handleHerfClick} >Click here</a> to login</text>
     </div>
 
   );
- 
-     };
-  
+
+};
+
 export default RegisterForm;
 
 

@@ -177,6 +177,36 @@ input[type="file"] {
     -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
+.textError{
+
+    color: #ee3838;
+    text-shadow: #00000029;
+    font-weight: bold;
+}
+  
+@keyframes shake {
+    0% { 
+      transform: rotate(2deg);
+    }
+    50% {
+     transform: rotate(-4deg);
+    }
+    70% {
+      transform: rotate(4deg);
+    }
+  
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  
+
+  .shake {
+    animation: shake 500ms ease-in-out forwards;
+  }
+  #anim:hover {
+    animation: shake 500ms ease-in-out forwards;
+  }
 
 
 /* ----------------------------------------------
