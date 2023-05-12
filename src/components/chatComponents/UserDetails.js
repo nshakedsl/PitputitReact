@@ -1,7 +1,7 @@
 import React from "react";
-import './../styles/login.css'
-import './../styles/chats.css'
-function UserDetails({nameMe, myImg }) {
+// import './../styles/login.css'
+// import './../styles/chats.css'
+function UserDetails({ nameMe, myImg }) {
     return (
         <div className="left_topbar">
             <button type="button" className="transparent-btn button4 btn-img-self ">

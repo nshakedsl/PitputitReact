@@ -1,6 +1,6 @@
 import React from "react";
-import './../styles/login.css'
-import './../styles/chats.css'
+// import './../styles/login.css'
+// import './../styles/chats.css'
 function OtherDetails({ nameOther, otherImg }) {
     return (
         <div className="image_and_name">

@@ -1,6 +1,6 @@
 import React from "react";
-import './../styles/login.css'
-import './../styles/chats.css'
+// import './../styles/login.css'
+// import './../styles/chats.css'
 import Mesage from './Message';
 
 function MessageContainer({ id, messages }) {

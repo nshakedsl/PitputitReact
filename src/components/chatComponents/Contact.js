@@ -1,6 +1,6 @@
 import React from "react";
-import './../styles/login.css'
-import './../styles/chats.css'
+// import './../styles/login.css'
+// import './../styles/chats.css'
 function UserDetails({ otherName, otherImg, date, lastMsg }) {
     return (
         <div className="chat_box">
