@@ -9,7 +9,7 @@ function LoginPage({users}) {
     <div className="center_content background_enterance">
       <Background />
       <Logo />
-      <LoginForm />
+      <LoginForm users = {users}/>
     </div>
   );
 }
