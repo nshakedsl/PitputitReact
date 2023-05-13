@@ -3,12 +3,12 @@ import Background from '../components/enteranceComponents/Background';
 import ImageUploader from '../components/enteranceComponents/ImageUploader';
 import RegisterForm from '../components/enteranceComponents/RegisterForm';
 
-function RegisterPage() {
+function RegisterPage({users}) {
   return (
-    <div class="center_content background_enterance">
+    <div className="center_content background_enterance">
       <Background />
       <ImageUploader />
-      <RegisterForm />
+      <RegisterForm users={users}/>
     </div>
   );
 }

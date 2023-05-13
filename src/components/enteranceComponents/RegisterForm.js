@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-function RegisterForm() {
+function RegisterForm({users}) {
 
   const navigate = useNavigate();
 
@@ -68,6 +68,9 @@ function RegisterForm() {
       shakeAction();
 
     } else {
+      //add user here
+      let newUser = {userName:username, pass:password, nick:nickname, dialogList: [] }
+      {users.push(newUser)}
       setError('');
       setShakeError(false); // Clear the shake animation
       navigate('/');
