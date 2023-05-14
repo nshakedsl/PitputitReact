@@ -36,7 +36,7 @@ function RegisterForm() {
 
   const handleRegisterClick = () => {
     // ...
-    if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '') {
+    if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === ''|| imageSrc === 'images/user.png') {
       setError('All fields are mandatory❗');
       shakeAction();
 
@@ -145,6 +145,5 @@ function RegisterForm() {
 };
 
 export default RegisterForm;
-
 
 
