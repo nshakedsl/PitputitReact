@@ -57,7 +57,7 @@ img {
 
 }
 
-.logo {
+.logo_big {
     z-index: 1;
     box-shadow: 0px 3px 6px #00000029;
 }
@@ -177,49 +177,53 @@ input[type="file"] {
     -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
-.textError{
+
+.textError {
 
     color: #ee3838;
     text-shadow: #00000029;
     font-weight: bold;
 }
 
-.my-tooltip .tooltip-inner{
+.my-tooltip .tooltip-inner {
 
-    background-color: rgba(80, 152, 233, 0.918); 
-    color: white; 
+    background-color: rgba(80, 152, 233, 0.918);
+    color: white;
     border-color: #000000;
     border-width: 0.1vw;
-    border-style:solid;
+    border-style: solid;
 
 
 }
 
 
-  
-@keyframes shake {
-    0% { 
-      transform: rotate(2deg);
-    }
-    50% {
-     transform: rotate(-4deg);
-    }
-    70% {
-      transform: rotate(4deg);
-    }
-  
-    100% {
-      transform: rotate(0deg);
-    }
-  }
-  
 
-  .shake {
+@keyframes shake {
+    0% {
+        transform: rotate(2deg);
+    }
+
+    50% {
+        transform: rotate(-4deg);
+    }
+
+    70% {
+        transform: rotate(4deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
+.shake {
     animation: shake 500ms ease-in-out forwards;
-  }
-  #anim:hover {
+}
+
+#anim:hover {
     animation: shake 500ms ease-in-out forwards;
-  }
+}
 
 
 /* ----------------------------------------------
