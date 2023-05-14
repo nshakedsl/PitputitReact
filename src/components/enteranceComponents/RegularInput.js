@@ -18,7 +18,7 @@ function RegularInput({ placeholder, value, setValue }) {
     <div className="App">
       <OverlayTrigger placement="left" overlay={renderTooltip}>
       {setValue && (<input 
-        data-bs-trigger="click" className="input regular" type="text" name="user" placeholder={placeholder} value={value}
+        data-bs-trigger="click"  className="input regular" type="text" name="user" placeholder={placeholder} value={value} autocomplete="off"
         onChange={(e) => setValue(e.target.value)} />)}
       </OverlayTrigger>
     </div>

@@ -4,7 +4,7 @@ import RegularInput from './RegularInput';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../../ctx/userContext"
 
-function RegisterForm() {
+function RegisterForm({ imageSrc }) {
   const Userctx = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ function RegisterForm() {
 
   const handleRegisterClick = () => {
     // ...
-    if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '') {
+    if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '' || imageSrc === 'images/user.png') {
       setError('All fields are mandatory❗');
       shakeAction();
 
@@ -69,9 +69,6 @@ function RegisterForm() {
   return (
 
     <div className="element_width slide-in-right">
-      {/* <div id="anim">
-      <text className="textError">{error}</text>
-    </div> */}
 
 
       <RegularInput
