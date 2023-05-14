@@ -1,13 +1,11 @@
 import React from "react";
-// import './../styles/login.css'
-// import './../styles/chats.css'
 import UserDetails from './UserDetails';
 import OtherDetails from './OtherDetails';
 
-function TopBar({ nameOther, myImg, otherImg }) {
+function TopBar({ nameOther, otherImg }) {
     return (
         <div className="topBar">
-            <UserDetails myImg={myImg} />
+            <UserDetails />
             <div className="right_topbar">
                 <OtherDetails nameOther={nameOther} otherImg={otherImg} />
                 <div className="image_and_name">
