@@ -30,7 +30,7 @@ function ChatPage() {
                         <Contact otherName="CSS" otherImg="https://play-lh.googleusercontent.com/TxjQBGYHvMJsBX5dCvxQ4R-_4N-XrVhW6-p7D7TXanXKZMD8L-UkeMBWO1dtubGVNqU"
                             date="3/31/2023 3:24" lastMsg="Agreed, HTML. Here's to more beautiful websites 🎉" />
                     </div>
-                    <div className="chats">
+                    <div className="chats" style={{ backgroundImage: `url("/images/chat-background.png")` }}>
                         <ChatsContainer id={1} messages={mesages} />
                         <MessageInput />
                     </div>
