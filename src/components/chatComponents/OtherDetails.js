@@ -1,6 +1,5 @@
 import React from "react";
-// import './../styles/login.css'
-// import './../styles/chats.css'
+// i\
 function OtherDetails({ nameOther, otherImg }) {
     return (
         <div className="image_and_name">
@@ -9,7 +8,7 @@ function OtherDetails({ nameOther, otherImg }) {
                     src={otherImg}
                     alt="buttonpng" width="60" className="btn-img image-cropper" />
             </button>
-            <text> {nameOther}</text>
+            <div> {nameOther}</div>
         </div>
     );
 }

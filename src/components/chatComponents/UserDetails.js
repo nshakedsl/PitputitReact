@@ -1,6 +1,4 @@
 import React from "react";
-// import './../styles/login.css'
-// import './../styles/chats.css'
 function UserDetails({ nameMe, myImg }) {
     return (
         <div className="left_topbar">
@@ -8,7 +6,7 @@ function UserDetails({ nameMe, myImg }) {
                 <img src={myImg} alt="buttonpng"
                     className="btn-img image-cropper ico" />
             </button>
-            <text> {nameMe}</text>
+            <div> {nameMe}</div>
             <div className="add">
 
                 <button type="button" className="transparent-btn btn-bar-size" data-bs-toggle="modal"

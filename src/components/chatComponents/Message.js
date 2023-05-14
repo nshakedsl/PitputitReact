@@ -1,6 +1,5 @@
 import React from "react";
-// import './../styles/login.css'
-// import './../styles/chats.css'
+
 
 function Message({ id, MessageInfo }) {
     return (
