@@ -5,8 +5,8 @@ function MessageContainer({ messages }) {
     return (
 
         <div className="chats-container">
-            {messages.map((item) => (
-                <Mesage MessageInfo={item} />
+            {messages.map((item, i) => (
+                <Mesage key={item.id} MessageInfo={item} />
             ))}
         </div>
     );

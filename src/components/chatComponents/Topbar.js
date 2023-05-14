@@ -12,6 +12,7 @@ function TopBar({ nameOther, otherImg }) {
                     <div className="form-check form-switch">
                         <input className="form-check-input " type="checkbox" id="flexSwitchCheckChecked" />
                     </div>
+                    <img className="exit" src="images/exit.png" />
                     <img className="logo" src="images/logo-color.svg" />
                 </div>
             </div>

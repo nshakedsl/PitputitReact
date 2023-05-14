@@ -35,6 +35,7 @@ body {
 }
 
 .image-cropper {
+    object-fit: cover;
     width: 7vh;
     height: 7vh;
     position: relative;
@@ -81,6 +82,7 @@ img {
     width: 19vw;
     height: 19vw;
     z-index: 1;
+    object-fit: cover;
 }
 
 .debug {

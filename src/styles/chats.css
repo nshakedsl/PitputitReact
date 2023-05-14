@@ -343,7 +343,15 @@ body {
     font-size: 1.8vh;
 }
 
+.exit {
+    width: 6vh;
+    height: 6vh;
+    margin: 1vh;
+    cursor: pointer;
+}
+
 .image-cropper {
+    object-fit: cover;
     width: 7vh;
     height: 7vh;
     position: relative;
