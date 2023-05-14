@@ -37,6 +37,7 @@ function LoginForm() {
         Userctx && Userctx.userList && Userctx.userList.forEach(function (element) {
           console.log(element);
           if (element.userName === username && element.pass === password) {
+            Userctx.setUserName(element.userName)
             setError(''); // Clear the error message
             setShakeError(false); // Clear the shake animation
             navigate('/chats');

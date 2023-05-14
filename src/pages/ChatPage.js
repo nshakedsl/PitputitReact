@@ -11,7 +11,6 @@ import { UserContext } from "../ctx/userContext"
 function ChatPage() {
 
     const Userctx = useContext(UserContext);
-    console.log('Userctx: ', Userctx);
 
     const mesage1 = { messageId: 1, messageText: "Hey CSS, you're looking stylish today. 😎 What's new?", time: "13:39", sender: 1 };
     const mesage2 = {
@@ -21,10 +20,8 @@ function ChatPage() {
     let mesages = [mesage1, mesage2]
     return (
         <div className="background center_content">
-
-
             <div className="main">
-                <TopBar nameMe="me" nameOther="CSS" myImg="https://www.lbscience.org/wp-content/uploads/2018/07/1-1-e1531677297836-1.jpg" otherImg="https://play-lh.googleusercontent.com/TxjQBGYHvMJsBX5dCvxQ4R-_4N-XrVhW6-p7D7TXanXKZMD8L-UkeMBWO1dtubGVNqU" />
+                <TopBar nameOther="CSS" myImg="https://www.lbscience.org/wp-content/uploads/2018/07/1-1-e1531677297836-1.jpg" otherImg="https://play-lh.googleusercontent.com/TxjQBGYHvMJsBX5dCvxQ4R-_4N-XrVhW6-p7D7TXanXKZMD8L-UkeMBWO1dtubGVNqU" />
                 <div className="content">
                     <div className="contacts">
                         <Contact otherName="CSS" otherImg="https://play-lh.googleusercontent.com/TxjQBGYHvMJsBX5dCvxQ4R-_4N-XrVhW6-p7D7TXanXKZMD8L-UkeMBWO1dtubGVNqU"

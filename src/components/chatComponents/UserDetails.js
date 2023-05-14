@@ -1,12 +1,15 @@
-import React from "react";
-function UserDetails({ nameMe, myImg }) {
+import React, { useContext } from 'react';
+import { UserContext } from "../../ctx/userContext"
+
+function UserDetails({myImg }) {
+    const Userctx = useContext(UserContext);
     return (
         <div className="left_topbar">
             <button type="button" className="transparent-btn button4 btn-img-self ">
                 <img src={myImg} alt="buttonpng"
                     className="btn-img image-cropper ico" />
             </button>
-            <div> {nameMe}</div>
+            <div>{Userctx.userName}</div>
             <div className="add">
 
                 <button type="button" className="transparent-btn btn-bar-size" data-bs-toggle="modal"
