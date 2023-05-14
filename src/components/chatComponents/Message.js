@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../ctx/userContext"
 
 
-function Message({ id, MessageInfo }) {
+function Message({MessageInfo}) {
+    const Userctx = useContext(UserContext);
+
     return (
 
-        id === MessageInfo.sender ?
+        Userctx.userName === MessageInfo.name ?
             (<div className="bubble_container bubble_container_me">
                 <div className="bubble me">
                     <div className="text">{MessageInfo.messageText}
