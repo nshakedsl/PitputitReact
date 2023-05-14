@@ -1,12 +1,12 @@
+import React, { useState,useContext } from 'react';
 // import './../styles/login.css'
 import PasswordInput from './PasswordInput';
 import RegularInput from './RegularInput';
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from "../../ctx/userContext"
 
-
-function RegisterForm({users}) {
-
+function RegisterForm() {
+  const Userctx = useContext(UserContext);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
@@ -70,7 +70,11 @@ function RegisterForm({users}) {
     } else {
       //add user here
       let newUser = {userName:username, pass:password, nick:nickname, dialogList: [] }
-      {users.push(newUser)}
+      Userctx.setUserList(()=>{
+        let temp = [...Userctx.userList]
+        temp.push(newUser)
+        return temp
+      })
       setError('');
       setShakeError(false); // Clear the shake animation
       navigate('/');
