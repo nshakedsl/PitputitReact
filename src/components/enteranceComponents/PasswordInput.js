@@ -13,11 +13,11 @@ function PasswordInput({ placeholder, value, setValue }) {
 
 
   const renderTooltip = props => (
-    <Tooltip className="my-tooltip" {...props}> This is mandatory field. Must contain 8-32 charcters.</Tooltip>
+    props && <Tooltip className="my-tooltip" {...props}> This is mandatory field. Must contain 8-32 charcters. Must contain a combination of uppercase and lowercase letters and numbers.</Tooltip>
   );
 
   const renderTooltipEye = props => (
-    <Tooltip className="my-tooltip" {...props}>{showPassword ? "Put my glasses on to hide my password🕶️ " : "Take off my glasses to see my password👁️ "} </Tooltip>
+    props && <Tooltip className="my-tooltip" {...props}>{showPassword ? "Put my glasses on to hide my password🕶️ " : "Take off my glasses to see my password👁️ "} </Tooltip>
   );
 
   return (

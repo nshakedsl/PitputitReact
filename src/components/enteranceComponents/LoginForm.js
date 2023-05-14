@@ -60,7 +60,8 @@ function LoginForm() {
         <RegularInput
           placeholder="Username"
           value={username}
-          setValue={setUsername} />
+          setValue={setUsername} 
+          setError={setError}/>
         <PasswordInput placeholder="Password"
           value={password}
           setValue={setPassword} />

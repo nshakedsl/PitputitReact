@@ -53,7 +53,7 @@ function RegisterForm() {
       shakeAction();
 
     } else if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
-      setError('Password must contain a combination of letters and numbers❗');
+      setError('Password must contain a combination of of uppercase and lowercase letters and numbers❗');
       shakeAction();
 
     } else if (password !== verifyPassword) {
@@ -107,19 +107,24 @@ function RegisterForm() {
         <RegularInput
           placeholder="Username"
           value={username}
-          setValue={setUsername}
+          setValue={setUsername} 
+          setError={setError}
 
         />
+
+        
         <RegularInput
           placeholder="Nickname"
           value={nickname}
           setValue={setNickname}
+          setError={setError}
         />
 
         <PasswordInput
           placeholder="Password"
           value={password}
           setValue={setPassword}
+          setError={setError}
         />
 
         <PasswordInput
@@ -127,6 +132,7 @@ function RegisterForm() {
           placeholder="Verify Password"
           value={verifyPassword}
           setValue={setVerifyPassword}
+          setError={setError}
         />
 
         <div id="anim" className={shakeError ? 'shake' : ''}>
