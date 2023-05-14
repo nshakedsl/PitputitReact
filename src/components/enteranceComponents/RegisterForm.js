@@ -100,14 +100,14 @@ function RegisterForm() {
       />
 
       <div id="anim" className={shakeError ? 'shake' : ''}>
-        <text className="textError">{error}</text>
+        <div className="textError">{error}</div>
       </div>
 
       <button type="button" onClick={handleRegisterClick} className="btn btn-info">Register</button>
 
 
 
-      <text>Already registered? <a href="#" onClick={handleHerfClick} >Click here</a> to login</text>
+      <div>Already registered? <a href="#" onClick={handleHerfClick} >Click here</a> to login</div>
     </div>
 
   );

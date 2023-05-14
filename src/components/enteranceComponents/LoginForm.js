@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import PasswordInput from './PasswordInput';
 import RegularInput from './RegularInput';
 import { useNavigate } from 'react-router-dom';
@@ -65,9 +65,9 @@ function LoginForm() {
           setValue={setPassword} />
         <button type="button" onClick={handleRegisterClick} className="btn btn-info">Log in</button>
         <div id="anim" className={shakeError ? 'shake' : ''}>
-          <text className="textError">{error}</text>
+          <div className="textError">{error}</div>
         </div>
-        <text className="text">Not registered? <a href="#" onClick={handleHerfClick} >click here</a> to register </text>
+        <div className="text">Not registered? <a href="#" onClick={handleHerfClick} >click here</a> to register </div>
       </div>
     </form>
   );
