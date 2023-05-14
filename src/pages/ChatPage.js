@@ -11,10 +11,17 @@ import { UserContext } from "../ctx/userContext"
 function ChatPage() {
 
     const Userctx = useContext(UserContext);
-    const mesage1 = { name : Userctx.userName, messageText: "Hey CSS, you're looking stylish today. 😎 What's new?", time: "13:39" };
+    const mesage1 = {
+        id: 1,
+        name: Userctx.userName,
+        messageText: "Hey CSS, you're looking stylish today. 😎 What's new?",
+        time: "13:39"
+    };
     const mesage2 = {
-        name: "2", messageText: "Not much, just making the web pages look pretty 💅 , and singing a song to help learnthe principles of advanced programming 1🎶."
-        , time: "13:40"
+        id: 2,
+        name: "2",
+        messageText: "Not much, just making the web pages look pretty 💅 , and singing a song to help learnthe principles of advanced programming 1🎶.",
+        time: "13:40"
     };
     let mesages = [mesage1, mesage2]
     return (
@@ -28,7 +35,7 @@ function ChatPage() {
                     </div>
                     <div className="chats" style={{ backgroundImage: `url("/images/chat-background.png")` }}>
                         <ChatsContainer messages={mesages} />
-                        <MessageInput mesages={mesages}/>
+                        <MessageInput mesages={mesages} />
                     </div>
 
 
