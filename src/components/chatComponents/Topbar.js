@@ -4,10 +4,10 @@ import React from "react";
 import UserDetails from './UserDetails';
 import OtherDetails from './OtherDetails';
 
-function TopBar({ nameMe, nameOther, myImg, otherImg }) {
+function TopBar({ nameOther, myImg, otherImg }) {
     return (
         <div className="topBar">
-            <UserDetails nameMe={nameMe} myImg={myImg} />
+            <UserDetails myImg={myImg} />
             <div className="right_topbar">
                 <OtherDetails nameOther={nameOther} otherImg={otherImg} />
                 <div className="image_and_name">

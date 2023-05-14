@@ -5,12 +5,12 @@ export const UserContext = React.createContext();
 
 export const UserProvider = ({ children }) => {
 
-    const [userId, setUserId] = useState(null);
+    const [userName, setUserName] = useState(null);
     const [userList, setUserList] = useState([]);
 
     const ctxuValue = {
-        userId,
-        setUserId,
+        userName,
+        setUserName,
         userList,
         setUserList
     };
