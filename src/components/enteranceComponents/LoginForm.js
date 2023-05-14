@@ -1,10 +1,11 @@
+import React, { useState,useContext } from 'react';
 import PasswordInput from './PasswordInput';
 import RegularInput from './RegularInput';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import { UserContext } from "../../ctx/userContext"
 
-function LoginForm({ users }) {
-
+function LoginForm() {
+  const Userctx = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -32,7 +33,8 @@ function LoginForm({ users }) {
 
     } else {
       {
-        users.forEach(function (element) {
+        console.log('Userctx.userList: ', Userctx.userList);
+        Userctx && Userctx.userList && Userctx.userList.forEach(function (element) {
           console.log(element);
           if (element.userName === username && element.pass === password) {
             setError(''); // Clear the error message
