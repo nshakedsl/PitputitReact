@@ -14,7 +14,7 @@ function AddContact({ show, onHide }) {
                     <Modal.Body>
 
                         <div className="element_width ">
-                            <label for="contact"></label>
+                            <label htmlFor="contact"></label>
                             <input className="input regular" type="text" name="contact" placeholder="Contact's identifier:" />
                             <button type="button" className="btn btn-info">add <BsCheckLg /></button>
 
