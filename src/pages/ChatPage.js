@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useContext } from 'react';
 import './../styles/login.css'
 import './../styles/chats.css'
 import MessageInput from '../components/chatComponents/MessageInput';
 import TopBar from '../components/chatComponents/Topbar';
 import Contact from '../components/chatComponents/Contact';
 import ChatsContainer from '../components/chatComponents/ChatsContainer';
+import { UserContext } from "../ctx/userContext"
 
 
 function ChatPage() {
 
-
+    const Userctx = useContext(UserContext);
     const mesage1 = { name : Userctx.userName, messageText: "Hey CSS, you're looking stylish today. 😎 What's new?", time: "13:39" };
     const mesage2 = {
         name: "2", messageText: "Not much, just making the web pages look pretty 💅 , and singing a song to help learnthe principles of advanced programming 1🎶."
@@ -27,7 +28,7 @@ function ChatPage() {
                     </div>
                     <div className="chats" style={{ backgroundImage: `url("/images/chat-background.png")` }}>
                         <ChatsContainer messages={mesages} />
-                        <MessageInput messages={mesages}/>
+                        <MessageInput mesages={mesages}/>
                     </div>
 
 

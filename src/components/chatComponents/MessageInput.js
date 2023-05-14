@@ -8,13 +8,12 @@ function MessageInput({mesages}) {
     const handleMessageSent = () => {
         var currentdate = new Date(); 
         if (value.trim()!='') {
-            console.log(value)
             let newMessage = {name : Userctx.userName, messageText:value, time: currentdate.getHours() + ":"  
             + currentdate.getMinutes()}
             mesages.push(newMessage)
             setValue('')
         }
-
+        
     };
     return (
         <footer className="footer">
