@@ -397,7 +397,7 @@ img {
 
 .btn-img-self {
 
-    transform: translate(0, -45%);
+    transform: translate(0, -37%);
 }
 
 .text_and_date_container {
@@ -485,6 +485,7 @@ img {
     width: 40%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .right_topbar {
