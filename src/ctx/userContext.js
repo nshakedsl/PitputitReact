@@ -8,11 +8,15 @@ export const UserProvider = ({ children }) => {
     const [userName, setUserName] = useState(null);
     const [userList, setUserList] = useState([]);
 
+    const getCurrentUser = () => userList.find(element => element.userName === userName)
+
+
     const ctxuValue = {
         userName,
         setUserName,
         userList,
-        setUserList
+        setUserList,
+        getCurrentUser
     };
 
     return (
