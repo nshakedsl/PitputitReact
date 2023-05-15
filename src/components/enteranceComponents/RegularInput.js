@@ -10,7 +10,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 function RegularInput({ placeholder, value, setValue, setError }) {
 
   const renderTooltip = props => (
-    props && <Tooltip className="my-tooltip" {...props}> This is mandatory field. Must contain 2-32 charcters.</Tooltip>
+    props && <Tooltip className="my-tooltip" {...props}> This is mandatory field. Must contain 2-32 charcters. Use lowercase, uppercase letters, numbers and . _ - : ? ! signs</Tooltip>
   );
 
 

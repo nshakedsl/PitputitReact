@@ -13,7 +13,7 @@ function PasswordInput({ placeholder, value, setValue }) {
 
 
   const renderTooltip = props => (
-    props && <Tooltip className="my-tooltip" {...props}> This is mandatory field. Must contain 8-32 charcters. Must contain a combination of uppercase and lowercase letters and numbers.</Tooltip>
+    props && <Tooltip className="my-tooltip" {...props}> This is mandatory field. Must contain 8-32 charcters. Must contain a combination of uppercase and lowercase letters and numbers. Can use . _ - : ? ! signs</Tooltip>
   );
 
   const renderTooltipEye = props => (

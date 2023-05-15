@@ -34,30 +34,42 @@ function RegisterForm() {
     setTimeout(() => { setShakeError(false); }, 500);
   }
 
+  //'/^[a-zA-Z0-9\._:\-\?!]+$/'
+  const userPattern = new RegExp('/[a-z]/');
+  const passPattern = new RegExp('/[a-z]/');
+
   const handleRegisterClick = () => {
     // ...
-    if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === ''|| imageSrc === 'images/user.png') {
+    if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '') {
       setError('All fields are mandatory❗');
+      shakeAction();
+
+    } else if (imageSrc === 'images/user.png') {
+      setError('image is a mandatory field❗');
       shakeAction();
 
     } else if (username.length < 2 || nickname.length < 2) {
       setError('inputs must contain at least 2 characters❗');
       shakeAction();
 
-    } else if (username.length > 32 || nickname.length > 32 || password.length > 32 || verifyPassword.length > 32) {
-      setError('inputs must contain maximun 32 characters❗');
+    } else if (!/^[a-zA-Z0-9\._:\-\?!]+$/.test(username) || !/^[a-zA-Z0-9\._:\-\?!]+$/.test(nickname) || !/^[a-zA-Z0-9\._:\-\?!]+$/.test(password)) {
+      setError('You choose invalid characters. Use lowercase, uppercase letters, numbers and ._-:?! signs❗');
       shakeAction();
 
     } else if (password.length < 8) {
       setError('Password must contain at least 8 characters❗');
       shakeAction();
 
-    } else if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
-      setError('Password must contain a combination of of uppercase and lowercase letters and numbers❗');
+    } else if (!/[0-9]/.test(password) || !/[a-z]/.test(password) || !/[A-Z]/.test(password)) {
+      setError('Password must contain a combination of uppercase and lowercase letters and numbers❗');
       shakeAction();
 
     } else if (password !== verifyPassword) {
       setError('Passwords do not match❗');
+      shakeAction();
+
+    } else if (Userctx.userList.find(element =>element.userName === username)) {
+      setError('This user name is already exist❗');
       shakeAction();
 
     } else {
@@ -107,12 +119,12 @@ function RegisterForm() {
         <RegularInput
           placeholder="Username"
           value={username}
-          setValue={setUsername} 
+          setValue={setUsername}
           setError={setError}
 
         />
 
-        
+
         <RegularInput
           placeholder="Nickname"
           value={nickname}
