@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Mesage from './Message';
-import { UserContext } from "../../ctx/userContext"
 
-function MessageContainer({ messages }) {
-    const Userctx = useContext(UserContext)
-    const curChat = Userctx.getCurrentChat()
-
+function MessageContainer({curChat}) {
+    console.log('curChat: ', curChat);
     return (
 
         <div className="chats-container">
