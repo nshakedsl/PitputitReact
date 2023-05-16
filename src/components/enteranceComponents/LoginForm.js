@@ -35,7 +35,6 @@ function LoginForm() {
       {
         console.log('Userctx.userList: ', Userctx.userList);
         Userctx && Userctx.userList && Userctx.userList.forEach(function (element) {
-          console.log(element);
           if (element.userName === username && element.pass === password) {
             Userctx.setUserName(element.userName)
             setError(''); // Clear the error message
@@ -54,9 +53,6 @@ function LoginForm() {
     <form>
       <div className="element_width slide-in-right">
         <h3 className="title"> Welcome Back👋</h3>
-
-
-
         <RegularInput
           placeholder="Username"
           value={username}

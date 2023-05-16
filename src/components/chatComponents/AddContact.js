@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState, useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { BsCheckLg, BsPersonPlus } from "react-icons/bs";
+import { UserContext } from "../../ctx/userContext"
 
 function AddContact({ show, onHide }) {
+    const [contact, setContact] = useState('');
+    const Userctx = useContext(UserContext);
+
+    const handleAddContact = () => {
+        let newContact = Userctx.userList.find((user) => user.userName === contact)
+        if (newContact) {
+            const uniqueId = Date.now().toString();
+            let newDialog = { dialogId: uniqueId ,user1: Userctx.userName, user2: newContact.userName, messages:[]}
+            newContact.dialogList.push(newDialog)
+            console.log(Userctx.userList.find((user) => user.userName === contact).dialogList)
+        }
+      };
+
     return (
 
         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -15,9 +29,9 @@ function AddContact({ show, onHide }) {
 
                         <div className="element_width ">
                             <label htmlFor="contact"></label>
-                            <input className="input regular" type="text" name="contact" placeholder="Contact's identifier:" />
-                            <button type="button" className="btn btn-info">add <BsCheckLg /></button>
-
+                            <input className="input regular" value = {contact}  type="text" name="contact" 
+                            placeholder="Contact's identifier:" onChange={(e) => setContact(e.target.value)} />
+                            <button type="button" onClick={handleAddContact} className="btn btn-info">add <BsCheckLg /></button>
                         </div>
                     </Modal.Body>
                 </div>
