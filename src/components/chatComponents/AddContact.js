@@ -4,8 +4,8 @@ import { BsCheckLg, BsPersonPlus } from "react-icons/bs";
 import { UserContext } from "../../ctx/userContext"
 
 function AddContact({ show, onHide }) {
-    const [contact, setContact] = useState('');
-    const Userctx = useContext(UserContext);
+    const [contact, setContact] = useState('')
+    const Userctx = useContext(UserContext)
 
     const handleAddContact = () => {
         let newContact = Userctx.userList.find((user) => user.userName === contact)
@@ -13,6 +13,7 @@ function AddContact({ show, onHide }) {
             const uniqueId = Date.now().toString();
             let newDialog = { dialogId: uniqueId ,user1: Userctx.userName, user2: newContact.userName, messages:[]}
             newContact.dialogList.push(newDialog)
+            Userctx.getCurrentUser().dialogList.push(newDialog)
             console.log(Userctx.userList.find((user) => user.userName === contact).dialogList)
         }
       };
