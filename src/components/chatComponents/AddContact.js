@@ -18,14 +18,12 @@ function AddContact({ show, onHide, setShow }) {
                 newContact.dialogList.push(newDialog)
                 Userctx.setUser(user => {
                     let temp = { ...user }
-                    console.log('temp: ', temp);
                     temp.dialogList.push(newDialog);
                     return temp;
                 })
                 setContact('')
                 setShow(false)
             } else {
-                console.log("User dosen't exists");
                 // TODO: Namma put error message- User dosen't exists
             }
         } 

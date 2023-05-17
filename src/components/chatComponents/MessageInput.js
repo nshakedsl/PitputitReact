@@ -3,7 +3,6 @@ import { UserContext } from "../../ctx/userContext"
 
 function MessageInput() {
     const inputRef = useRef(null);
-    console.log('inputRef: ', inputRef);
     const [value, setValue] = useState('');
     const Userctx = useContext(UserContext);
 
