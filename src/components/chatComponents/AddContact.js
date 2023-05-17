@@ -9,22 +9,28 @@ function AddContact({ show, onHide, setShow }) {
     const Userctx = useContext(UserContext)
 
     const handleAddContact = () => {
-        let newContact = Userctx.userList.find((user) => user.userName === contact)
-        if (newContact) {
-            const uniqueId = Date.now().toString();
-            let newDialog = { dialogId: uniqueId, user1: Userctx.userName, user2: newContact.userName, messages: [] }
-            newContact.dialogList.push(newDialog)
-            Userctx.setUser(user => {
-                let temp = { ...user }
-                console.log('temp: ', temp);
-                temp.dialogList.push(newDialog);
-                return temp;
-            })
-            setContact('')
-            setShow(false)
-        } else {
-            console.log("User dosen't exists");
-            // TODO: Namma put error message- User dosen't exists
+        let isPresent = Userctx.user.dialogList.find(element => element.user2===contact)
+        if (contact != Userctx.userName && !isPresent) {
+            let newContact = Userctx.userList.find((user) => user.userName === contact)
+            if (newContact) {
+                const uniqueId = Date.now().toString();
+                let newDialog = { dialogId: uniqueId, user1: Userctx.userName, user2: newContact.userName, messages: [] }
+                newContact.dialogList.push(newDialog)
+                Userctx.setUser(user => {
+                    let temp = { ...user }
+                    console.log('temp: ', temp);
+                    temp.dialogList.push(newDialog);
+                    return temp;
+                })
+                setContact('')
+                setShow(false)
+            } else {
+                console.log("User dosen't exists");
+                // TODO: Namma put error message- User dosen't exists
+            }
+        } 
+        else {
+            //TODO: naama, illegal person to add
         }
     };
 
