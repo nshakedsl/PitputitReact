@@ -5,8 +5,7 @@ function MessageInput() {
     const [value, setValue] = useState('');
     const Userctx = useContext(UserContext);
     const curChat = Userctx.getCurrentChat()
-    console.log("cur msg is",Userctx.getCurrentUser())
-    console.log('curChat[0]: ', curChat[0]);
+   
     const handleMessageSent = () => {
         var currentdate = new Date(); 
         if (value.trim()!='') {

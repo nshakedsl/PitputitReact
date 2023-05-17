@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './../styles/login.css'
 import './../styles/chats.css'
 import MessageInput from '../components/chatComponents/MessageInput';
@@ -12,6 +12,8 @@ function ChatPage() {
 
 
     const Userctx = useContext(UserContext);
+    const curChat = Userctx.getCurrentChat()
+
     const mesage1 = {
         id: 1,
         name: Userctx.userName,
@@ -31,8 +33,24 @@ function ChatPage() {
                 <TopBar nameOther="CSS" otherImg="https://play-lh.googleusercontent.com/TxjQBGYHvMJsBX5dCvxQ4R-_4N-XrVhW6-p7D7TXanXKZMD8L-UkeMBWO1dtubGVNqU" />
                 <div className="content">
                     <div className="contacts">
-                        <Contact otherName="CSS" otherImg="https://play-lh.googleusercontent.com/TxjQBGYHvMJsBX5dCvxQ4R-_4N-XrVhW6-p7D7TXanXKZMD8L-UkeMBWO1dtubGVNqU"
-                            date="3/31/2023 3:24" lastMsg="Agreed, HTML. Here's to more beautiful websites 🎉" />
+
+
+                        {
+                            Userctx && Userctx.user && Userctx.user.dialogList && Userctx.user.dialogList.map(
+                                item => {
+                                    let contact = Userctx.findUserByName(item.user2)
+                                    let lastMessage = item.messages.at(-1)
+                                    return lastMessage ?
+                                        <Contact key={contact.userName} otherName={contact.nick} otherImg={contact.image}
+                                            date={lastMessage.time} lastMsg={lastMessage.messageText} />
+                                        :
+                                        <Contact key={contact.userName} otherName={contact.nick} otherImg={contact.image}
+                                            date='' lastMsg='' />
+
+                                })
+
+
+                        }
                     </div>
                     <div className="chats" style={{ backgroundImage: `url("/images/chat-background.png")` }}>
                         <ChatsContainer messages={mesages} />
