@@ -1,12 +1,21 @@
 # Pitputit
 
-This reposetory, is a web user interface using HTML and CSS.
+**Milestone 1 B branch:**
+
+Targil 2 (Milestone 1 B) is on branch Milestone1b
+## Authors:
+![Authors](/public/images/Authors.jpeg)
+1. Shaked Solomon
+2. Ofir Gurvits
+3. Naama Matzliach
+
+This reposetory, is a React App.
 There are 3 pages:
 1. SignUp page.
 2. Login page.
 3. Chats page.
 
-This project is a web user interface for chatting between different users. We called the website Pitputit, which is similar to the Hebrew word for "to chat" or "to talk".
+This project is a React App for chatting between different users. We called the website Pitputit, which is similar to the Hebrew word for "to chat" or "to talk".
 
 ## Cloning and Running Instructions:
 To clone the repository, follow these steps:
@@ -18,15 +27,19 @@ https://github.com/nshakedsl/PitputitReact.git
 ```
 To run the program, follow these steps:
 
-1. [npm i]
-2. [npm start]
-3. [navigate in the browser to localhost:3000]
-4. [then you can create and use the users and navigate in the application]
-
+1.
+ ```
+ npm i
+ ```
+2. 
+```
+npm start
+```
+3. Navigate in the browser to localhost:3000
+4. Then you can create users and use the application.
 ### Switching Between Pages
 
-To move between the pages, click on "Not registered? Click here to register" on the Login page to access the register/signUp page. To go from the Login page to the Chats page, click on the Log in button
-after you entered the password and username you signed up with. 
+To move between the pages, click on "Not registered? Click here to register" on the Login page to access the register/signUp page. To go from the Login page to the Chats page, click on the Log in button after you entered the password and username you signed up with. 
 
 ## Pages
 ### SignUp page:
@@ -40,15 +53,6 @@ The chat screen is divided into two parts. In the left part of the screen, users
 ## Design -css and boostrap:
 The design of the user interface was created using BOOTSTRAP and CSS. Images and additional CSS files can be found in the "public/images" and "Style" folders, respectively.
 
-## Authors:
-1. Shaked Solomon
-2. Ofir Gurvits
-3. Naama Matzliach
-
-
-**Milestone 1 B branch:**
-
-Targil 2 (Milestone 1 B) is on branch Milestone1b
 
 # Getting Started with Create React App
 
