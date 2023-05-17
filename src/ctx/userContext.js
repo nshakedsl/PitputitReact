@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 
 export const UserContext = React.createContext();
@@ -7,8 +7,14 @@ export const UserProvider = ({ children }) => {
 
     const [userName, setUserName] = useState(null);
     const [userList, setUserList] = useState([]);
-    const [curChat, setCurChat] = useState([])
+    const [curChat, setCurChat] = useState([]);
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        setUser(getCurrentUser())
+    }, [userName])
     const getCurrentUser = () => userList.find(element => element.userName === userName)
+    const findUserByName = (name) => userList.find(element => element.userName === name)
     const getCurrentChat = () => getCurrentUser().dialogList
 
     const ctxuValue = {
@@ -16,10 +22,12 @@ export const UserProvider = ({ children }) => {
         setUserName,
         userList,
         setUserList,
-        getCurrentUser,
         curChat,
         setCurChat,
-        getCurrentChat
+        getCurrentChat,
+        findUserByName,
+        user,
+        setUser
     };
 
     return (
