@@ -46,6 +46,10 @@ The design of the user interface was created using BOOTSTRAP and CSS. Images and
 3. Naama Matzliach
 
 
+**Milestone 1 B branch:**
+
+Targil 2 (Milestone 1 B) is on branch Milestone1b
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
