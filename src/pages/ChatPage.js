@@ -6,6 +6,7 @@ import TopBar from '../components/chatComponents/Topbar';
 import Contact from '../components/chatComponents/Contact';
 import ChatsContainer from '../components/chatComponents/ChatsContainer';
 import { UserContext } from "../ctx/userContext"
+import { useNavigate } from 'react-router-dom';
 
 
 function ChatPage() {
@@ -13,6 +14,18 @@ function ChatPage() {
 
     const Userctx = useContext(UserContext);
     const [contact, setContact] = useState({});
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        if (!Userctx.userName) {
+            navigate("/")
+        }
+
+    }, []);
+
+
+
     useEffect(() => {
         if (Userctx && Userctx.currentChat)
             setContact(Userctx.findUserByName(Userctx.currentChat.user2))
@@ -57,9 +70,6 @@ function ChatPage() {
                         }
                     </div>
 
-
-
-                    {console.log('Userctx.currentChat: ', Userctx.currentChat)}
                     {
 
                         Userctx && Userctx.currentChat == undefined ?
