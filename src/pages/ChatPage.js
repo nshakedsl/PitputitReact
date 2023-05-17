@@ -52,7 +52,7 @@ function ChatPage() {
                         }
                     </div>
                     <div className="chats" style={{ backgroundImage: `url("/images/chat-background.png")` }}>
-                        <ChatsContainer curChat={mesages} />
+                        <ChatsContainer curChat={[]} />
                         <MessageInput />
                     </div>
 
