@@ -10,8 +10,8 @@ import { UserContext } from "../ctx/userContext"
 
 function ChatPage() {
 
+
     const Userctx = useContext(UserContext);
-    const curChat = Userctx.getCurrentChat()
     const mesage1 = {
         id: 1,
         name: Userctx.userName,
@@ -35,8 +35,8 @@ function ChatPage() {
                             date="3/31/2023 3:24" lastMsg="Agreed, HTML. Here's to more beautiful websites 🎉" />
                     </div>
                     <div className="chats" style={{ backgroundImage: `url("/images/chat-background.png")` }}>
-                        <ChatsContainer curChat={mesages} />
-                        <MessageInput />
+                        <ChatsContainer messages={mesages} />
+                        <MessageInput mesages={mesages} />
                     </div>
 
 

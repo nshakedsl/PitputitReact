@@ -34,9 +34,6 @@ function RegisterForm() {
     setTimeout(() => { setShakeError(false); }, 500);
   }
 
-  //'/^[a-zA-Z0-9\._:\-\?!]+$/'
-  const userPattern = new RegExp('/[a-z]/');
-  const passPattern = new RegExp('/[a-z]/');
 
   const handleRegisterClick = () => {
     // ...
@@ -53,7 +50,7 @@ function RegisterForm() {
       shakeAction();
 
     } else if (!/^[a-zA-Z0-9\._:\-\?!]+$/.test(username) || !/^[a-zA-Z0-9\._:\-\?!]+$/.test(nickname) || !/^[a-zA-Z0-9\._:\-\?!]+$/.test(password)) {
-      setError('You choose invalid characters. Use lowercase, uppercase letters, numbers and ._-:?! signs❗');
+      setError('You choose invalid characters. Use lowercase, uppercase letters, numbers and . _ - : ? ! signs❗');
       shakeAction();
 
     } else if (password.length < 8) {

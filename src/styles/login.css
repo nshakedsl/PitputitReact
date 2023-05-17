@@ -141,7 +141,8 @@ body {
 }
 
 .containLoginInput {
-    background-color: rgba(163, 166, 180, 0.18);
+    /* background-color: rgba(163, 166, 180, 0.18); */
+    background-color: #ffe6e6;
     border-radius: 2vh;
     display: flex;
 }
@@ -187,9 +188,44 @@ input[type="file"] {
     font-weight: bold;
 }
 
+.has-error .input.regular {
+    border: 2px solid red;
+  }
+  
+  .has-error .input.regular.error {
+    background-color: #ffe6e6; 
+  }
 
+  /* .divBig{
+    background-color: #ffe6e6; 
+    border: 2px solid red;  
+  }
 
+  .divBig input {
+    background-color: #ffe6e6;
+  } */
 
+  .divBig {
+    border: 2px solid red;
+  }
+  
+  .divBig, .divBig input, .divBig img {
+    background-color: #ffe6e6;
+  }
+
+  /* .divBig div {
+    background-color: #ffe6e6;
+  } */
+
+  .div.containLoginInput.divBig {
+    background-color: #ffe6e6;
+  }
+
+  
+  .containLoginInput input,
+  .containLoginInput img {
+    background-color: #ffe6e6;
+  }
 @keyframes shake {
     0% {
         transform: rotate(2deg);
