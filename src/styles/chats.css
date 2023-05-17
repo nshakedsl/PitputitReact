@@ -395,8 +395,8 @@ img {
 }
 
 .form-check-input:checked {
-    background-color: black;
-    border-color: black;
+    background-color: black !important;
+    border-color: black !important;
 }
 
 .form-check-input:focus {

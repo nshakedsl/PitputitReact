@@ -65,7 +65,10 @@ function ChatPage() {
                                 <img src="images/logo-color.svg" className="logo_big" alt="default_user" />
                             </div>
                             :
-                            <div className="chats" style={{ backgroundImage: `url("/images/chat-background.png")` }}>
+                            <div className="chats" style={{
+                                backgroundColor: !Userctx.checkboxChecked ? "black" : "#EFEAE2",
+                                backgroundImage: `url("/images/chat-background.png")`
+                            }}>
                                 <ChatsContainer />
                                 <MessageInput />
 
@@ -76,7 +79,7 @@ function ChatPage() {
                 </div>
 
             </div>
-        </div>
+        </div >
     );
 }
 

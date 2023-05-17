@@ -7,7 +7,7 @@ function MessageContainer() {
     const Userctx = useContext(UserContext);
     return (
 
-        <div className="chats-container">
+        <div className="chats-container" >
             {Userctx && Userctx.currentChat && Userctx.currentChat && Userctx.currentChat.messages.map((item) => (
                 <Mesage key={item.id} MessageInfo={item} />
             ))}
