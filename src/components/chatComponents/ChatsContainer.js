@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Mesage from './Message';
+import { UserContext } from "../../ctx/userContext"
 
-function MessageContainer({ curChat }) {
-    console.log('curChat: ', curChat);
+
+function MessageContainer() {
+    const Userctx = useContext(UserContext);
     return (
 
         <div className="chats-container">
-            {curChat && curChat.map((item, i) => (
+            {Userctx && Userctx.currentChat && Userctx.currentChat && Userctx.currentChat.messages.map((item) => (
                 <Mesage key={item.id} MessageInfo={item} />
             ))}
         </div>

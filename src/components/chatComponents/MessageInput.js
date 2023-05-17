@@ -1,21 +1,43 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../ctx/userContext"
 
 function MessageInput() {
     const [value, setValue] = useState('');
     const Userctx = useContext(UserContext);
-    const curChat = Userctx.getCurrentChat()
-   
+
     const handleMessageSent = () => {
-        var currentdate = new Date(); 
-        if (value.trim()!='') {
-            let newMessage = {name : Userctx.userName, messageText:value, time: currentdate.getHours() + ":"  
-            + currentdate.getMinutes()}
-            curChat[0].messages.push(newMessage)
+
+        var currentdate = new Date();
+        if (value.trim() != '') {
+            let newMessage = {
+                id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":"
+                    + currentdate.getMinutes()
+            }
+            Userctx.setCurrentChat((prevCurrentChat) => {
+                let temp = { ...prevCurrentChat }
+                temp.messages.push(newMessage)
+                return temp;
+            })
             setValue('')
         }
-        
+
     };
+    useEffect(() => {
+        return () => {
+            if (Userctx.currentChat.messages.length !== 0) {
+                Userctx.setUser(prevUser => {
+                    let temp = { ...prevUser }
+                    let i = temp.dialogList.findIndex(item => item.user2 === Userctx.currentChat.user2)
+                    temp.dialogList[i] = Userctx.currentChat
+                    return temp
+                })
+
+            }
+        };
+    }, []);
+
+
+
     return (
         <footer className="footer">
             <input className="message" value={value} onChange={(e) => setValue(e.target.value)}

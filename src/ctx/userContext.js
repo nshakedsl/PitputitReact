@@ -9,13 +9,12 @@ export const UserProvider = ({ children }) => {
     const [userList, setUserList] = useState([]);
     const [curChat, setCurChat] = useState([]);
     const [user, setUser] = useState({});
-
+    const [currentChat, setCurrentChat] = useState(undefined);
     useEffect(() => {
         setUser(getCurrentUser())
     }, [userName])
     const getCurrentUser = () => userList.find(element => element.userName === userName)
     const findUserByName = (name) => userList.find(element => element.userName === name)
-    const getCurrentChat = () => getCurrentUser().dialogList
 
     const ctxuValue = {
         userName,
@@ -24,10 +23,12 @@ export const UserProvider = ({ children }) => {
         setUserList,
         curChat,
         setCurChat,
-        getCurrentChat,
         findUserByName,
         user,
-        setUser
+        setUser,
+        currentChat,
+        setCurrentChat
+
     };
 
     return (

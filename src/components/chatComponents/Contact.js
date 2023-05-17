@@ -1,9 +1,11 @@
-import React from "react";
-// import './../styles/login.css'
-// import './../styles/chats.css'
-function UserDetails({ otherName, otherImg, date, lastMsg }) {
+import React, { useContext } from 'react';
+import { UserContext } from "../../ctx/userContext"
+
+function UserDetails({ otherName, otherImg, date, lastMsg, dialog }) {
+    const Userctx = useContext(UserContext);
+
     return (
-        <div className="chat_box">
+        <div className="chat_box" onClick={() => { Userctx.setCurrentChat(dialog) }}>
             <div className="image-cropper">
                 <img
                     src={otherImg} />
