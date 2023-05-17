@@ -13,19 +13,19 @@ function ChatPage() {
     const Userctx = useContext(UserContext);
     const curChat = Userctx.getCurrentChat()
 
-    const mesage1 = {
-        id: 1,
-        name: Userctx.userName,
-        messageText: "Hey CSS, you're looking stylish today. 😎 What's new?",
-        time: "13:39"
-    };
-    const mesage2 = {
-        id: 2,
-        name: "2",
-        messageText: "Not much, just making the web pages look pretty 💅 , and singing a song to help learnthe principles of advanced programming 1🎶.",
-        time: "13:40"
-    };
-    let mesages = [mesage1, mesage2]
+    // const mesage1 = {
+    //     id: 1,
+    //     name: Userctx.userName,
+    //     messageText: "Hey CSS, you're looking stylish today. 😎 What's new?",
+    //     time: "13:39"
+    // };
+    // const mesage2 = {
+    //     id: 2,
+    //     name: "2",
+    //     messageText: "Not much, just making the web pages look pretty 💅 , and singing a song to help learnthe principles of advanced programming 1🎶.",
+    //     time: "13:40"
+    // };
+    // let mesages = [mesage1, mesage2]
     return (
         <div className="background center_content">
             <div className="main">
