@@ -10,10 +10,20 @@ function MessageInput() {
 
         var currentdate = new Date();
         if (value.trim() != '') {
-            let newMessage = {
-                id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":"
-                    + currentdate.getMinutes()
+            let newMessage
+            if (currentdate.getMinutes() > 10) {
+                newMessage = {
+                    id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":"
+                        + currentdate.getMinutes()
+                }
             }
+            else {
+                newMessage = {
+                    id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":0"
+                        + currentdate.getMinutes()
+                }
+            }
+
             Userctx.setCurrentChat((prevCurrentChat) => {
                 let temp = { ...prevCurrentChat }
                 temp.messages.push(newMessage)
