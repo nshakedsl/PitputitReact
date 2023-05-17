@@ -112,21 +112,22 @@ function RegisterForm() {
       <text className="textError">{error}</text>
     </div> */}
 
-
         <RegularInput
           placeholder="Username"
           value={username}
           setValue={setUsername}
           setError={setError}
+          isRegistration={1}
+
 
         />
-
 
         <RegularInput
           placeholder="Nickname"
           value={nickname}
           setValue={setNickname}
           setError={setError}
+          isRegistration={1}
         />
 
         <PasswordInput
@@ -134,6 +135,7 @@ function RegisterForm() {
           value={password}
           setValue={setPassword}
           setError={setError}
+          isRegistration={1}
         />
 
         <PasswordInput
@@ -142,6 +144,7 @@ function RegisterForm() {
           value={verifyPassword}
           setValue={setVerifyPassword}
           setError={setError}
+          isRegistration={1}
         />
 
         <div id="anim" className={shakeError ? 'shake' : ''}>
