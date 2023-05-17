@@ -27,11 +27,11 @@ https://github.com/nshakedsl/PitputitReact.git
 ```
 To run the program, follow these steps:
 
-1.
+1. To install the libraries:
  ```
  npm i
  ```
-2. 
+2. To rtun the project:
 ```
 npm start
 ```
