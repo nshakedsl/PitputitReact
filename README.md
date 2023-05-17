@@ -1,3 +1,55 @@
+# Pitputit
+
+This reposetory, is a web user interface using HTML and CSS.
+There are 3 pages:
+1. SignUp page.
+2. Login page.
+3. Chats page.
+
+This project is a web user interface for chatting between different users. We called the website Pitputit, which is similar to the Hebrew word for "to chat" or "to talk".
+
+## Cloning and Running Instructions:
+To clone the repository, follow these steps:
+
+In the terminal, navigate to the directory where you want to clone the repository.
+Enter the following command:
+```
+https://github.com/nshakedsl/PitputitReact.git
+```
+To run the program, follow these steps:
+
+1. [npm i]
+2. [npm start]
+3. [navigate in the browser to localhost:3000]
+4. [then you can create and use the users and navigate in the application]
+
+### Switching Between Pages
+
+To move between the pages, click on "Not registered? Click here to register" on the Login page to access the register/signUp page. To go from the Login page to the Chats page, click on the Log in button
+after you entered the password and username you signed up with. 
+
+## Pages
+### SignUp page:
+On the registration screen, users can enter a username, password, nickname, and picture. There is also an option to go to the login screen by clicking on "Already registered? Click here to login."
+
+### Login page:
+On the login screen, users can enter a username and password. There is a place to upload a picture. There is also an option to go to the signup screen by clicking on "Not registered? Click here to register."
+
+### Chats page:
+The chat screen is divided into two parts. In the left part of the screen, users can see a list of all the chats they are currently engaged in. In the right part of the screen, the correspondence is displayed, including messages with the selected recipient.
+## Design -css and boostrap:
+The design of the user interface was created using BOOTSTRAP and CSS. Images and additional CSS files can be found in the "public/images" and "Style" folders, respectively.
+
+## Authors:
+1. Shaked Solomon
+2. Ofir Gurvits
+3. Naama Matzliach
+
+
+**Milestone 1 B branch:**
+
+Targil 2 (Milestone 1 B) is on branch Milestone1b
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

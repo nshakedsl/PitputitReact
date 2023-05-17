@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 function ChatPage() {
+
+
     const Userctx = useContext(UserContext);
     const [contact, setContact] = useState({});
     const navigate = useNavigate();

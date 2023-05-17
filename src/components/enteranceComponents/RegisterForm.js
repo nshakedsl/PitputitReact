@@ -34,9 +34,6 @@ function RegisterForm() {
     setTimeout(() => { setShakeError(false); }, 500);
   }
 
-  //'/^[a-zA-Z0-9\._:\-\?!]+$/'
-  const userPattern = new RegExp('/[a-z]/');
-  const passPattern = new RegExp('/[a-z]/');
 
   const handleRegisterClick = () => {
     // ...
@@ -53,7 +50,7 @@ function RegisterForm() {
       shakeAction();
 
     } else if (!/^[a-zA-Z0-9\._:\-\?!]+$/.test(username) || !/^[a-zA-Z0-9\._:\-\?!]+$/.test(nickname) || !/^[a-zA-Z0-9\._:\-\?!]+$/.test(password)) {
-      setError('You choose invalid characters. Use lowercase, uppercase letters, numbers and ._-:?! signs❗');
+      setError('You choose invalid characters. Use lowercase, uppercase letters, numbers and . _ - : ? ! signs❗');
       shakeAction();
 
     } else if (password.length < 8) {
@@ -115,21 +112,22 @@ function RegisterForm() {
       <text className="textError">{error}</text>
     </div> */}
 
-
         <RegularInput
           placeholder="Username"
           value={username}
           setValue={setUsername}
           setError={setError}
+          isRegistration={1}
+
 
         />
-
 
         <RegularInput
           placeholder="Nickname"
           value={nickname}
           setValue={setNickname}
           setError={setError}
+          isRegistration={1}
         />
 
         <PasswordInput
@@ -137,6 +135,7 @@ function RegisterForm() {
           value={password}
           setValue={setPassword}
           setError={setError}
+          isRegistration={1}
         />
 
         <PasswordInput
@@ -145,6 +144,7 @@ function RegisterForm() {
           value={verifyPassword}
           setValue={setVerifyPassword}
           setError={setError}
+          isRegistration={1}
         />
 
         <div id="anim" className={shakeError ? 'shake' : ''}>

@@ -48,6 +48,7 @@ function AddContact({ show, onHide, setShow }) {
                             <label htmlFor="contact"></label>
                             <input className="input regular" value={contact} type="text" name="contact"
                                 placeholder="Contact's identifier:" onChange={(e) => setContact(e.target.value)} />
+                                {/* <div className="textError">{error}</div> */}
                             <button type="button" onClick={handleAddContact} className="btn btn-info">add <BsCheckLg /></button>
                         </div>
                     </Modal.Body>
