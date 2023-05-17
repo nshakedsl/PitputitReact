@@ -7,7 +7,6 @@ export const UserProvider = ({ children }) => {
 
     const [userName, setUserName] = useState(null);
     const [userList, setUserList] = useState([]);
-    const [curChat, setCurChat] = useState([]);
     const [user, setUser] = useState({});
     const [currentChat, setCurrentChat] = useState(undefined);
     useEffect(() => {
@@ -21,8 +20,6 @@ export const UserProvider = ({ children }) => {
         setUserName,
         userList,
         setUserList,
-        curChat,
-        setCurChat,
         findUserByName,
         user,
         setUser,

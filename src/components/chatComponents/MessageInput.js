@@ -27,9 +27,12 @@ function MessageInput() {
             if (Userctx.currentChat.messages.length !== 0) {
                 Userctx.setUser(prevUser => {
                     let temp = { ...prevUser }
-                    let i = temp.dialogList.findIndex(item => item.user2 === Userctx.currentChat.user2)
-                    temp.dialogList[i] = Userctx.currentChat
+                    if (temp && temp.dialogList) {
+                        let i = temp.dialogList.findIndex(item => item.user2 === Userctx.currentChat.user2)
+                        temp.dialogList[i] = Userctx.currentChat
+                    }
                     return temp
+
                 })
 
             }
