@@ -4,12 +4,24 @@ import { BsCheckLg, BsPersonPlus } from "react-icons/bs";
 import { UserContext } from "../../ctx/userContext"
 
 function AddContact({ show, onHide, setShow }) {
+    const [error, setError] = useState('');
     const [contact, setContact] = useState('')
-
     const Userctx = useContext(UserContext)
+    const [shakeError, setShakeError] = useState(false);
+
+    const shakeAction = () => {
+        setShakeError(true);
+        setTimeout(() => { setShakeError(false); }, 500);
+    }
+
+    const inputChange = (e) => {
+        setContact(e.target.value)
+        setError('');
+    }
+
 
     const handleAddContact = () => {
-        let isPresent = Userctx.user.dialogList.find(element => element.user2===contact)
+        let isPresent = Userctx.user.dialogList.find(element => element.user2 === contact)
         if (contact != Userctx.userName && !isPresent) {
             let newContact = Userctx.userList.find((user) => user.userName === contact)
             if (newContact) {
@@ -25,12 +37,16 @@ function AddContact({ show, onHide, setShow }) {
                 setContact('')
                 setShow(false)
             } else {
-                console.log("User dosen't exists");
-                // TODO: Namma put error message- User dosen't exists
+
+                setError('User does not exists❗');
+                shakeAction();
+
+
             }
-        } 
+        }
         else {
-            //TODO: naama, illegal person to add
+            setError('Illegal person to add❗');
+            shakeAction();
         }
     };
 
@@ -47,8 +63,13 @@ function AddContact({ show, onHide, setShow }) {
                         <div className="element_width ">
                             <label htmlFor="contact"></label>
                             <input className="input regular" value={contact} type="text" name="contact"
-                                placeholder="Contact's identifier:" onChange={(e) => setContact(e.target.value)} />
-                                {/* <div className="textError">{error}</div> */}
+                                placeholder="Contact's identifier:" onChange={inputChange} />
+                            <div id="anim" className={shakeError ? 'shake' : ''}>
+                                <div className="textError">{error}</div>
+                            </div>
+
+
+
                             <button type="button" onClick={handleAddContact} className="btn btn-info">add <BsCheckLg /></button>
                         </div>
                     </Modal.Body>
@@ -57,6 +78,7 @@ function AddContact({ show, onHide, setShow }) {
         </div>
 
     );
+
 }
 
 export default AddContact;
