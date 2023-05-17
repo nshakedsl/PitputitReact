@@ -1,14 +1,14 @@
-import React from "react";
-// i\
-function OtherDetails({ nameOther, otherImg }) {
+import React from 'react';
+
+function OtherDetails({ otherImg, otherName }) {
     return (
         <div className="image_and_name">
             <button type="button" className="transparent-btn button5" data-bs-toggle="modal" data-bs-target="#PicModal">
-                <img
+                {otherImg && <img
                     src={otherImg}
-                    alt="buttonpng" width="60" className="btn-img image-cropper" />
+                    alt="buttonpng" width="60" className="btn-img image-cropper" />}
             </button>
-            <div> {nameOther}</div>
+            <div> {otherName}</div>
         </div>
     );
 }

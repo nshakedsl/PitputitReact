@@ -395,8 +395,8 @@ img {
 }
 
 .form-check-input:checked {
-    background-color: black;
-    border-color: black;
+    background-color: black !important;
+    border-color: black !important;
 }
 
 .form-check-input:focus {
@@ -533,17 +533,17 @@ img {
     aspect-ratio: 1 / 1
 }
 
-.background.dark-mode {
-    background: #111;
-  }
-  
-  .main.dark-mode {
-    background-color: #333;
-  }
-  
-  .topBar.dark-mode {
-    background-color: #222;
-  }
-  
-  /* Add more dark mode styles as needed for other elements */
-  
+
+.before_chats {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(240, 242, 245)
+}
+
+.before_chats>.logo_big {
+
+    height: 90%;
+}
