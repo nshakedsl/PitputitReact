@@ -30,7 +30,6 @@ function LoginForm() {
     } else if (password.length < 8) {
       setError('incorrect password❗');
       shakeAction();
-
     } else {
       {
         console.log('Userctx.userList: ', Userctx.userList);
@@ -46,7 +45,6 @@ function LoginForm() {
       setError('incorrect password or username❗'); // Clear the error message
       shakeAction();
     }
-
   };
 
   return (
@@ -57,10 +55,12 @@ function LoginForm() {
           placeholder="Username"
           value={username}
           setValue={setUsername} 
-          setError={setError}/>
+          setError={setError}
+          isRegistration={0}/>
         <PasswordInput placeholder="Password"
           value={password}
-          setValue={setPassword} />
+          setValue={setPassword}
+          isRegistration={0} />
         <button type="button" onClick={handleRegisterClick} className="btn btn-info">Log in</button>
         <div id="anim" className={shakeError ? 'shake' : ''}>
           <div className="textError">{error}</div>
