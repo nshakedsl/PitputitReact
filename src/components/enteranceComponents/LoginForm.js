@@ -32,7 +32,6 @@ function LoginForm() {
       shakeAction();
     } else {
       {
-        console.log('Userctx.userList: ', Userctx.userList);
         Userctx && Userctx.userList && Userctx.userList.forEach(function (element) {
           if (element.userName === username && element.pass === password) {
             Userctx.setUserName(element.userName)
@@ -54,9 +53,9 @@ function LoginForm() {
         <RegularInput
           placeholder="Username"
           value={username}
-          setValue={setUsername} 
+          setValue={setUsername}
           setError={setError}
-          isRegistration={0}/>
+          isRegistration={0} />
         <PasswordInput placeholder="Password"
           value={password}
           setValue={setPassword}
