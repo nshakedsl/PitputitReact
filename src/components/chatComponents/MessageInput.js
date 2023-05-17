@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../ctx/userContext"
 
 function MessageInput() {
+    const inputRef = useRef(null);
+    console.log('inputRef: ', inputRef);
     const [value, setValue] = useState('');
     const Userctx = useContext(UserContext);
 
@@ -22,6 +24,7 @@ function MessageInput() {
         }
 
     };
+
     useEffect(() => {
         return () => {
             if (Userctx.currentChat.messages.length !== 0) {
@@ -40,10 +43,13 @@ function MessageInput() {
     }, []);
 
 
-
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter')
+            handleMessageSent();
+    }
     return (
         <footer className="footer">
-            <input className="message" value={value} onChange={(e) => setValue(e.target.value)}
+            <input onKeyDown={handleKeyDown} className="message" value={value} onChange={(e) => setValue(e.target.value)}
                 placeholder="Type a message" />
             <svg onClick={handleMessageSent} className="send" viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet"
                 version="1.1" x="0px" y="0px" enableBackground="new 0 0 24 24">

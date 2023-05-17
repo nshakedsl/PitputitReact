@@ -10,6 +10,8 @@ function TopBar({ otherImg, otherName }) {
 
 
     const Userctx = useContext(UserContext)
+
+
     let logout = () => {
         Userctx.setUserList(prevUserList => {
             let temp = [...prevUserList]
