@@ -26,10 +26,6 @@ function LoginForm() {
     if (username.trim() === '' || password.trim() === '') {
       setError('All fields are mandatory❗');
       shakeAction();
-
-    } else if (password.length < 8) {
-      setError('incorrect password❗');
-      shakeAction();
     } else {
       {
         Userctx && Userctx.userList && Userctx.userList.forEach(function (element) {
@@ -41,7 +37,7 @@ function LoginForm() {
           }
         })
       };
-      setError('incorrect password or username❗'); // Clear the error message
+      setError('incorrect password or/and username❗'); // Clear the error message
       shakeAction();
     }
   };
