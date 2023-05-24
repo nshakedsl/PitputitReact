@@ -40,3 +40,46 @@
     transform: rotate(360deg);
   }
 }
+
+.spinner {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  height: 4vh;
+
+
+}
+
+.spinner div {
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  margin-right: 4px;
+  border-radius: 100%;
+  display: inline-block;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  animation-delay: -0.16s;
+}
+
+
+@keyframes sk-bouncedelay {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1.0);
+  }
+}

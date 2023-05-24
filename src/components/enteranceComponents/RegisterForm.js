@@ -15,6 +15,7 @@ function RegisterForm() {
   const [error, setError] = useState('');
   const [shakeError, setShakeError] = useState(false);
   const [imageSrc, setImageSrc] = useState('images/user.png');
+  const [loading, setLoading] = useState(false);
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -83,7 +84,7 @@ function RegisterForm() {
   };
 
   const register = async (newUser) => {
-
+    setLoading(true)
     try {
       let res = await fetch('http://localhost:5000/api/Users', {
         'method': 'Post',
@@ -97,6 +98,7 @@ function RegisterForm() {
         setError('This user name is already exist❗');
         shakeAction();
       }
+      setLoading(false)
       return res;
       //TODO: handle with wrong image format, user register twice
     } catch (err) {
@@ -171,7 +173,16 @@ function RegisterForm() {
           <div className="textError">{error}</div>
         </div>
 
-        <button type="button" onClick={handleRegisterClick} className="btn btn-info">Register</button>
+        <button type="button" onClick={handleRegisterClick} className="btn btn-info">
+
+          {loading ? <div className="spinner">
+            <div className="bounce1"></div>
+            <div className="bounce2"></div>
+            <div className="bounce3"></div>
+          </div>
+            : "Register"}
+
+        </button>
 
 
 
