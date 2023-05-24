@@ -72,35 +72,37 @@ function RegisterForm() {
     } else {
       //add user here
       let newUser = { username, password, displayName: nickname, profilePic: imageSrc }
-      try {
-        await register(newUser)
-
-
+      let res = await register(newUser)
+      if (res.ok) {
+        setError('');
+        setShakeError(false); // Clear the shake animation
+        navigate('/');
       }
-      //TODO: handle with wrong image format, user register twice
-      catch (err) {
-        console.log('err: ', err);
 
-      }
-      // Userctx.setUserList(() => {
-      //   let temp = [...Userctx.userList]
-      //   temp.push(newUser)
-      //   return temp
-      // })
-      // setError('');
-      // setShakeError(false); // Clear the shake animation
-      navigate('/');
     }
   };
 
   const register = async (newUser) => {
-    return fetch('http://localhost:5000/api/Users', {
-      'method': 'Post',
-      'headers': {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newUser)
-    })
+
+    try {
+      let res = await fetch('http://localhost:5000/api/Users', {
+        'method': 'Post',
+        'headers': {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser)
+      })
+      if (res.status === 409) {
+        // Handle the conflict error here
+        setError('This user name is already exist❗');
+        shakeAction();
+      }
+      return res;
+      //TODO: handle with wrong image format, user register twice
+    } catch (err) {
+      console.log('err: ', err);
+
+    }
   }
   const handleHerfClick = () => {
     navigate('/');
