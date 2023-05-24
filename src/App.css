@@ -47,14 +47,13 @@
   display: flex;
   width: 100%;
   align-items: center;
-  height: 4vh;
-
+  height: 3.20vh;
 
 }
 
 .spinner div {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background-color: white;
   margin-right: 4px;
   border-radius: 100%;
