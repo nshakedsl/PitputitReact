@@ -35,7 +35,7 @@ function RegisterForm() {
   }
 
 
-  const handleRegisterClick = () => {
+  const handleRegisterClick = async () => {
     // ...
     if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '') {
       setError('All fields are mandatory❗');
@@ -65,25 +65,43 @@ function RegisterForm() {
       setError('Passwords do not match❗');
       shakeAction();
 
-    } else if (Userctx.userList.find(element =>element.userName === username)) {
+    } else if (Userctx.userList.find(element => element.userName === username)) {
       setError('This user name is already exist❗');
       shakeAction();
 
     } else {
       //add user here
-      let newUser = { userName: username, pass: password, nick: nickname, dialogList: [], image: imageSrc }
-      Userctx.setUserList(() => {
-        let temp = [...Userctx.userList]
-        temp.push(newUser)
-        return temp
-      })
-      setError('');
-      setShakeError(false); // Clear the shake animation
+      let newUser = { username, password, displayName: nickname, profilePic: imageSrc }
+      try {
+        await register(newUser)
+
+
+      }
+      //TODO: handle with wrong image format, user register twice
+      catch (err) {
+        console.log('err: ', err);
+
+      }
+      // Userctx.setUserList(() => {
+      //   let temp = [...Userctx.userList]
+      //   temp.push(newUser)
+      //   return temp
+      // })
+      // setError('');
+      // setShakeError(false); // Clear the shake animation
       navigate('/');
     }
   };
 
-
+  const register = async (newUser) => {
+    return fetch('http://localhost:5000/api/Users', {
+      'method': 'Post',
+      'headers': {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser)
+    })
+  }
   const handleHerfClick = () => {
     navigate('/');
   };

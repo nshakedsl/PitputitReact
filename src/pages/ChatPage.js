@@ -40,7 +40,6 @@ function ChatPage() {
                 <div className="content">
                     <div className="contacts">
 
-
                         {
                             Userctx && Userctx.user && Userctx.user.dialogList && Userctx.user.dialogList.map(
                                 item => {
