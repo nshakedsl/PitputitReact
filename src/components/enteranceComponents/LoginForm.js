@@ -10,6 +10,7 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [shakeError, setShakeError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,24 +22,52 @@ function LoginForm() {
     setShakeError(true);
     setTimeout(() => { setShakeError(false); }, 500);
   }
+  
 
-  const handleRegisterClick = () => {
+  const login = async(data)=>{
+    try{
+      setLoading(true)
+      const res = await fetch('http://localhost:5000/api/Tokens',{
+      'method': 'post', 
+      'headers': {
+          'Content-Type':'application/json',
+      }, 
+      'body':JSON.stringify(data)
+      })
+
+      if(res.status === 404){
+        setError('incorrect password or/and username❗'); // Clear the error message
+        shakeAction();
+      }
+      setLoading(false)
+      return res
+    }
+    catch(err){
+      console.log('err: ', err);
+
+    }
+}
+
+  const handleRegisterClick = async() => {
     if (username.trim() === '' || password.trim() === '') {
       setError('All fields are mandatory❗');
       shakeAction();
     } else {
       {
-        Userctx && Userctx.userList && Userctx.userList.forEach(function (element) {
-          if (element.userName === username && element.pass === password) {
-            Userctx.setUserName(element.userName)
+        
+        let user = { username, password }
+      
+        let res = await login(user)
+
+          if(res.ok){
+             Userctx.setUserName(username)
             setError(''); // Clear the error message
             setShakeError(false); // Clear the shake animation
             navigate('/chats');
           }
-        })
+
       };
-      setError('incorrect password or/and username❗'); // Clear the error message
-      shakeAction();
+
     }
   };
 
@@ -56,7 +85,12 @@ function LoginForm() {
           value={password}
           setValue={setPassword}
           isRegistration={0} />
-        <button type="button" onClick={handleRegisterClick} className="btn btn-info">Log in</button>
+        <button type="button" onClick={handleRegisterClick} className="btn btn-info"> {loading ? <div className="spinner">
+            <div className="bounce1"></div>
+            <div className="bounce2"></div>
+            <div className="bounce3"></div>
+          </div>
+            : "Log In"}</button>
         <div id="anim" className={shakeError ? 'shake' : ''}>
           <div className="textError">{error}</div>
         </div>
