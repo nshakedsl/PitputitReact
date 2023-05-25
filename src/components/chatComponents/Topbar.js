@@ -21,6 +21,7 @@ function TopBar({ otherImg, otherName }) {
         Userctx.setUser({});
         Userctx.setUserName('')
         Userctx.setCurrentChat(undefined)
+        localStorage.setItem("token", '');
         navigate('/')
 
 

@@ -68,7 +68,7 @@ function LoginForm() {
           Userctx.setUserName(username)
           setError(''); // Clear the error message
           setShakeError(false); // Clear the shake animation
-          navigate('/chats');
+          navigate('/');
         }
 
       };
