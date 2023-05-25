@@ -66,10 +66,6 @@ function RegisterForm() {
       setError('Passwords do not match❗');
       shakeAction();
 
-    } else if (Userctx.userList.find(element => element.userName === username)) {
-      setError('This user name is already exist❗');
-      shakeAction();
-
     } else {
       //add user here
       let newUser = { username, password, displayName: nickname, profilePic: imageSrc }

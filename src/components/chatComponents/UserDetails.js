@@ -14,7 +14,7 @@ function UserDetails() {
                 <button type="button" className="transparent-btn button4 btn-img-self ">
                     <img src={Userctx && Userctx.user && Userctx.user.profilePic} alt="buttonpng" className="btn-img image-cropper ico" />
                 </button>
-                <div>{Userctx.userName}</div>
+                <div>{Userctx && Userctx.user && Userctx.user.displayName}</div>
                 <div className="add">
 
                     <button type="button" className="transparent-btn btn-bar-size" onClick={handleShow}><img src="images/add-contact.png" alt="buttonpng" className="btn-img" />
