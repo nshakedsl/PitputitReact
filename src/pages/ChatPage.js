@@ -18,13 +18,68 @@ function ChatPage() {
 
 
     useEffect(() => {
-        if (!Userctx.userName) {
-            navigate("/")
+        // no token
+        if (!localStorage.getItem("token")) {
+            navigate('/login')
         }
+        // have token
+        else {
+            // no name
+            if (!Userctx.userName) {
+                if (localStorage.getItem("username")) {
+                    Userctx.setUserName(localStorage.getItem("username"))
+                    getUserDetails(localStorage.getItem("username"))
+                }
+                // no name in local storage
+                else {
+                    localStorage.setItem("token", '')
+                    navigate('/login')
+                }
+            }
+            // have name
+            else {
+                // no user details
+                if (!Userctx.user || Userctx && Userctx.user && Object.keys(Userctx.user).length === 0) {
+                    getUserDetails(Userctx.userName);
+                }
+            }
+
+
+        }
+
+
 
     }, []);
 
 
+
+    const getUserDetails = async (username) => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/Users/${username}`, {
+                'method': 'GET',
+                'headers': {
+                    'Content-Type': 'application/json',
+                    "authorization": `Bearer ${localStorage.getItem("token")}`,
+                },
+            })
+            if (res.status === 401) {
+                navigate('/login')
+                return
+            }
+            else {
+                if (res.status === 200) {
+                    const responseData = await res.json()
+                    Userctx.setUser(responseData)
+                    return responseData
+                }
+            }
+
+        }
+        catch (err) {
+            console.log('err: ', err);
+
+        }
+    }
 
     useEffect(() => {
         if (Userctx && Userctx.currentChat)

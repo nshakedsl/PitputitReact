@@ -13,7 +13,6 @@ function LoginForm() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-
   const handleHerfClick = () => {
     navigate('/register');
   };
@@ -65,6 +64,7 @@ function LoginForm() {
         if (res) {
           // Save the token in local storage
           localStorage.setItem("token", res);
+          localStorage.setItem("username", username);
           Userctx.setUserName(username)
           setError(''); // Clear the error message
           setShakeError(false); // Clear the shake animation
