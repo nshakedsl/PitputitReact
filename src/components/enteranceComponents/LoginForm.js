@@ -26,7 +26,7 @@ function LoginForm() {
 
   const login = async(data)=>{
     try{
-      setLoading(true)
+      // setLoading(true)
       const res = await fetch('http://localhost:5000/api/Tokens',{
       'method': 'post', 
       'headers': {
@@ -39,7 +39,7 @@ function LoginForm() {
         setError('incorrect password or/and username❗'); // Clear the error message
         shakeAction();
       }
-      setLoading(false)
+      // setLoading(false)
       return res
     }
     catch(err){

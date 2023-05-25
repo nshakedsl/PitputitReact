@@ -72,13 +72,6 @@ function RegisterForm() {
 
     } else {
       // //add user here
-      // let newUser = { username, password, displayName: nickname, profilePic: imageSrc }
-      // let res = await register(newUser)
-      // if (res.ok) {
-      //   setError('');
-      //   setShakeError(false); // Clear the shake animation
-      //   navigate('/');
-      // }
 
       setLoading(true); // Start loading
 
