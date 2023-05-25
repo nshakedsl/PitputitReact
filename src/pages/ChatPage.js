@@ -29,6 +29,7 @@ function ChatPage() {
                 if (localStorage.getItem("username")) {
                     Userctx.setUserName(localStorage.getItem("username"))
                     getUserDetails(localStorage.getItem("username"))
+                    getContacts()
                 }
                 // no name in local storage
                 else {
@@ -41,6 +42,7 @@ function ChatPage() {
                 // no user details
                 if (!Userctx.user || Userctx && Userctx.user && Object.keys(Userctx.user).length === 0) {
                     getUserDetails(Userctx.userName);
+                    getContacts()
                 }
             }
 
@@ -52,7 +54,38 @@ function ChatPage() {
     }, []);
 
 
+    const getContacts = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/Chats/`, {
+                'method': 'GET',
+                'headers': {
+                    'Content-Type': 'application/json',
+                    "authorization": `Bearer ${localStorage.getItem("token")}`,
+                },
+            })
+            if (res.status === 401) {
+                navigate('/login')
+                return
+            }
+            else {
+                if (res.status === 200) {
+                    const responseData = await res.json()
+                    Userctx.setUser((prevUser) => {
+                        let temp = { ...prevUser }
+                        temp.dialogList = responseData
+                        return temp
+                    })
+                    console.log('responseData: ', responseData);
+                    return responseData
+                }
+            }
 
+        }
+        catch (err) {
+            console.log('err: ', err);
+
+        }
+    }
     const getUserDetails = async (username) => {
         try {
             const res = await fetch(`http://localhost:5000/api/Users/${username}`, {
@@ -98,21 +131,22 @@ function ChatPage() {
                         {
                             Userctx && Userctx.user && Userctx.user.dialogList && Userctx.user.dialogList.map(
                                 item => {
-                                    let contact = Userctx.findUserByName(item.user2)
-                                    let lastMessage = item.messages && item.messages.at(-1)
+                                    console.log('item: ', item);
+                                    // let contact = Userctx.findUserByName(item.user2)
+                                    let lastMessage = false
                                     return lastMessage ?
                                         <Contact
-                                            key={contact.userName}
-                                            otherName={contact.nick}
-                                            otherImg={contact.image}
+                                            key={item.id}
+                                            otherName={item.user.displayName}
+                                            otherImg={item.user.profilPic}
                                             date={lastMessage.time}
                                             lastMsg={lastMessage.messageText}
                                             dialog={item} />
                                         :
                                         <Contact
-                                            key={contact.userName}
-                                            otherName={contact.nick}
-                                            otherImg={contact.image}
+                                            key={item.user.username}
+                                            otherName={item.user.displayName}
+                                            otherImg={item.user.profilePic}
                                             date=''
                                             lastMsg=''
                                             dialog={item}
