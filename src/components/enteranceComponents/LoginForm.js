@@ -48,28 +48,58 @@ function LoginForm() {
     }
 }
 
-  const handleRegisterClick = async() => {
+  // const handleRegisterClick = async() => {
+  //   if (username.trim() === '' || password.trim() === '') {
+  //     setError('All fields are mandatory❗');
+  //     shakeAction();
+  //   } else {
+  //     {
+        
+  //       let user = { username, password }
+      
+  //       let res = await login(user)
+
+  //         if(res.ok){
+  //            Userctx.setUserName(username)
+  //           setError(''); // Clear the error message
+  //           setShakeError(false); // Clear the shake animation
+  //           navigate('/chats');
+  //         }
+
+  //     };
+
+  //   }
+  // };
+
+
+  const handleRegisterClick = async () => {
     if (username.trim() === '' || password.trim() === '') {
       setError('All fields are mandatory❗');
       shakeAction();
     } else {
-      {
-        
-        let user = { username, password }
-      
-        let res = await login(user)
+      let user = { username, password };
+      setLoading(true); // Start loading
 
-          if(res.ok){
-             Userctx.setUserName(username)
-            setError(''); // Clear the error message
-            setShakeError(false); // Clear the shake animation
-            navigate('/chats');
-          }
+      try {
+        let res = await login(user);
 
-      };
+        if (res.ok) {
+          Userctx.setUserName(username)
+          setError(''); // Clear the error message
+          setShakeError(false); // Clear the shake animation
+          navigate('/chats');
+        }
+      } catch (err) {
+        console.log('err: ', err);
+      }
 
+      setLoading(false); // Stop loading
     }
   };
+
+
+
+
 
   return (
     <form>
@@ -80,24 +110,36 @@ function LoginForm() {
           value={username}
           setValue={setUsername}
           setError={setError}
-          isRegistration={0} />
-        <PasswordInput placeholder="Password"
+          isRegistration={0}
+        />
+        <PasswordInput
+          placeholder="Password"
           value={password}
           setValue={setPassword}
-          isRegistration={0} />
-        <button type="button" onClick={handleRegisterClick} className="btn btn-info"> {loading ? <div className="spinner">
-            <div className="bounce1"></div>
-            <div className="bounce2"></div>
-            <div className="bounce3"></div>
-          </div>
-            : "Log In"}</button>
+          isRegistration={0}
+        />
+        <button
+          type="button"
+          onClick={handleRegisterClick}
+          className="btn btn-info"
+          disabled={loading} // Disable the button when loading is true
+        >
+          {loading ? ( <div className="spinner">
+              <div className="bounce1"></div>
+              <div className="bounce2"></div>
+              <div className="bounce3"></div>
+            </div> ) : ( 'Log In')}
+
+        </button>
         <div id="anim" className={shakeError ? 'shake' : ''}>
           <div className="textError">{error}</div>
         </div>
-        <div className="text">Not registered? <a href="#" onClick={handleHerfClick} >click here</a> to register </div>
-      </div>
-    </form>
-  );
+        <div className="text">
+          Not registered?{' '}
+          <a href="#" onClick={handleHerfClick}> click here </a>{' '} to register </div>
+       </div>
+     </form>
+   );
 }
 
 export default LoginForm;

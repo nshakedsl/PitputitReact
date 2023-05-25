@@ -71,14 +71,32 @@ function RegisterForm() {
       shakeAction();
 
     } else {
-      //add user here
-      let newUser = { username, password, displayName: nickname, profilePic: imageSrc }
-      let res = await register(newUser)
-      if (res.ok) {
-        setError('');
-        setShakeError(false); // Clear the shake animation
-        navigate('/');
+      // //add user here
+      // let newUser = { username, password, displayName: nickname, profilePic: imageSrc }
+      // let res = await register(newUser)
+      // if (res.ok) {
+      //   setError('');
+      //   setShakeError(false); // Clear the shake animation
+      //   navigate('/');
+      // }
+
+      setLoading(true); // Start loading
+
+      try {
+        let newUser = { username, password, displayName: nickname, profilePic: imageSrc }
+        let res = await register(newUser);
+
+        if (res.ok) {
+          setError('');
+          setShakeError(false); // Clear the shake animation
+          navigate('/');
+        }
+      } catch (err) {
+        console.log('err: ', err);
       }
+
+      setLoading(false); // Stop loading
+
 
     }
   };
@@ -173,7 +191,9 @@ function RegisterForm() {
           <div className="textError">{error}</div>
         </div>
 
-        <button type="button" onClick={handleRegisterClick} className="btn btn-info">
+        <button type="button" onClick={handleRegisterClick} className="btn btn-info"
+        disabled={loading} // Disable the button when loading is true
+        >
 
           {loading ? <div className="spinner">
             <div className="bounce1"></div>
