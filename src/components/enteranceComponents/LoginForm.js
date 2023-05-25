@@ -48,28 +48,6 @@ function LoginForm() {
     }
 }
 
-  // const handleRegisterClick = async() => {
-  //   if (username.trim() === '' || password.trim() === '') {
-  //     setError('All fields are mandatory❗');
-  //     shakeAction();
-  //   } else {
-  //     {
-        
-  //       let user = { username, password }
-      
-  //       let res = await login(user)
-
-  //         if(res.ok){
-  //            Userctx.setUserName(username)
-  //           setError(''); // Clear the error message
-  //           setShakeError(false); // Clear the shake animation
-  //           navigate('/chats');
-  //         }
-
-  //     };
-
-  //   }
-  // };
 
 
   const handleRegisterClick = async () => {
