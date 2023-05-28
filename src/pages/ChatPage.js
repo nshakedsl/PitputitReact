@@ -119,7 +119,13 @@ function ChatPage() {
             setContact(Userctx.findUserByName(Userctx.currentChat.user2))
 
     }, [Userctx.currentChat])
-
+    const calcDisplayDate = function(curDate){
+        const date = new Date(curDate)
+        const today = new Date()
+        if(date.getDate===today.getDate && date.getMonth === today.getMonth && date.getFullYear === today.getFullYear)
+            return date.getHours + ":" + date.getMinutes + ":" + date.getSeconds
+        return curDate
+    }
     return (
 
         <div className="background center_content">
@@ -137,7 +143,7 @@ function ChatPage() {
                                             key={item.id}
                                             otherName={item.user.displayName}
                                             otherImg={item.user.profilePic}
-                                            date={lastMessage.created}
+                                            date={calcDisplayDate(lastMessage.created)}
                                             lastMsg={lastMessage.content}
                                         />
                                         :
