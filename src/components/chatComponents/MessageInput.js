@@ -32,8 +32,11 @@ function MessageInput() {
                     console.log('responseData: ', responseData);
 
                     Userctx.setCurrentChat((prevCurrentChat) => {
-                        let temp = { ...prevCurrentChat }
-                        temp.messages.push(responseData)
+                        let temp = [ ...prevCurrentChat ]
+                        if (temp && temp.length != 0)
+                            temp.push(responseData)
+                        else
+                            temp = [responseData]
                         return temp;
                     })
                     setValue('')
@@ -60,22 +63,7 @@ function MessageInput() {
 
     };
 
-    useEffect(() => {
-        // return () => {
-        //     if (Userctx.currentChat.messages.length !== 0) {
-        //         Userctx.setUser(prevUser => {
-        //             let temp = { ...prevUser }
-        //             if (temp && temp.dialogList) {
-        //                 let i = temp.dialogList.findIndex(item => item.user2 === Userctx.currentChat.user2)
-        //                 temp.dialogList[i] = Userctx.currentChat
-        //             }
-        //             return temp
 
-        //         })
-
-        //     }
-        // };
-    }, []);
 
 
     const handleKeyDown = (event) => {
