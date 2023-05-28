@@ -1,55 +1,69 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../../ctx/userContext"
+import { useNavigate } from 'react-router-dom';
 
 function MessageInput() {
     const inputRef = useRef(null);
     const [value, setValue] = useState('');
     const Userctx = useContext(UserContext);
+    const navigate = useNavigate();
+
+
+
+    const sendMessage = async (data) => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/Chats/${Userctx.currentChatId}/Messages`, {
+                'method': 'POST',
+                'headers': {
+                    'Content-Type': 'application/json',
+                    "authorization": `Bearer ${localStorage.getItem("token")}`,
+                },
+                'body': JSON.stringify(data)
+            })
+
+            if (res.status === 401) {
+                navigate('/login')
+                return
+            }
+            else {
+
+                if (res.status === 200) {
+                    const responseData = await res.json()
+                    console.log('responseData: ', responseData);
+
+                    Userctx.setCurrentChat((prevCurrentChat) => {
+                        let temp = [ ...prevCurrentChat ]
+                        if (temp && temp.length != 0)
+                            temp.push(responseData)
+                        else
+                            temp = [responseData]
+                        return temp;
+                    })
+                    setValue('')
+                }
+            }
+
+        }
+        catch (err) {
+            console.log('err: ', err);
+
+        }
+    }
+
+
+
 
     const handleMessageSent = () => {
 
-        var currentdate = new Date();
         if (value.trim() != '') {
-            let newMessage
-            if (currentdate.getMinutes() > 10) {
-                newMessage = {
-                    id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":"
-                        + currentdate.getMinutes()
-                }
-            }
-            else {
-                newMessage = {
-                    id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":0"
-                        + currentdate.getMinutes()
-                }
-            }
-
-            Userctx.setCurrentChat((prevCurrentChat) => {
-                let temp = { ...prevCurrentChat }
-                temp.messages.push(newMessage)
-                return temp;
-            })
+            let newMessage = { msg: value }
+            sendMessage(newMessage)
             setValue('')
         }
 
     };
 
-    useEffect(() => {
-        return () => {
-            if (Userctx.currentChat.messages.length !== 0) {
-                Userctx.setUser(prevUser => {
-                    let temp = { ...prevUser }
-                    if (temp && temp.dialogList) {
-                        let i = temp.dialogList.findIndex(item => item.user2 === Userctx.currentChat.user2)
-                        temp.dialogList[i] = Userctx.currentChat
-                    }
-                    return temp
 
-                })
-
-            }
-        };
-    }, []);
 
 
     const handleKeyDown = (event) => {
