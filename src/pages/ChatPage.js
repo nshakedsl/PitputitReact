@@ -113,12 +113,45 @@ function ChatPage() {
     }
 
 
-    const calcDisplayDate = function(curDate){
-        const date = new Date(curDate)
-        const today = new Date()
-        if(date.getDate===today.getDate && date.getMonth === today.getMonth && date.getFullYear === today.getFullYear)
-            return date.getHours + ":" + date.getMinutes + ":" + date.getSeconds
-        return curDate
+    const calcDisplayDate = (curDate) => {
+        const date = new Date(curDate);
+        const today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1); // Set yesterday's date
+
+        if (
+            date.getDate() === today.getDate() &&
+            date.getMonth() === today.getMonth() &&
+            date.getFullYear() === today.getFullYear()
+        ) {
+            return getTime(date);
+        } else if (
+            date.getDate() === yesterday.getDate() &&
+            date.getMonth() === yesterday.getMonth() &&
+            date.getFullYear() === yesterday.getFullYear()
+        ) {
+            return 'yesterday';
+        }
+
+        return curDate;
+    }
+
+    const getTime = (t) => {
+        // Create a new Date object
+        var currentDate = t;
+
+        // Get the current hours and minutes
+        var hours = currentDate.getHours();
+        var minutes = currentDate.getMinutes();
+
+        // Format the hours and minutes with leading zeros if necessary
+        var formattedHours = hours < 10 ? '0' + hours : hours;
+        var formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+        // Create the final time string
+        var time = formattedHours + ':' + formattedMinutes;
+
+        return time// Output: "hh:mm" format of the current time
     }
     return (
 
