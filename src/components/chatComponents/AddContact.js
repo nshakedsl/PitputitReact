@@ -77,23 +77,6 @@ function AddContact({ show, onHide, setShow }) {
         let isPresent = Userctx && Userctx.user && Userctx.user.dialogList && Userctx.user.dialogList.find(element => element.user2 === contact)
         if (contact != Userctx.userName && !isPresent) {
             addContactToUser({ username: contact })
-            // let newContact = Userctx.userList.find((user) => user.userName === contact)
-            // if (newContact) {
-            //     const uniqueId = Date.now().toString();
-            //     let newDialog = { dialogId: uniqueId, user1: Userctx.userName, user2: newContact.userName, messages: [] }
-            //     newContact.dialogList.push(newDialog)
-            //     Userctx.setUser(user => {
-            //         let temp = { ...user }
-            //         temp.dialogList.push(newDialog);
-            //         return temp;
-            //     })
-            //     setContact('')
-            //     setShow(false)
-            // } else {
-
-            //     setError('User does not exists❗');
-            //     shakeAction();
-            // }
         }
         else {
             setError('Illegal person to add❗');
