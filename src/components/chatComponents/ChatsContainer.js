@@ -29,8 +29,7 @@ function MessageContainer() {
             else {
                 if (res.status === 200) {
                     const responseData = await res.json()
-                    Userctx.setCurrentChat(responseData)
-                    console.log('responseData: ', responseData);
+                    Userctx.setCurrentChat(responseData.reverse())
                     return
                 }
             }
