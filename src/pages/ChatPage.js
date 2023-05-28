@@ -131,25 +131,22 @@ function ChatPage() {
                         {
                             Userctx && Userctx.user && Userctx.user.dialogList && Userctx.user.dialogList.map(
                                 item => {
-                                    console.log('item: ', item);
-                                    // let contact = Userctx.findUserByName(item.user2)
-                                    let lastMessage = false
+                                    let lastMessage = item.lastMessage
                                     return lastMessage ?
                                         <Contact
                                             key={item.id}
                                             otherName={item.user.displayName}
-                                            otherImg={item.user.profilPic}
-                                            date={lastMessage.time}
-                                            lastMsg={lastMessage.messageText}
-                                            dialog={item} />
+                                            otherImg={item.user.profilePic}
+                                            date={lastMessage.created}
+                                            lastMsg={lastMessage.content}
+                                        />
                                         :
                                         <Contact
-                                            key={item.user.username}
+                                            key={item.id}
                                             otherName={item.user.displayName}
                                             otherImg={item.user.profilePic}
                                             date=''
                                             lastMsg=''
-                                            dialog={item}
                                         />
 
                                 })
