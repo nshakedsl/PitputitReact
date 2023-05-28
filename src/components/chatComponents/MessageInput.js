@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../../ctx/userContext"
+import { useNavigate } from 'react-router-dom';
 
 function MessageInput() {
     const inputRef = useRef(null);
     const [value, setValue] = useState('');
     const Userctx = useContext(UserContext);
+    const navigate = useNavigate();
 
 
 
@@ -27,38 +29,16 @@ function MessageInput() {
 
                 if (res.status === 200) {
                     const responseData = await res.json()
-                    //UserctxuseContext(UserContext);
+                    console.log('responseData: ', responseData);
 
-                    var currentdate = new Date();
-                    if (value.trim() != '') {
-                        let newMessage
-                        if (currentdate.getMinutes() > 10) {
-                            newMessage = {
-                                id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":"
-                                    + currentdate.getMinutes()
-                            }
-                        }
-                        else {
-                            newMessage = {
-                                id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":0"
-                                    + currentdate.getMinutes()
-                            }
-                        }
-
-                        Userctx.setCurrentChat((prevCurrentChat) => {
-                            let temp = { ...prevCurrentChat }
-                            temp.messages.push(newMessage)
-                            return temp;
-                        })
-                        setValue('')
-                    }
-
-                    setContact('')
-                    setShow(false)
+                    Userctx.setCurrentChat((prevCurrentChat) => {
+                        let temp = { ...prevCurrentChat }
+                        temp.messages.push(responseData)
+                        return temp;
+                    })
+                    setValue('')
                 }
-
             }
-
 
         }
         catch (err) {
@@ -72,47 +52,29 @@ function MessageInput() {
 
     const handleMessageSent = () => {
 
-        var currentdate = new Date();
         if (value.trim() != '') {
-            let newMessage
-            if (currentdate.getMinutes() > 10) {
-                newMessage = {
-                    id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":"
-                        + currentdate.getMinutes()
-                }
-            }
-            else {
-                newMessage = {
-                    id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":0"
-                        + currentdate.getMinutes()
-                }
-            }
-
-            Userctx.setCurrentChat((prevCurrentChat) => {
-                let temp = { ...prevCurrentChat }
-                temp.messages.push(newMessage)
-                return temp;
-            })
+            let newMessage = { msg: value }
+            sendMessage(newMessage)
             setValue('')
         }
 
     };
 
     useEffect(() => {
-        return () => {
-            if (Userctx.currentChat.messages.length !== 0) {
-                Userctx.setUser(prevUser => {
-                    let temp = { ...prevUser }
-                    if (temp && temp.dialogList) {
-                        let i = temp.dialogList.findIndex(item => item.user2 === Userctx.currentChat.user2)
-                        temp.dialogList[i] = Userctx.currentChat
-                    }
-                    return temp
+        // return () => {
+        //     if (Userctx.currentChat.messages.length !== 0) {
+        //         Userctx.setUser(prevUser => {
+        //             let temp = { ...prevUser }
+        //             if (temp && temp.dialogList) {
+        //                 let i = temp.dialogList.findIndex(item => item.user2 === Userctx.currentChat.user2)
+        //                 temp.dialogList[i] = Userctx.currentChat
+        //             }
+        //             return temp
 
-                })
+        //         })
 
-            }
-        };
+        //     }
+        // };
     }, []);
 
 
