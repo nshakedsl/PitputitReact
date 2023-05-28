@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './../styles/login.css'
 import './../styles/chats.css'
 import MessageInput from '../components/chatComponents/MessageInput';
@@ -13,7 +13,6 @@ function ChatPage() {
 
 
     const Userctx = useContext(UserContext);
-    const [contact, setContact] = useState({});
     const navigate = useNavigate();
 
 
@@ -40,7 +39,7 @@ function ChatPage() {
             // have name
             else {
                 // no user details
-                if (!Userctx.user || Userctx && Userctx.user && Object.keys(Userctx.user).length === 0) {
+                if ((!Userctx.user) || (Userctx && Userctx.user && Object.keys(Userctx.user).length === 0)) {
                     getUserDetails(Userctx.userName);
                     getContacts()
                 }
@@ -75,7 +74,6 @@ function ChatPage() {
                         temp.dialogList = responseData
                         return temp
                     })
-                    console.log('responseData: ', responseData);
                     return responseData
                 }
             }
@@ -114,17 +112,16 @@ function ChatPage() {
         }
     }
 
-    useEffect(() => {
-        if (Userctx && Userctx.currentChat)
-            setContact(Userctx.findUserByName(Userctx.currentChat.user2))
 
-    }, [Userctx.currentChat])
 
     return (
 
         <div className="background center_content">
             <div className="main">
-                <TopBar otherName={contact.nick} otherImg={contact.image ? contact.image : ''} />
+                <TopBar
+                    otherName={Userctx && Userctx.currentChatUser && Userctx.currentChatUser.displayName}
+                    otherImg={Userctx && Userctx.currentChatUser && Userctx.currentChatUser.profilePic ?
+                        Userctx.currentChatUser.profilePic : ''} />
                 <div className="content">
                     <div className="contacts">
 
@@ -139,6 +136,8 @@ function ChatPage() {
                                             otherImg={item.user.profilePic}
                                             date={lastMessage.created}
                                             lastMsg={lastMessage.content}
+                                            chatId={item.id}
+                                            user={item.user}
                                         />
                                         :
                                         <Contact
@@ -147,6 +146,8 @@ function ChatPage() {
                                             otherImg={item.user.profilePic}
                                             date=''
                                             lastMsg=''
+                                            chatId={item.id}
+
                                         />
 
                                 })
@@ -157,7 +158,7 @@ function ChatPage() {
 
                     {
 
-                        Userctx && Userctx.currentChat == undefined ?
+                        Userctx && Userctx.currentChatId === undefined ?
                             <div className=" before_chats">
                                 <img src="images/logo-color.svg" className="logo_big" alt="default_user" />
                             </div>

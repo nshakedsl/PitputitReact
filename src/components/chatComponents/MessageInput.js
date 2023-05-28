@@ -9,7 +9,7 @@ function MessageInput() {
     const handleMessageSent = () => {
 
         var currentdate = new Date();
-        if (value.trim() != '') {
+        if (value.trim() !== '') {
             let newMessage
             if (currentdate.getMinutes() > 10) {
                 newMessage = {
@@ -36,7 +36,7 @@ function MessageInput() {
 
     useEffect(() => {
         return () => {
-            if (Userctx.currentChat.messages.length !== 0) {
+            if (Userctx && Userctx.currentChat && Userctx.currentChat.length !== 0) {
                 Userctx.setUser(prevUser => {
                     let temp = { ...prevUser }
                     if (temp && temp.dialogList) {
