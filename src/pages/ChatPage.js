@@ -186,6 +186,7 @@ function ChatPage() {
                                             date=''
                                             lastMsg=''
                                             chatId={item.id}
+                                            user={item.user}
 
                                         />
 
