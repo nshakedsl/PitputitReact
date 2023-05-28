@@ -2,11 +2,13 @@ import React, { useState, useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { BsCheckLg, BsPersonPlus } from "react-icons/bs";
 import { UserContext } from "../../ctx/userContext"
+import { useNavigate } from 'react-router-dom';
 
 function AddContact({ show, onHide, setShow }) {
     const [error, setError] = useState('');
     const [contact, setContact] = useState('')
     const Userctx = useContext(UserContext)
+    const navigate = useNavigate();
     const [shakeError, setShakeError] = useState(false);
 
     const shakeAction = () => {
@@ -20,28 +22,61 @@ function AddContact({ show, onHide, setShow }) {
     }
 
 
-    const handleAddContact = () => {
-        let isPresent = Userctx.user.dialogList.find(element => element.user2 === contact)
-        if (contact != Userctx.userName && !isPresent) {
-            let newContact = Userctx.userList.find((user) => user.userName === contact)
-            if (newContact) {
-                const uniqueId = Date.now().toString();
-                let newDialog = { dialogId: uniqueId, user1: Userctx.userName, user2: newContact.userName, messages: [] }
-                newContact.dialogList.push(newDialog)
-                Userctx.setUser(user => {
-                    let temp = { ...user }
-                    temp.dialogList.push(newDialog);
-                    return temp;
-                })
-                setContact('')
-                setShow(false)
-            } else {
+    const addContactToUser = async (data) => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/Chats`, {
+                'method': 'POST',
+                'headers': {
+                    'Content-Type': 'application/json',
+                    "authorization": `Bearer ${localStorage.getItem("token")}`,
+                },
+                'body': JSON.stringify(data)
+            })
 
-                setError('User does not exists❗');
-                shakeAction();
+            //TODO: add user twice.
 
-
+            if (res.status === 401) {
+                navigate('/login')
+                return
             }
+            else {
+
+                if (res.status === 400) {
+                    setError('User does not exists❗');
+                    shakeAction();
+                    return
+
+                } else {
+                    if (res.status === 200) {
+                        const responseData = await res.json()
+                        Userctx.setUser(user => {
+                            let temp = { ...user }
+                            if (temp.dialogList)
+                                temp.dialogList.push(responseData);
+                            else
+                                temp.dialogList = [responseData]
+                            return temp;
+                        })
+                        setContact('')
+                        setShow(false)
+                    }
+                }
+            }
+
+
+        }
+        catch (err) {
+            console.log('err: ', err);
+
+        }
+    }
+
+
+    const handleAddContact = () => {
+        console.log('Userctx.user: ', Userctx.user);
+        let isPresent = Userctx && Userctx.user && Userctx.user.dialogList && Userctx.user.dialogList.find(element => element.user2 === contact)
+        if (contact != Userctx.userName && !isPresent) {
+            addContactToUser({ username: contact })
         }
         else {
             setError('Illegal person to add❗');
