@@ -6,6 +6,70 @@ function MessageInput() {
     const [value, setValue] = useState('');
     const Userctx = useContext(UserContext);
 
+
+
+    const sendMessage = async (data) => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/Chats/${Userctx.currentChatId}/Messages`, {
+                'method': 'POST',
+                'headers': {
+                    'Content-Type': 'application/json',
+                    "authorization": `Bearer ${localStorage.getItem("token")}`,
+                },
+                'body': JSON.stringify(data)
+            })
+
+            if (res.status === 401) {
+                navigate('/login')
+                return
+            }
+            else {
+
+                if (res.status === 200) {
+                    const responseData = await res.json()
+                    //UserctxuseContext(UserContext);
+
+                    var currentdate = new Date();
+                    if (value.trim() != '') {
+                        let newMessage
+                        if (currentdate.getMinutes() > 10) {
+                            newMessage = {
+                                id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":"
+                                    + currentdate.getMinutes()
+                            }
+                        }
+                        else {
+                            newMessage = {
+                                id: Date.now().toString(), name: Userctx.userName, messageText: value, time: currentdate.getHours() + ":0"
+                                    + currentdate.getMinutes()
+                            }
+                        }
+
+                        Userctx.setCurrentChat((prevCurrentChat) => {
+                            let temp = { ...prevCurrentChat }
+                            temp.messages.push(newMessage)
+                            return temp;
+                        })
+                        setValue('')
+                    }
+
+                    setContact('')
+                    setShow(false)
+                }
+
+            }
+
+
+        }
+        catch (err) {
+            console.log('err: ', err);
+
+        }
+    }
+
+
+
+
     const handleMessageSent = () => {
 
         var currentdate = new Date();
