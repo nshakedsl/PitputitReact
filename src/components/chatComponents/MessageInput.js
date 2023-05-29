@@ -32,7 +32,7 @@ function MessageInput() {
                     console.log('responseData: ', responseData);
 
                     Userctx.setCurrentChat((prevCurrentChat) => {
-                        let temp = [ ...prevCurrentChat ]
+                        let temp = [...prevCurrentChat]
                         if (temp && temp.length != 0)
                             temp.push(responseData)
                         else

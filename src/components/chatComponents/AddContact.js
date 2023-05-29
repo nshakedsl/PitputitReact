@@ -10,6 +10,7 @@ function AddContact({ show, onHide, setShow }) {
     const Userctx = useContext(UserContext)
     const navigate = useNavigate();
     const [shakeError, setShakeError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const shakeAction = () => {
         setShakeError(true);
@@ -23,6 +24,7 @@ function AddContact({ show, onHide, setShow }) {
 
 
     const addContactToUser = async (data) => {
+        setLoading(true)
         try {
             const res = await fetch(`http://localhost:5000/api/Chats`, {
                 'method': 'POST',
@@ -69,10 +71,12 @@ function AddContact({ show, onHide, setShow }) {
             console.log('err: ', err);
 
         }
+
     }
 
 
     const handleAddContact = () => {
+        setLoading(true)
         console.log('Userctx.user: ', Userctx.user);
         let isPresent = Userctx && Userctx.user && Userctx.user.dialogList && Userctx.user.dialogList.find(element => element.user2 === contact)
         if (contact != Userctx.userName && !isPresent) {
@@ -82,6 +86,7 @@ function AddContact({ show, onHide, setShow }) {
             setError('Illegal person to add❗');
             shakeAction();
         }
+        setLoading(false)
     };
 
     return (
@@ -104,7 +109,13 @@ function AddContact({ show, onHide, setShow }) {
 
 
 
-                            <button type="button" onClick={handleAddContact} className="btn btn-info">add <BsCheckLg /></button>
+                            <button type="button" disabled={loading} onClick={handleAddContact}
+                                className="btn btn-info"> <BsCheckLg /> {loading ? <div className="spinner">
+                                    <div className="bounce1"></div>
+                                    <div className="bounce2"></div>
+                                    <div className="bounce3"></div>
+                                </div>
+                                    : "Add"}</button>
                         </div>
                     </Modal.Body>
                 </div>
