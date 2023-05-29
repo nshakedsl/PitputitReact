@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect  } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { BsCheckLg, BsPersonPlus } from "react-icons/bs";
 import { UserContext } from "../../ctx/userContext"
@@ -16,6 +16,13 @@ function AddContact({ show, onHide, setShow }) {
         setShakeError(true);
         setTimeout(() => { setShakeError(false); }, 500);
     }
+
+    useEffect(() => {
+        if (show) {
+            setContact(''); 
+            setError('');
+        }
+    }, [show]);
 
     const inputChange = (e) => {
         setContact(e.target.value)
