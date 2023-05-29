@@ -32,9 +32,17 @@ function MessageInput() {
                     console.log('responseData: ', responseData);
 
                     Userctx.setCurrentChat((prevCurrentChat) => {
-                        let temp = [ ...prevCurrentChat ]
-                        if (temp && temp.length != 0)
+                        let temp = [...prevCurrentChat]
+                        if (temp && temp.length != 0) {
                             temp.push(responseData)
+                            Userctx.setUser((prevUser) => {
+                                let temp = { ...prevUser }
+                                let newMessage = { created: responseData.created, content: responseData.content }
+                                temp.dialogList.find(item => item.user.username === Userctx.currentChatUser.username).lastMessage = newMessage
+                                return temp
+
+                            })
+                        }
                         else
                             temp = [responseData]
                         return temp;
