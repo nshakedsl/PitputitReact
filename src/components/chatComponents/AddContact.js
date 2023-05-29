@@ -42,7 +42,6 @@ function AddContact({ show, onHide, setShow }) {
                 return
             }
             else {
-
                 if (res.status === 400) {
                     setError('User does not exists❗');
                     shakeAction();
@@ -76,6 +75,7 @@ function AddContact({ show, onHide, setShow }) {
 
 
     const handleAddContact = () => {
+        if (contact === "") return
         setLoading(true)
         console.log('Userctx.user: ', Userctx.user);
         let isPresent = Userctx && Userctx.user && Userctx.user.dialogList && Userctx.user.dialogList.find(element => element.user2 === contact)
