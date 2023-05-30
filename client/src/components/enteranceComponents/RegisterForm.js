@@ -114,7 +114,7 @@ function RegisterForm() {
     }
   }
   const handleHerfClick = () => {
-    navigate('/');
+    navigate('/login');
   };
 
 
