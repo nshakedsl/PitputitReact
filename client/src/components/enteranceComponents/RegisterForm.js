@@ -181,7 +181,7 @@ function RegisterForm() {
         </div>
 
         <button type="button" onClick={handleRegisterClick} className="btn btn-info"
-        disabled={loading} // Disable the button when loading is true
+          disabled={loading} // Disable the button when loading is true
         >
 
           {loading ? <div className="spinner">
@@ -195,7 +195,7 @@ function RegisterForm() {
 
 
 
-        <div>Already registered? <a href="#" onClick={handleHerfClick} >Click here</a> to login</div>
+        <div>Already registered? <a onClick={handleHerfClick} >Click here</a> to login</div>
       </div>
     </>
   );
