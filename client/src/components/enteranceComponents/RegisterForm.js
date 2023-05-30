@@ -198,7 +198,7 @@ function RegisterForm() {
 
 
 
-        <div>Already registered? <a onClick={handleHerfClick} >Click here</a> to login</div>
+        <div>Already registered? <a href="#" onClick={handleHerfClick} >Click here</a> to login</div>
       </div>
     </>
   );
