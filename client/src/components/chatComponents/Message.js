@@ -20,6 +20,7 @@ function Message({ MessageInfo }) {
         }
     }, [])
 
+
     const getTime = (t) => {
         // Create a new Date object
         var currentDate = new Date(t);
