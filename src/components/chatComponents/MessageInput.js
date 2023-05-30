@@ -22,6 +22,7 @@ function MessageInput() {
             })
 
             if (res.status === 401) {
+                localStorage.setItem("token", '')
                 navigate('/login')
                 return
             }
