@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect  } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { BsCheckLg, BsPersonPlus } from "react-icons/bs";
 import { UserContext } from "../../ctx/userContext"
@@ -19,7 +19,7 @@ function AddContact({ show, onHide, setShow }) {
 
     useEffect(() => {
         if (show) {
-            setContact(''); 
+            setContact('');
             setError('');
         }
     }, [show]);
@@ -31,7 +31,6 @@ function AddContact({ show, onHide, setShow }) {
 
 
     const addContactToUser = async (data) => {
-        setLoading(true)
         try {
             const res = await fetch(`http://localhost:5000/api/Chats`, {
                 'method': 'POST',
@@ -49,7 +48,6 @@ function AddContact({ show, onHide, setShow }) {
                 return
             }
             else {
-
                 if (res.status === 400) {
                     setError('User does not exists❗');
                     shakeAction();
@@ -79,21 +77,23 @@ function AddContact({ show, onHide, setShow }) {
 
         }
 
+
     }
 
 
-    const handleAddContact = () => {
-        setLoading(true)
-        console.log('Userctx.user: ', Userctx.user);
+    const handleAddContact = async () => {
+        if (contact === "") return
         let isPresent = Userctx && Userctx.user && Userctx.user.dialogList && Userctx.user.dialogList.find(element => element.user2 === contact)
         if (contact != Userctx.userName && !isPresent) {
-            addContactToUser({ username: contact })
+            setLoading(true)
+            await addContactToUser({ username: contact })
+            setLoading(false)
+
         }
         else {
             setError('Illegal person to add❗');
             shakeAction();
         }
-        setLoading(false)
     };
 
     return (
@@ -117,12 +117,13 @@ function AddContact({ show, onHide, setShow }) {
 
 
                             <button type="button" disabled={loading} onClick={handleAddContact}
-                                className="btn btn-info"> <BsCheckLg /> {loading ? <div className="spinner">
-                                    <div className="bounce1"></div>
-                                    <div className="bounce2"></div>
-                                    <div className="bounce3"></div>
-                                </div>
-                                    : "Add"}</button>
+                                className="btn btn-info">  {loading ?
+                                    <div className="spinner">
+                                        <div className="bounce1"></div>
+                                        <div className="bounce2"></div>
+                                        <div className="bounce3"></div>
+                                    </div>
+                                    : <><BsCheckLg /> <span>Add</span></>}</button>
                         </div>
                     </Modal.Body>
                 </div>

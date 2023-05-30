@@ -135,7 +135,7 @@ function ChatPage() {
             return 'yesterday';
         }
 
-        return curDate;
+        return date.toLocaleDateString();
     }
 
     const getTime = (t) => {
