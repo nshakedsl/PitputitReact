@@ -547,3 +547,7 @@ img {
 
     height: 90%;
 }
+
+.gray_spinner {
+    background-color: gray !important;
+}
