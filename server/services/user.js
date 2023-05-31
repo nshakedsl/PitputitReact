@@ -9,8 +9,9 @@ const deleteUser = async (username) => {
     return user;
 };
 
-const createUser = async () => {
-
+const createUser = async (senderName, displayName, profilePic) => {
+    const user = new User({ username: senderName, displayName, profilePic });
+    return user;
 };
 
-module.exports = { getUserByName, getUsers, deleteUser }
+module.exports = { getUserByName, getUsers, deleteUser,createUser }
