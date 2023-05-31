@@ -36,6 +36,9 @@ function RegisterForm() {
   }
 
 
+
+
+
   const handleRegisterClick = async () => {
     // ...
     if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '') {
