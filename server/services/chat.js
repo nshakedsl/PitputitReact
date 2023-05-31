@@ -8,8 +8,11 @@ function generateUniqueId() {
     counter++;
     return uniqueId;
 }
-
-
+const getMessagesOfChat = async (id) => {
+    const chat = await getchatById(id);
+    if (!chat || !chat.messages) return null;
+    return chat.messages;
+};
 const createChat = async (sender, reciever) => {
     const id = generateUniqueId();
     let messages = [];
@@ -30,4 +33,4 @@ const deleteChatById = async (id) => {
     await chat.remove();
     return chat;
 };
-module.exports = { getChatById, getChats, deleteChatById,createChat }
+module.exports = { getMessagesOfChat,getChatById, getChats, deleteChatById,createChat }
