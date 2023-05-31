@@ -1,4 +1,5 @@
 const Chat = require('../models/chats');
+const { createMessage } = require('./message');
 const { getUserByName } = require('./user');
 
 let counter = 0;
@@ -13,16 +14,27 @@ const getMessagesOfChat = async (id) => {
     if (!chat || !chat.messages) return null;
     return chat.messages;
 };
+const addMessage = async (id, senderName, content) => {
+    const chat = await getchatById(id);
+    if (!chat || !chat.messages) return null;
+    const message = createMessage(senderName, content);
+    Chat.findOneAndUpdate(
+        { id },
+        { $push: { messages: message } },
+        { new: true }
+    );
+    return true;
+};
 const createChat = async (sender, reciever) => {
     const id = generateUniqueId();
     let messages = [];
     const user1 = getUserByName(sender);
     const user2 = getUserByName(reciever);
-    if(!user1 || !user2){
+    if (!user1 || !user2) {
         return null;
     }
     const users = [user1, user2];
-    const chat = new Chat({ id:id, messages: messages, users: users });
+    const chat = new Chat({ id, messages, users });
     return await chat.save();
 };
 const getChatById = async (id) => { return await Chat.findById(id); };
@@ -33,4 +45,4 @@ const deleteChatById = async (id) => {
     await chat.remove();
     return chat;
 };
-module.exports = { getMessagesOfChat,getChatById, getChats, deleteChatById,createChat }
+module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage }

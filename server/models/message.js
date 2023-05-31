@@ -9,6 +9,10 @@ const Message = new Schema({
     created: {
         type: string($date-time)
     },
-    sender: User
+    sender: User,
+    content: {
+        type: String,
+        nullable: true
+    }
 });
 module.exports = mongoose.model('message', Message);
