@@ -4,12 +4,15 @@ const User = require('./user');
 const Schema = mongoose.Schema;
 const Message = new Schema({
     id: {
-        type: integer($int32)
+        type: Number
     },
     created: {
-        type: string($date-time)
+        type: Date
     },
-    sender: User,
+    sender: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     content: {
         type: String,
         nullable: true

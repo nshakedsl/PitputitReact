@@ -1,12 +1,12 @@
-const chatsController = reqire('../controllers/chat');
+const chatsController = require('../controllers/chat');
 
 const express = require('express');
 var router = express.Router();
 
 router.route('/')
-    .get(chatsController.getAllChats)
+    .get(chatsController.getChats)
     .post(chatsController.createChat);
-    
+
 
 router.route('/:id')
     .get(chatsController.getChatMessages)
