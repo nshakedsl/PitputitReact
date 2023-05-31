@@ -9,6 +9,13 @@ const getChat = async (req, res) => {
     }
     res.json(chat);
 };
+const getChatMessages = async (req, res) => {
+    const chatMessages = await chatService.getMessagesOfChat(req.params.id);
+    if (!chatMessages) {
+        return res.status(404).json({ errors: ['Chat Messages not found'] });
+    }
+    res.json(chatMessages);
+};
 const deleteChat = async (req, res) => {
     const chat = await chatService.deleteChatById(req.params.id);
     if (!chat) {
@@ -25,4 +32,4 @@ const createChat = async (req, res) => {
     res.json(chat);
 };
 //...
-module.exports = { createChat,getChats,getChat,deleteChat };
+module.exports = { getChatMessages,createChat,getChats,getChat,deleteChat };
