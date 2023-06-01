@@ -3,9 +3,6 @@ const User = require('./user');
 
 const Schema = mongoose.Schema;
 const Message = new Schema({
-    id: {
-        type: Number
-    },
     created: {
         type: Date
     },

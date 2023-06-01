@@ -26,15 +26,17 @@ const addMessage = async (id, senderName, content) => {
     return true;
 };
 const createChat = async (sender, reciever) => {
-    const id = generateUniqueId();
     let messages = [];
-    const user1 = getUserByName(sender);
-    const user2 = getUserByName(reciever);
+    const user1 = await getUserByName(sender);
+    const user2 = await getUserByName(reciever);
     if (!user1 || !user2) {
+        console.log("here?!");
+        console.log(user1);
+        console.log(user2);
         return null;
     }
     const users = [user1, user2];
-    const chat = new Chat({ id, messages, users });
+    const chat = await Chat.create({ messages, users });
     return await chat.save();
 };
 const getChatById = async (id) => { return await Chat.findById(id); };
