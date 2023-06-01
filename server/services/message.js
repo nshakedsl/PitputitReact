@@ -1,9 +1,8 @@
 const Message = require('../models/message');
 const createMessage = async (senderName,content) => {
-    const id  =  new Date().getTime();
     const created = new Date().getTime();
     sender = getUserByName(senderName);
-    const message = new Message({ id, created , sender, content });
+    const message = new Message({ created , sender, content });
     return message;
 };
 const getMessageById = async (id) => { return await Message.findById(id); };

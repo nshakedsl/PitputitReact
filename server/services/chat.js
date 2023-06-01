@@ -19,7 +19,7 @@ const addMessage = async (id, senderName, content) => {
     if (!chat || !chat.messages) return null;
     const message = serviceMessage.createMessage(senderName, content);
     Chat.findOneAndUpdate(
-        { id },
+        { _id:id },
         { $push: { messages: message } },
         { new: true }
     );
@@ -30,9 +30,6 @@ const createChat = async (sender, reciever) => {
     const user1 = await getUserByName(sender);
     const user2 = await getUserByName(reciever);
     if (!user1 || !user2) {
-        console.log("here?!");
-        console.log(user1);
-        console.log(user2);
         return null;
     }
     const users = [user1, user2];
@@ -44,7 +41,7 @@ const getChats = async () => { return await Chat.find({}); };
 const deleteChatById = async (id) => {
     const chat = await getchatById(id);
     await chat.messages.map(message => {
-        return serviceMessage.deleteMessage(message.id);
+        return serviceMessage.deleteMessage(message._id);
     });
     if (!chat) return null;
     await chat.remove();
