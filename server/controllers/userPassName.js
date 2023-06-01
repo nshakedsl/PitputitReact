@@ -31,8 +31,9 @@ const registerUser = async (req, res) => {
     }
 
     const user = await userPassNameService.createUserPassName(req.body.username, req.body.password, req.body.displayName, req.body.profilePic);
+    console.log('user: ', user);
     if (!user) {
-        return res.status(409).json({ errors: ['error creating user'] });
+        return res.status(409).json({ errors: ['user already exists'] });
     }
     return res.status(200).json({});
 
