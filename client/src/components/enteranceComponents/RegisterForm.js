@@ -53,7 +53,9 @@ function RegisterForm() {
       setError('inputs must contain at least 2 characters❗');
       shakeAction();
 
-    } else if (!/^[a-zA-Z0-9\._:\-\?!]+$/.test(username) || !/^[a-zA-Z0-9\._:\-\?!]+$/.test(nickname) || !/^[a-zA-Z0-9\._:\-\?!]+$/.test(password)) {
+    } else if (!/^[a-zA-Z0-9\._:\-\?!]+$/.test(username) ||
+      !/^[a-zA-Z0-9\._:\-\?! ]+$/.test(nickname) ||
+      !/^[a-zA-Z0-9\._:\-\?!]+$/.test(password)) {
       setError('You choose invalid characters. Use lowercase, uppercase letters, numbers and . _ - : ? ! signs❗');
       shakeAction();
 

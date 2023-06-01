@@ -3,13 +3,20 @@ const userService = require('../services/user');
 
 const registerUser = async (req, res) => {
 
-    if (!req.body.password.length < 8) {
+    console.log('!/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.username): ', !/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.username));
+    console.log('!/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.displayName): ', !/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.displayName));
+    console.log('!/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.password): ', !/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.password));
+
+    if (req.body.password.length < 8) {
         return res.status(400).json({ errors: ['Password must contain at least 8 characters'] });
 
-    } else if (!/[0-9]/.test(!req.body.password) || !/[a-z]/.test(!req.body.password) || !/[A-Z]/.test(!req.body.password)) {
+    } else if (!/[0-9]/.test(req.body.password) || !/[a-z]/.test(req.body.password) || !/[A-Z]/.test(req.body.password)) {
         return res.status(400).json({ errors: ['Password must contain a combination of uppercase and lowercase letters and numbers'] });
 
-    } else if (!/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.username) || !/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.displayName) || !/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.password)) {
+    } else if (
+        !/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.username) ||
+        !/^[a-zA-Z0-9\._:\-\?! ]+$/.test(req.body.displayName) ||
+        !/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.password)) {
         return res.status(400).json({ errors: ['You choose invalid characters'] });
 
     } else if (req.body.profilePic === 'images/user.png') {
@@ -22,11 +29,7 @@ const registerUser = async (req, res) => {
         return res.status(400).json({ errors: ['inputs must contain until 32 characters'] });
 
     }
-    /*
-    else if (userService(req.body.username)) {
-        return res.status(400).json({ errors: ['username already taken'] });
-    }
-    */
+
     const user = await userPassNameService.createUserPassName(req.body.username, req.body.password, req.body.displayName, req.body.profilePic);
     if (!user) {
         return res.status(409).json({ errors: ['error creating user'] });
@@ -34,7 +37,6 @@ const registerUser = async (req, res) => {
     res.json(user);
 
 };
-//...
 module.exports = { registerUser };
 
 
