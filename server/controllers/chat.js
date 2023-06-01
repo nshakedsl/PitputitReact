@@ -1,5 +1,6 @@
 const chatService = require('../services/chat');
 const messageService = require('../services/message');
+const userService = require('../services/user');
 const getChats = async (req, res) => {
     res.json(await chatService.getChats());
 };
@@ -49,15 +50,19 @@ const deleteChat = async (req, res) => {
     res.json(chat);
 };
 const createChat = async (req, res) => {
-    const me = "";
+    const me = "fred";
     if (!req.body.username || !me) {
-        return res.status(400).json({ errors: ['Bad Request user'] });
+        return res.status(400).json({ errors: ['other user field is mandatory'] });
+    }
+    const retVal = await userService.getUserByName(req.body.username);
+    if(!retVal){
+        return res.status(401).json({ errors: ['the other user does not exist'] });
     }
     const chat = await chatService.createChat(req.body.username, me);
     if (!chat) {
         return res.status(404).json({ errors: ['error when creating chat'] });
     }
-    res.json(chat);
+    return res.status(200).json(chat);
 };
 //...
 module.exports = { addChatMessage, getChatMessages, createChat, getChats, getChat, deleteChat };
