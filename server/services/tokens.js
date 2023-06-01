@@ -13,7 +13,6 @@ const login = async (username, password) => {
     return null
 
 
-    console.log('user: ', user);
 };
 
 module.exports = { login }
