@@ -1,6 +1,9 @@
 const userPassNameService = require('../services/userPassName');
 
 const registerUser = async (req, res) => {
+    if(!req || !req.body || !req.body.password || !req.body.username || !req.body.displayName || !req.body.profilePic){
+        return res.status(401).json({ errors: ['all fields are mandatory'] });
+    }
 
 
     if (req.body.password.length < 8) {

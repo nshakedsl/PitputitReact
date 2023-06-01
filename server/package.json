@@ -1,9 +1,9 @@
 {
   "description": "",
   "scripts": {
-    "test": "SET NODE_ENV=test && node app.js",
-    "start": "SET NODE_ENV=local && node app.js"
-  },
+    "test": "export NODE_ENV=test && node app.js",
+    "start": "export NODE_ENV=local && node app.js"
+  },  
   "dependencies": {
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
