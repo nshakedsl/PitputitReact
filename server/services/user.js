@@ -10,6 +10,9 @@ const deleteUser = async (username) => {
 };
 
 const createUser = async (senderName, displayName, profilePic) => {
+    if(getUserByName(senderName)){
+        return null;
+    }
     const user = new User({ username: senderName, displayName, profilePic });
     return user;
 };
