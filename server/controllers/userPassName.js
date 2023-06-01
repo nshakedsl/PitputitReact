@@ -1,11 +1,7 @@
 const userPassNameService = require('../services/userPassName');
-const userService = require('../services/user');
 
 const registerUser = async (req, res) => {
 
-    console.log('!/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.username): ', !/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.username));
-    console.log('!/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.displayName): ', !/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.displayName));
-    console.log('!/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.password): ', !/^[a-zA-Z0-9\._:\-\?!]+$/.test(req.body.password));
 
     if (req.body.password.length < 8) {
         return res.status(400).json({ errors: ['Password must contain at least 8 characters'] });
