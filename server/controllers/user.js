@@ -10,4 +10,4 @@ const getUser = async (req, res) => {
     }
     res.json(user);
 };
-module.exports = { getUsers, getUser };
+module.exports = { getUser };

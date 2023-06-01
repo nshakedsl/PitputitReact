@@ -21,4 +21,4 @@ const createUser = async (username, displayName, profilePic) => {
 
 };
 
-module.exports = { getUserByName, getUsers, deleteUser, createUser }
+module.exports = { getUserByName, deleteUser, createUser }
