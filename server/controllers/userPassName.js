@@ -34,9 +34,9 @@ const registerUser = async (req, res) => {
     //    return res.status(404).json({ errors: ['err: ', err] });
 
     // }
-    const user = userPassNameService.createUserPassName(req.body.username,req.body.password,req.body.displayName,req.body.profilePic);
+    const user = await userPassNameService.createUserPassName(req.body.username,req.body.password,req.body.displayName,req.body.profilePic);
     if(!user) {
-        return res.status(400).json({ errors: ['error creating user'] }); 
+        return res.status(409).json({ errors: ['error creating user'] }); 
     }
     res.json(user);
 
