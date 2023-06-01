@@ -1,6 +1,6 @@
 const User = require('../models/user');
 
-const getUserByName = async (username) => { return await User.find({}).select({ username });; };
+const getUserByName = async (username) => { return await User.find({}).select({ username }); };
 const getUsers = async () => { return await User.find({}); };
 const deleteUser = async (username) => {
     const user = await getUserByName(username);
@@ -14,4 +14,4 @@ const createUser = async (senderName, displayName, profilePic) => {
     return user;
 };
 
-module.exports = { getUserByName, getUsers, deleteUser,createUser }
+module.exports = { getUserByName, getUsers, deleteUser, createUser }
