@@ -1,5 +1,5 @@
 const Chat = require('../models/chat');
-const { createMessage } = require('./message');
+const { serviceMessage } = require('./message');
 const { getUserByName } = require('./user');
 
 let counter = 0;
@@ -17,7 +17,7 @@ const getMessagesOfChat = async (id) => {
 const addMessage = async (id, senderName, content) => {
     const chat = await getchatById(id);
     if (!chat || !chat.messages) return null;
-    const message = createMessage(senderName, content);
+    const message = serviceMessage.createMessage(senderName, content);
     Chat.findOneAndUpdate(
         { id },
         { $push: { messages: message } },
@@ -42,7 +42,7 @@ const getChats = async () => { return await Chat.find({}); };
 const deleteChatById = async (id) => {
     const chat = await getchatById(id);
     await chat.messages.map(message => {
-        return deleteMessage(message.id);
+        return serviceMessage.deleteMessage(message.id);
     });
     if (!chat) return null;
     await chat.remove();
