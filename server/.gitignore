@@ -2,3 +2,4 @@ config/.env
 config/.env.test
 package.json
 /node_modules
+package.json

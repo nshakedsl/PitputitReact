@@ -1,19 +1,18 @@
 const UserPassName = require('../models/userPassName');
-
+const userService = require('./user');
 
 const login = async (username, password) => {
     try {
-
-
-
-
-
+        const userObj = await userService.getUserByName(username);
+        if(!userObj){
+            return null;
+        }
         console.log('password: ', password);
         console.log('username: ', username);
         const user = await UserPassName.findOne({
-            'user.username': username,
+            user: userObj,
             password: password
-        }).populate('User');
+        });
 
         console.log('user: ', user);
         if (user) {
