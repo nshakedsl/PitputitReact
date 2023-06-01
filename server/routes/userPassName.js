@@ -1,4 +1,4 @@
-const userPassNameController = reqire('../controllers/userPassName');
+const userPassNameController = require('../controllers/userPassName');
 
 const express = require('express');
 var router = express.Router();
