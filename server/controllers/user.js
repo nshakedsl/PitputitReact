@@ -1,9 +1,9 @@
 const userService = require('../services/user');
 const getUsers = async (req, res) => {
-    res.json(await userService.getUsers());
+    return res.status(200).json(await userService.getUsers());
 };
 const getUser = async (req, res) => {
-    if(!req.body.username || req.body.username === ""){
+    if (!req.body.username || req.body.username === "") {
         return res.status(400).json({ errors: ['Bad Request of User'] });
     }
     const user = await messageService.getUserByName(req.body.username);
@@ -12,5 +12,4 @@ const getUser = async (req, res) => {
     }
     res.json(user);
 };
-//...
-module.exports = { getUsers,getUser };
+module.exports = { getUsers, getUser };
