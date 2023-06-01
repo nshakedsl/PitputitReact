@@ -1,7 +1,7 @@
 const userPassNameService = require('../services/userPassName');
 
 const registerUser = async (req, res) => {
-    if(!req || !req.body || !req.body.password || !req.body.username || !req.body.displayName || !req.body.profilePic){
+    if (!req || !req.body || !req.body.password || !req.body.username || !req.body.displayName || !req.body.profilePic) {
         return res.status(401).json({ errors: ['all fields are mandatory'] });
     }
 
@@ -30,7 +30,6 @@ const registerUser = async (req, res) => {
     }
 
     const user = await userPassNameService.createUserPassName(req.body.username, req.body.password, req.body.displayName, req.body.profilePic);
-    console.log('user: ', user);
     if (!user) {
         return res.status(409).json({ errors: ['user already exists'] });
     }
