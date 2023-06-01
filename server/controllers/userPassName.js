@@ -34,7 +34,7 @@ const registerUser = async (req, res) => {
     if (!user) {
         return res.status(409).json({ errors: ['error creating user'] });
     }
-    res.json(user);
+    res.status(200);
 
 };
 module.exports = { registerUser };
