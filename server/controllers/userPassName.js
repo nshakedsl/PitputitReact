@@ -1,6 +1,10 @@
 const userPassNameService = require('../services/userPassName');
 
 const registerUser = async (req, res) => {
+    if(!req || !req.body || !req.body.password || !req.body.username || !req.body.displayName){
+        return res.status(401).json({ errors: ['Mising '] });
+        //TODO:everyoneeeee
+    }
 
 
     if (req.body.password.length < 8) {
