@@ -42,9 +42,9 @@ const getChatById = async (id) => {
 };
 const getChats = async () => { return await Chat.find({}); };
 const deleteChatById = async (id) => {
-    const chat = await getchatById(id);
-    await chat.messages.map(message => {
-        return serviceMessage.deleteMessage(message._id);
+    const chat = await getChatById(id);
+    chat.messages.map(async (message) => {
+        return await serviceMessage.deleteMessage(message._id);
     });
     if (!chat) return null;
     await chat.remove();
