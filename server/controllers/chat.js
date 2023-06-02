@@ -16,8 +16,7 @@ const addChatMessage = async (req, res) => {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
     const sender = req.user.userObj.username;
-    console.log("the message body is: ", req.body.msg);
-    const result = await messageService.createMessage(req.params.id, req.body.msg, sender);
+    const result = chatService.addMessage(req.params.id, sender, req.body.msg);
     if (!result) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
