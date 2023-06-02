@@ -48,4 +48,13 @@ const deleteChatById = async (id) => {
     await chat.remove();
     return chat;
 };
+const amInChat = (name, chat) => {
+    chat.users.forEach((element, index) => {
+        if (element === name) {
+            return true;
+        }
+    });
+    return false;
+};
+
 module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage }
