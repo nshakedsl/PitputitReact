@@ -59,4 +59,4 @@ const amInChat = (name, chat) => {
     return false;
 };
 
-module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage }
+module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage, amInChat }
