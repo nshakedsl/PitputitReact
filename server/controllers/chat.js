@@ -50,7 +50,10 @@ const deleteChat = async (req, res) => {
     res.json(chat);
 };
 const createChat = async (req, res) => {
-    const me = "fred";
+    if(!req.user || !req.user.userObj || !req.user.userObj.username){
+        return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+    }
+    const me = req.user.userObj.username;
     if (!req.body.username || !me) {
         return res.status(402).json({ errors: ['username field is mandatory'] });
     }
