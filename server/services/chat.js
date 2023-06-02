@@ -17,7 +17,7 @@ const addMessage = async (id, senderName, content) => {
         { $push: { messages: message } },
         { new: true }
     );
-    return true;
+    return message;
 };
 const createChat = async (sender, reciever) => {
     let messages = [];
@@ -52,8 +52,8 @@ const deleteChatById = async (id) => {
 };
 const amInChat = (id, chat) => {
     if (chat.users[0].equals(id)) {
-        return true;
-    }
+            return true;
+        }
     if (chat.users[1].equals(id)) {
         return true;
     }
