@@ -27,12 +27,11 @@ const getChat = async (req, res) => {
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
-    const me = req.user.userObj._id;
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
     const chat = await chatService.getChatById(req.params.id);
-    if (!chatService.amInChat(me, chat)) {
+    if (!chatService.amInChat(req.user.userObj._id, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request of Chat'] });
     }
     if (!chat) {
@@ -44,12 +43,12 @@ const getChatMessages = async (req, res) => {
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
-    const me = req.user.userObj.username;
+
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
     const chat = await chatService.getChatById(req.params.id);
-    if (!chatService.amInChat(me, chat)) {
+    if (!chatService.amInChat(req.user.userObj._id, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request'] });
     }
     const chatMessages = await chatService.getMessagesOfChat(req.params.id);
@@ -62,7 +61,7 @@ const deleteChat = async (req, res) => {
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
-    const me = req.user.userObj.username;
+
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
@@ -70,7 +69,7 @@ const deleteChat = async (req, res) => {
     if (!chat) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
-    if (!chatService.amInChat(me, chat)) {
+    if (!chatService.amInChat(req.user.userObj._id, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request'] });
     }
     res.json(chat);
