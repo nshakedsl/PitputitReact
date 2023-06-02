@@ -2,9 +2,8 @@ const userPassNameService = require('../services/userPassName');
 
 const registerUser = async (req, res) => {
     if (!req || !req.body || !req.body.password || !req.body.username || !req.body.displayName || !req.body.profilePic) {
-        return res.status(401).json({ errors: ['all fields are mandatory'] });
+        return res.status(402).json({ errors: ['all fields are mandatory'] });
     }
-
 
     if (req.body.password.length < 8) {
         return res.status(400).json({ errors: ['Password must contain at least 8 characters'] });

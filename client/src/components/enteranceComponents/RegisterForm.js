@@ -2,10 +2,8 @@ import React, { useState, useContext } from 'react';
 import PasswordInput from './PasswordInput';
 import RegularInput from './RegularInput';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from "../../ctx/userContext"
 import { BsArrowRepeat } from "react-icons/bs";
 function RegisterForm() {
-  const Userctx = useContext(UserContext);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
@@ -40,7 +38,6 @@ function RegisterForm() {
 
 
   const handleRegisterClick = async () => {
-    // ...
     if (username.trim() === '' || nickname.trim() === '' || password.trim() === '' || verifyPassword.trim() === '') {
       setError('All fields are mandatory❗');
       shakeAction();
@@ -72,7 +69,6 @@ function RegisterForm() {
       shakeAction();
 
     } else {
-      // //add user here
 
       setLoading(true); // Start loading
 
@@ -112,7 +108,7 @@ function RegisterForm() {
       }
       setLoading(false)
       return res;
-      //TODO: handle with wrong image format, user register twice
+      //TODO: handle with wrong image format
     } catch (err) {
       console.log('err: ', err);
 
