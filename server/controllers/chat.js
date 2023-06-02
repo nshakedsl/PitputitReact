@@ -6,7 +6,12 @@ const getChats = async (req, res) => {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
     const me = req.user.userObj;
-    const chats = await chatService.getChats().filter(element => chatService.amInChat(me._id,element))
+    let chats = await chatService.getChats()
+    if (chats) {
+        chats = chats.filter(element => chatService.amInChat(me._id, element))
+    } else {
+        chats = []
+    }
     res.json(chats);
 };
 const addChatMessage = async (req, res) => {
