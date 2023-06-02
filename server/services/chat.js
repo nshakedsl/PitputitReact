@@ -51,7 +51,7 @@ const deleteChatById = async (id) => {
     return chat;
 };
 const amInChat = (name, chat) => {
-    chat.users.forEach((element, index) => {
+    chat.users.forEach((element) => {
         if (element === name) {
             return true;
         }
