@@ -17,8 +17,7 @@ const addChatMessage = async (req, res) => {
     if (!result) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
-    // TODO: ofir return the message 
-    res.status(200);
+    return res.status(200).json({result});
 };
 
 const getChat = async (req, res) => {
