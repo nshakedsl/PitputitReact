@@ -2,6 +2,7 @@ const chatService = require('../services/chat');
 const userService = require('../services/user');
 
 const getChats = async (req, res) => {
+    console.log("getChats");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
@@ -15,6 +16,8 @@ const getChats = async (req, res) => {
     res.json(chats);
 };
 const addChatMessage = async (req, res) => {
+    console.log("addChatMessage");
+
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
@@ -33,6 +36,7 @@ const addChatMessage = async (req, res) => {
 };
 
 const getChat = async (req, res) => {
+    console.log("getChat");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
@@ -40,19 +44,21 @@ const getChat = async (req, res) => {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
     const chat = await chatService.getChatById(req.params.id);
-    if (!chatService.amInChat(req.user.userObj._id, chat)) {
-        return res.status(401).json({ errors: ['Unauthorized Request of Chat'] });
-    }
     if (!chat) {
         return res.status(404).json({ errors: ['Chat not found'] });
+    }
+    if (!chatService.amInChat(req.user.userObj._id, chat)) {
+        return res.status(401).json({ errors: ['Unauthorized Request of Chat'] });
     }
     res.json(chat);
 };
 const getChatMessages = async (req, res) => {
+    console.log("getChatMessages");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
 
+    console.log('req.params.id: ', req.params.id);
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
@@ -71,6 +77,7 @@ const getChatMessages = async (req, res) => {
     }
 };
 const deleteChat = async (req, res) => {
+    console.log("deleteChat");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
@@ -88,6 +95,7 @@ const deleteChat = async (req, res) => {
     res.json(chat);
 };
 const createChat = async (req, res) => {
+    console.log("createChat");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
