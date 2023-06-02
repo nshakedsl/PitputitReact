@@ -4,7 +4,6 @@ const getUserByName = async (username) => {
     const user = await User.findOne({ username });
     return user;
 };
-const getUsers = async () => { return await User.find({}); };
 const deleteUser = async (username) => {
     const user = await getUserByName(username);
     if (!user) return null;
@@ -22,4 +21,4 @@ const createUser = async (username, displayName, profilePic) => {
 
 };
 
-module.exports = { getUserByName, getUsers, deleteUser, createUser }
+module.exports = { getUserByName, deleteUser, createUser }
