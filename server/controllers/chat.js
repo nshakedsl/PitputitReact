@@ -57,6 +57,9 @@ const createChat = async (req, res) => {
     if (!req.body.username) {
         return res.status(402).json({ errors: ['username field is mandatory'] });
     }
+    if (req.user.userObj.username === req.body.username) {
+        return res.status(403).json({ errors: ['stop talking to yourself you wierdo'] });
+    }
     const retVal = await userService.getUserByName(req.body.username);
     if (!retVal) {
         return res.status(400).json({ errors: ['User does not exists'] });
