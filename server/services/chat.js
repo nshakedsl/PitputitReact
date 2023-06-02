@@ -4,12 +4,12 @@ const { getUserByName } = require('./user');
 
 
 const getMessagesOfChat = async (id) => {
-    const chat = await getchatById(id);
+    const chat = await getChatById(id);
     if (!chat || !chat.messages) return null;
     return chat.messages;
 };
 const addMessage = async (id, senderName, content) => {
-    const chat = await getchatById(id);
+    const chat = await getChatById(id);
     if (!chat || !chat.messages) return null;
     const message = serviceMessage.createMessage(senderName, content);
     Chat.findOneAndUpdate(
@@ -33,16 +33,18 @@ const createChat = async (sender, reciever) => {
 const getChatById = async (id) => {
     try {
         return await Chat.findById(id);
+
     } catch (err) {
+        console.log('err: ', err);
         return null;
     }
 
 };
 const getChats = async () => { return await Chat.find({}); };
 const deleteChatById = async (id) => {
-    const chat = await getchatById(id);
-    await chat.messages.map(message => {
-        return serviceMessage.deleteMessage(message._id);
+    const chat = await getChatById(id);
+    chat.messages.map(async (message) => {
+        return await serviceMessage.deleteMessage(message._id);
     });
     if (!chat) return null;
     await chat.remove();
