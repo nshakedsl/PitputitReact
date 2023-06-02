@@ -47,14 +47,18 @@ const getChatMessages = async (req, res) => {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
     const chat = await chatService.getChatById(req.params.id);
-    if (!chatService.amInChat(req.user.userObj._id, chat)) {
-        return res.status(401).json({ errors: ['Unauthorized Request'] });
+    if (chat) {
+        if (!chatService.amInChat(req.user.userObj._id, chat)) {
+            return res.status(401).json({ errors: ['Unauthorized Request'] });
+        }
+        const chatMessages = await chatService.getMessagesOfChat(req.params.id);
+        if (!chatMessages) {
+            return res.status(404).json({ errors: ['Chat Messages not found'] });
+        }
+        res.json(chatMessages);
+    } else {
+        return res.status(404).json({ errors: ['Chat not found'] });
     }
-    const chatMessages = await chatService.getMessagesOfChat(req.params.id);
-    if (!chatMessages) {
-        return res.status(404).json({ errors: ['Chat Messages not found'] });
-    }
-    res.json(chatMessages);
 };
 const deleteChat = async (req, res) => {
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
