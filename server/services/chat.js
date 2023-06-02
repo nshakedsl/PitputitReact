@@ -17,6 +17,7 @@ const addMessage = async (id, senderName, content) => {
         { $push: { messages: message } },
         { new: true }
     );
+    console.log(message);
     return message;
 };
 const createChat = async (sender, reciever) => {
