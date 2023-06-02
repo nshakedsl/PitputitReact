@@ -1,5 +1,5 @@
 const Chat = require('../models/chat');
-const { serviceMessage } = require('./message');
+const serviceMessage = require('./message');
 const { getUserByName } = require('./user');
 const { ObjectId } = require('mongodb');
 
@@ -8,10 +8,10 @@ const getMessagesOfChat = async (id) => {
     if (!chat || !chat.messages) return null;
     return chat.messages;
 };
-const addMessage = async (id, senderName, content) => {
+const addMessage = async (id, sender, content) => {
     const chat = await getChatById(id);
     if (!chat || !chat.messages) return null;
-    const message = serviceMessage.createMessage(senderName, content);
+    const message = await serviceMessage.createMessage(sender, content);
     Chat.findOneAndUpdate(
         { _id: id },
         { $push: { messages: message } },
@@ -53,8 +53,8 @@ const deleteChatById = async (id) => {
 };
 const amInChat = (id, chat) => {
     if (chat.users[0].equals(id)) {
-            return true;
-        }
+        return true;
+    }
     if (chat.users[1].equals(id)) {
         return true;
     }

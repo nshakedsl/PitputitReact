@@ -1,9 +1,8 @@
 const Message = require('../models/message');
 const userService = require('../services/user');
 
-const createMessage = async (senderName, content) => {
+const createMessage = async (sender, content) => {
     const created = new Date().getTime();
-    sender = await userService.getUserByName(senderName);
     const message = await Message.create({ created, sender, content });
     return message;
 };

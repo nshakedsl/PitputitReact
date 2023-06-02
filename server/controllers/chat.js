@@ -1,5 +1,4 @@
 const chatService = require('../services/chat');
-const messageService = require('../services/message');
 const userService = require('../services/user');
 
 const getChats = async (req, res) => {
@@ -15,12 +14,12 @@ const addChatMessage = async (req, res) => {
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
-    const sender = req.user.userObj.username;
-    const result = chatService.addMessage(req.params.id, sender, req.body.msg);
+    const sender = req.user.userObj
+    const result = await chatService.addMessage(req.params.id, sender, req.body.msg);
     if (!result) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
-    return res.status(200).json(result);
+    return res.status(200).json({ id: result._id, created: result.created, content: result.content, sender });
 };
 
 const getChat = async (req, res) => {
