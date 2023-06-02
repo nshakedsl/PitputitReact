@@ -10,6 +10,7 @@ const isLoggedIn = (req, res, next) => {
             // Verify the token is valid
             const user = jwt.verify(token, process.env.SECRET_KEY);
             console.log('user: ', user);
+            req.user = user;
             // Token validation was successful. Continue to the actual function (index)
             return next()
         } catch (err) {

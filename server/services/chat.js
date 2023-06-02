@@ -2,13 +2,7 @@ const Chat = require('../models/chat');
 const { serviceMessage } = require('./message');
 const { getUserByName } = require('./user');
 
-let counter = 0;
-function generateUniqueId() {
-    const timestamp = new Date().getTime();
-    const uniqueId = timestamp + counter;
-    counter++;
-    return uniqueId;
-}
+
 const getMessagesOfChat = async (id) => {
     const chat = await getchatById(id);
     if (!chat || !chat.messages) return null;
@@ -19,7 +13,7 @@ const addMessage = async (id, senderName, content) => {
     if (!chat || !chat.messages) return null;
     const message = serviceMessage.createMessage(senderName, content);
     Chat.findOneAndUpdate(
-        { _id:id },
+        { _id: id },
         { $push: { messages: message } },
         { new: true }
     );

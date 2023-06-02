@@ -14,7 +14,7 @@ const login = async (username, password) => {
         });
 
         if (user) {
-            const data = { username }
+            const data = { userObj }
             // Generate the token.
             const token = jwt.sign(data, process.env.SECRET_KEY, { expiresIn: '1h' })
             // Return the token to the browser

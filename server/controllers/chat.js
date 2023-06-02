@@ -52,11 +52,11 @@ const deleteChat = async (req, res) => {
 const createChat = async (req, res) => {
     const me = "fred";
     if (!req.body.username || !me) {
-        return res.status(400).json({ errors: ['other user field is mandatory'] });
+        return res.status(402).json({ errors: ['username field is mandatory'] });
     }
     const retVal = await userService.getUserByName(req.body.username);
-    if(!retVal){
-        return res.status(401).json({ errors: ['the other user does not exist'] });
+    if (!retVal) {
+        return res.status(400).json({ errors: ['User does not exists'] });
     }
     const chat = await chatService.createChat(req.body.username, me);
     if (!chat) {
@@ -64,5 +64,4 @@ const createChat = async (req, res) => {
     }
     return res.status(200).json(chat);
 };
-//...
 module.exports = { addChatMessage, getChatMessages, createChat, getChats, getChat, deleteChat };
