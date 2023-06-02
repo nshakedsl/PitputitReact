@@ -1,6 +1,7 @@
 const chatService = require('../services/chat');
 const messageService = require('../services/message');
 const userService = require('../services/user');
+
 const getChats = async (req, res) => {
     res.json(await chatService.getChats());
 };
@@ -21,18 +22,33 @@ const addChatMessage = async (req, res) => {
 };
 
 const getChat = async (req, res) => {
+    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
+        return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+    }
+    const me = req.user.userObj.username;
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
     const chat = await chatService.getChatById(req.params.id);
+    if(!chatService.amInChat(me,chat)){
+        return res.status(401).json({ errors: ['Unauthorized Request of Chat'] });
+    }
     if (!chat) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
     res.json(chat);
 };
 const getChatMessages = async (req, res) => {
+    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
+        return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+    }
+    const me = req.user.userObj.username;
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
+    }
+    const chat = await chatService.getChatById(req.params.id);
+    if(!chatService.amInChat(me,chat)){
+        return res.status(401).json({ errors: ['Unauthorized Request'] });
     }
     const chatMessages = await chatService.getMessagesOfChat(req.params.id);
     if (!chatMessages) {
@@ -41,12 +57,19 @@ const getChatMessages = async (req, res) => {
     res.json(chatMessages);
 };
 const deleteChat = async (req, res) => {
-    if (!req.params.id || !Number.isInteger(req.params.id)) {
+    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
+        return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+    }
+    const me = req.user.userObj.username;
+    if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
     const chat = await chatService.deleteChatById(req.params.id);
     if (!chat) {
         return res.status(404).json({ errors: ['Chat not found'] });
+    }
+    if(!chatService.amInChat(me,chat)){
+        return res.status(401).json({ errors: ['Unauthorized Request'] });
     }
     res.json(chat);
 };
