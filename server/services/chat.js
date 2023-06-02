@@ -30,7 +30,14 @@ const createChat = async (sender, reciever) => {
     const chat = await Chat.create({ messages, users });
     return await chat.save();
 };
-const getChatById = async (id) => { return await Chat.findById(id); };
+const getChatById = async (id) => {
+    try {
+        return await Chat.findById(id);
+    } catch (err) {
+        return null;
+    }
+
+};
 const getChats = async () => { return await Chat.find({}); };
 const deleteChatById = async (id) => {
     const chat = await getchatById(id);
