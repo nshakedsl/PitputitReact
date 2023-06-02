@@ -5,7 +5,8 @@ const getChats = async (req, res) => {
     res.json(await chatService.getChats());
 };
 const addChatMessage = async (req, res) => {
-    if (!req.params.id || !Number.isInteger(req.params.id)) {
+    console.log("addChatMessage");
+    if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
     if (!req.body.msg || !req.body.msg === '') {
@@ -20,7 +21,7 @@ const addChatMessage = async (req, res) => {
 };
 
 const getChat = async (req, res) => {
-    if (!req.params.id || !Number.isInteger(req.params.id)) {
+    if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
     const chat = await chatService.getChatById(req.params.id);
@@ -30,7 +31,7 @@ const getChat = async (req, res) => {
     res.json(chat);
 };
 const getChatMessages = async (req, res) => {
-    if (!req.params.id || !Number.isInteger(req.params.id)) {
+    if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
     const chatMessages = await chatService.getMessagesOfChat(req.params.id);

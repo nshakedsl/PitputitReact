@@ -9,7 +9,6 @@ router.route('/')
 
 
 router.route('/:id')
-    .get(chatsController.getChatMessages)
     .get(chatsController.getChat)
     .delete(chatsController.deleteChat);
 

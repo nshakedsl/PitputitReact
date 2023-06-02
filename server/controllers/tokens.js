@@ -8,7 +8,6 @@ const login = async (req, res) => {
     if (!ans) {
         return res.status(404).json({ errors: ['username or password incorrect'] });
     }
-    console.log('ans: ', ans);
     return res.send(ans);
 };
 module.exports = { login };
