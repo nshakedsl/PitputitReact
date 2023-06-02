@@ -1,7 +1,7 @@
 const Chat = require('../models/chat');
 const { serviceMessage } = require('./message');
 const { getUserByName } = require('./user');
-
+const { ObjectId } = require('mongodb');
 
 const getMessagesOfChat = async (id) => {
     const chat = await getChatById(id);
@@ -50,12 +50,13 @@ const deleteChatById = async (id) => {
     await chat.remove();
     return chat;
 };
-const amInChat = (name, chat) => {
-    chat.users.forEach((element) => {
-        if (element === name) {
-            return true;
-        }
-    });
+const amInChat = (id, chat) => {
+    if (chat.users[0].equals(id)) {
+        return true;
+    }
+    if (chat.users[1].equals(id)) {
+        return true;
+    }
     return false;
 };
 

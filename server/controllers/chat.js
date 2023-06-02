@@ -28,7 +28,7 @@ const getChat = async (req, res) => {
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
-    const me = req.user.userObj.username;
+    const me = req.user.userObj._id;
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
