@@ -5,7 +5,6 @@ const getChats = async (req, res) => {
     res.json(await chatService.getChats());
 };
 const addChatMessage = async (req, res) => {
-    console.log("addChatMessage");
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
@@ -17,7 +16,8 @@ const addChatMessage = async (req, res) => {
     if (!result) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
-    res.json(chat);
+    // TODO: ofir return the message 
+    res.status(200);
 };
 
 const getChat = async (req, res) => {
