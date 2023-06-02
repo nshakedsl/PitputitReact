@@ -13,11 +13,11 @@ const addChatMessage = async (req, res) => {
         return res.status(403).json({ errors: ['illegal msg'] });
     }
     const sender = "";
-    const result = messageService.createMessage(req.params.id, sender, req.body.msg);
+    const result = await messageService.createMessage(req.params.id, sender, req.body.msg);
     if (!result) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
-    return res.status(200).json({result});
+    return res.status(200).json(result);
 };
 
 const getChat = async (req, res) => {
@@ -29,7 +29,7 @@ const getChat = async (req, res) => {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
     const chat = await chatService.getChatById(req.params.id);
-    if(!chatService.amInChat(me,chat)){
+    if (!chatService.amInChat(me, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request of Chat'] });
     }
     if (!chat) {
@@ -46,7 +46,7 @@ const getChatMessages = async (req, res) => {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
     const chat = await chatService.getChatById(req.params.id);
-    if(!chatService.amInChat(me,chat)){
+    if (!chatService.amInChat(me, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request'] });
     }
     const chatMessages = await chatService.getMessagesOfChat(req.params.id);
@@ -67,7 +67,7 @@ const deleteChat = async (req, res) => {
     if (!chat) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
-    if(!chatService.amInChat(me,chat)){
+    if (!chatService.amInChat(me, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request'] });
     }
     res.json(chat);
