@@ -1,6 +1,24 @@
+const { findOne } = require('../models/userPassName');
 const chatService = require('../services/chat');
 const userService = require('../services/user');
-
+const JSONIFY = async (chat) => {
+    if(!chat){
+        return {};
+    }
+    const result = {};
+    const users = [];
+    result["id"] = chat._id;
+    await chat.users.forEach(async (ref) => {
+        let temp = await userService.jsonifyUser(ref);
+        users.push(temp);
+        console.log("temp is ",temp,"adsa");
+        console.log("users is",users)
+    });
+    result["users"] = users;
+    console.log("users inside is",users)
+    console.log("result is",result)
+    return result;
+};
 const getChats = async (req, res) => {
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
@@ -12,7 +30,8 @@ const getChats = async (req, res) => {
     } else {
         chats = []
     }
-    res.json(chats);
+    let temp = await JSONIFY(chats[0])
+    res.json(temp);
 };
 const addChatMessage = async (req, res) => {
     if (!req.params.id) {
