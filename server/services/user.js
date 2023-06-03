@@ -1,8 +1,11 @@
 const User = require('../models/user');
 const jsonifyUser = async (userRef) => {
     const userJson = {};
-    const user = await User.findOne({ _id: userRef }).exec();
-    if(!user){
+    console.log("jsonifyUser");
+    console.log('userRef: ', userRef);
+    const user = await User.findOne({ _id: userRef });
+    console.log("tttt");
+    if (!user) {
         console.log("here?!?!");
         return {};
     }

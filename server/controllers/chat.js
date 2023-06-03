@@ -2,21 +2,18 @@ const { findOne } = require('../models/userPassName');
 const chatService = require('../services/chat');
 const userService = require('../services/user');
 const JSONIFY = async (chat) => {
-    if(!chat){
+    if (!chat) {
         return {};
     }
     const result = {};
     const users = [];
     result["id"] = chat._id;
-    await chat.users.forEach(async (ref) => {
+    await Promise.all(chat.users.map(async (ref) => {
         let temp = await userService.jsonifyUser(ref);
         users.push(temp);
-        console.log("temp is ",temp,"adsa");
-        console.log("users is",users)
-    });
+    }
+    ))
     result["users"] = users;
-    console.log("users inside is",users)
-    console.log("result is",result)
     return result;
 };
 const getChats = async (req, res) => {
