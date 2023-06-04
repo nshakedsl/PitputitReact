@@ -33,9 +33,6 @@ This project is a React App for chatting between different users. We called the 
     ```
 
 - Click the connect button.
-- Click the add button and fill in the Database Name field with `Pitputit`
-    and the Collection Name field with `chats`. 
-- Finally, click the create button.
 
 
 
@@ -53,19 +50,19 @@ git checkout -b milestone2
 ```
 To run the program, follow these steps:
 
-- To install the libraries:
- ```
- npm i
- ```
 - To run the project- enter to server folder:
 ```
 cd server
 ```
+- To install the libraries:
+ ```
+ npm i
+ ```
 - And run it by:
 ```
 npm start
 ```
-- Navigate in the browser to Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Navigate in the browser to Open [http://localhost:8080](http://localhost:8080) to view it in your browser.
 
 - Then you can create users and use the application.
 
