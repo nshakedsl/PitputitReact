@@ -95,6 +95,19 @@ const jsonifyForGetChat = async (chat) => {
     return result;
 };
 
+const jsonifyForGetChatMessages = async (chat) => {
+    if (!chat) {
+        return {};
+    }
+    const messages = [];
+    await Promise.all(chat.map(async (ref) => {
+        let temp = await serviceMessage.jsonifyMessageForMessageOnly(ref);
+        messages.push(temp);
+    }
+    ))
+    return messages;
+};
+
 const amInChat = (id, chat) => {
     if (chat.users[0].equals(id)) {
         return true;
@@ -105,4 +118,5 @@ const amInChat = (id, chat) => {
     return false;
 };
 
-module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage, amInChat, getLastMessage,jsonifyForGetChat }
+module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage,
+     amInChat, getLastMessage,jsonifyForGetChat, jsonifyForGetChatMessages }
