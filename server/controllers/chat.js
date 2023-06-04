@@ -1,4 +1,3 @@
-const { findOne } = require('../models/userPassName');
 const chatService = require('../services/chat');
 const userService = require('../services/user');
 const JSONIFY = async (chat) => {
@@ -35,7 +34,6 @@ const getChats = async (req, res) => {
 };
 const addChatMessage = async (req, res) => {
     console.log("addChatMessage");
-
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
@@ -71,12 +69,9 @@ const getChat = async (req, res) => {
     res.json(chat);
 };
 const getChatMessages = async (req, res) => {
-    console.log("getChatMessages");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
-
-    console.log('req.params.id: ', req.params.id);
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
@@ -95,7 +90,6 @@ const getChatMessages = async (req, res) => {
     }
 };
 const deleteChat = async (req, res) => {
-    console.log("deleteChat");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }

@@ -7,10 +7,10 @@ const createMessage = async (sender, content) => {
     return message;
 };
 const getMessageById = async (id) => { return await Message.findById(id); };
-const deleteMessage = async (id) => {
-    const message = await getMessageById(id);
+const deleteMessage = async (_id) => {
+    const message = await getMessageById(_id);
     if (!message) return null;
-    await message.remove();
+    await Chat.deleteOne({ _id }).exec();
     return message;
 };
 module.exports = { getMessageById, deleteMessage, createMessage }
