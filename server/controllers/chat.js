@@ -31,7 +31,7 @@ const getChats = async (req, res) => {
     }
     jsonArr = [];
     await Promise.all(chats.map(async (ref) => {
-        let temp = JSONIFY(ref);
+        let temp = await JSONIFY(ref);
         jsonArr.push(temp);
     }
     ))
@@ -49,7 +49,7 @@ const addChatMessage = async (req, res) => {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
     const chat = await chatService.getChatById(req.params.id);
-    if(!chat){
+    if (!chat) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
     if (!chatService.amInChat(req.user.userObj._id, chat)) {
