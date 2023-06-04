@@ -3,7 +3,7 @@ const jsonifyUser = async (userRef) => {
     const userJson = {};
     const user = await User.findOne({ _id: userRef });
     if (!user) {
-        return {};
+        return null;
     }
     userJson["username"] = user.username;
     userJson["displayName"] = user.displayName;

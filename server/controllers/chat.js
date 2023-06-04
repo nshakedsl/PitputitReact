@@ -16,7 +16,6 @@ const JSONIFY = async (chat) => {
     const lastMsgId = await chatService.getLastMessage(chat);
     result["lastMessage"] = lastMsgId;
     console.log(lastMsgId);
-    //todo: deal with empty message
     return result;
 };
 const getChats = async (req, res) => {
@@ -30,8 +29,13 @@ const getChats = async (req, res) => {
     } else {
         chats = []
     }
-    let temp = await JSONIFY(chats[0])
-    res.json(temp);
+    jsonArr = [];
+    await Promise.all(chats.map(async (ref) => {
+        let temp = JSONIFY(ref);
+        jsonArr.push(temp);
+    }
+    ))
+    res.json(jsonArr);
 };
 const addChatMessage = async (req, res) => {
     console.log("addChatMessage");
@@ -43,6 +47,13 @@ const addChatMessage = async (req, res) => {
     }
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+    }
+    const chat = await chatService.getChatById(req.params.id);
+    if(!chat){
+        return res.status(404).json({ errors: ['Chat not found'] });
+    }
+    if (!chatService.amInChat(req.user.userObj._id, chat)) {
+        return res.status(401).json({ errors: ['Unauthorized Request of Chat'] });
     }
     const sender = req.user.userObj
     const result = await chatService.addMessage(req.params.id, sender, req.body.msg);
