@@ -30,12 +30,11 @@ const addMessage = async (id, sender, content) => {
     if (!chat || !chat.messages) return null;
     const message = await serviceMessage.createMessage(sender, content);
     console.log(message);
-    let updatedChat = await Chat.findOneAndUpdate(
+    await Chat.findOneAndUpdate(
         { _id: id },
         { $push: { messages: message } },
         { new: true }
     ).exec();
-    console.log('updatedChat: ', updatedChat);
     return message;
 };
 const createChat = async (sender, reciever) => {

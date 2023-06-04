@@ -38,7 +38,6 @@ const getChats = async (req, res) => {
     res.json(jsonArr);
 };
 const addChatMessage = async (req, res) => {
-    console.log("addChatMessage");
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
