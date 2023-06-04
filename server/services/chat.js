@@ -12,12 +12,12 @@ const addMessage = async (id, sender, content) => {
     const chat = await getChatById(id);
     if (!chat || !chat.messages) return null;
     const message = await serviceMessage.createMessage(sender, content);
-    Chat.findOneAndUpdate(
+    console.log(message);
+    let updatedChat = await Chat.findOneAndUpdate(
         { _id: id },
         { $push: { messages: message } },
         { new: true }
-    );
-    console.log(message);
+    ).exec();
     return message;
 };
 const createChat = async (sender, reciever) => {
@@ -42,15 +42,21 @@ const getChatById = async (id) => {
 
 };
 const getChats = async () => { return await Chat.find({}); };
-const deleteChatById = async (id) => {
-    const chat = await getChatById(id);
-    chat.messages.map(async (message) => {
-        return await serviceMessage.deleteMessage(message._id);
-    });
+
+
+const deleteChatById = async (_id) => {
+    const chat = await getChatById(_id);
     if (!chat) return null;
-    await chat.remove();
+    await Promise.all(chat.messages.map(async (message) => {
+        return await serviceMessage.deleteMessage(message._id);
+    }
+    ))
+    await Chat.deleteOne({ _id }).exec();
     return chat;
 };
+
+
+
 const amInChat = (id, chat) => {
     if (chat.users[0].equals(id)) {
         return true;
