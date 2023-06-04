@@ -24,7 +24,7 @@ This project is a React App for chatting between different users. We called the 
 ## Cloning and Running Instructions:
 
 
-1. Create a database using MongoDB.
+### 1. Create a database using MongoDB.
 - using MongoDB Compass are provided below (you can use also Mongosh):
 - Ensure that the MongoDB Compass application is installed.
 - Open the downloaded application and note the following message via the default URI:
@@ -36,7 +36,7 @@ This project is a React App for chatting between different users. We called the 
 
 
 
-2. To clone the repository, follow these steps:
+### 2. To clone the repository, follow these steps:
 
 In the terminal, navigate to the directory where you want to clone the repository.
 
@@ -48,7 +48,24 @@ Change your branch by writing :
 ```
 git checkout -b milestone2
 ```
-To run the program, follow these steps:
+
+
+### 3. create env file: 
+    - create `.env.local` file 
+    - put the file into `server/config/` directory. 
+    - fill the file by writiing the following data.
+        - `CONNECTION_STRING`- Login details 
+        - `PORT` - The port you want to run on  it.
+        - `SECRET_KEY` - A random string
+
+    ### For example:
+
+    ```
+    CONNECTION_STRING="mongodb://localhost:27017/Pitputit"
+    PORT=8080
+    SECRET_KEY="_______"
+    ```
+### 4. To run the program:
 
 - To run the project- enter to server folder:
 ```
@@ -67,18 +84,17 @@ npm start
 - Then you can create users and use the application.
 
 
-
 ### The assignment parts:
-In the first part:
+#### In the first part:
 We modified the React code to enable communication with a built-in server.
 This step served as preparatory code for the subsequent parts.
 
-In the second part:
+#### In the second part:
 We developed a web server using Node.js.
 As a result, when any input is entered through the login, the details are saved.
 We implemented a Node.js server following the MVC architecture, which offers the same functionality as the server in the first part. Additionally, it performs additional validation checks to ensure that the entered details are correct before saving them to MongoDB.
 
-In the third part:
+#### In the third part:
 We established real-time communication.
 Users can log in through the login screen and send messages to each other while they are both logged in on their respective browsers. The recipient user immediately receives and sees the message without needing to request it.
 ### Switching Between Pages
