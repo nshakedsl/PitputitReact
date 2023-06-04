@@ -85,6 +85,7 @@ const getChat = async (req, res) => {
     res.json(result);
 };
 const getChatMessages = async (req, res) => {
+    console.log("here?")
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
@@ -100,7 +101,9 @@ const getChatMessages = async (req, res) => {
         if (!chatMessages) {
             return res.status(404).json({ errors: ['Chat Messages not found'] });
         }
-        res.json(chatMessages);
+        console.log(chatMessages)
+        result = await chatService.jsonifyForGetChatMessages(chatMessages);
+        return res.json(result);
     } else {
         return res.status(404).json({ errors: ['Chat not found'] });
     }

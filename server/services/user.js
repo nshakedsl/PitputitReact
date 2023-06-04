@@ -10,6 +10,15 @@ const jsonifyUser = async (userRef) => {
     userJson["profilePic"] = user.profilePic;
     return userJson;
 }
+const jsonifyUserAsSender = async (userRef) => {
+    const userJson = {};
+    const user = await User.findOne({ _id: userRef });
+    if (!user) {
+        return null;
+    }
+    userJson["username"] = user.username;
+    return userJson;
+}
 
 const getUserByName = async (username) => {
     const user = await User.findOne({ username });
@@ -32,4 +41,4 @@ const createUser = async (username, displayName, profilePic) => {
 
 };
 
-module.exports = { getUserByName, deleteUser, createUser, jsonifyUser }
+module.exports = { getUserByName, deleteUser, createUser, jsonifyUser, jsonifyUserAsSender }
