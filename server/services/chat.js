@@ -13,10 +13,14 @@ const getLastMessage = async (id) => {
     const messages = await getMessagesOfChat(id);
     console.log("messages is",messages);
     if(!messages || messages.length === 0){
-        return null;
+        return {};
     }
     console.log("last message is: ",messages[messages.length - 1]);
-    return messages[messages.length - 1];
+    const lastMsgJson = {};
+    lastMsgJson["id"] = messages[messages.length - 1]._id;
+    lastMsgJson["created"] = messages[messages.length - 1].created;
+    lastMsgJson["content"] = messages[messages.length - 1].content;
+    return lastMsgJson;
 }
 
 const addMessage = async (id, sender, content) => {

@@ -14,8 +14,9 @@ const JSONIFY = async (chat) => {
     }
     ))
     result["users"] = users;
-    const lastmsg = await chatService.getLastMessage(chat);
-    console.log(lastmsg);
+    const lastMsgId = await chatService.getLastMessage(chat);
+    console.log(lastMsgId);
+    //todo: deal with empty message
     return result;
 };
 const getChats = async (req, res) => {
