@@ -13,6 +13,7 @@ const isLoggedIn = (req, res, next) => {
             // Token validation was successful. Continue to the actual function (index)
             return next()
         } catch (err) {
+            console.log('err: ', err);
             return res.status(401).send("Unauthorized");
         }
     }
