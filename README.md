@@ -25,13 +25,16 @@ This project is a React App for chatting between different users. We called the 
 
 
 1. Create a database using MongoDB.
-Detailed instructions on creating the database using MongoDB Compass (or through the shell) are provided below:
+- using MongoDB Compass are provided below (you can use also Mongosh):
 - Ensure that the MongoDB Compass application is installed.
-- Open the downloaded application and note the following message:
-"mongodb://localhost:27017" via the default URI.
+- Open the downloaded application and note the following message via the default URI:
+    ```
+    "mongodb://localhost:27017"
+    ```
+
 - Click the connect button.
-- Click the add button and fill in the Database Name field with "Pitputit"
-and the Collection Name field with "chats". 
+- Click the add button and fill in the Database Name field with `Pitputit`
+    and the Collection Name field with `chats`. 
 - Finally, click the create button.
 
 
@@ -39,9 +42,14 @@ and the Collection Name field with "chats".
 2. To clone the repository, follow these steps:
 
 In the terminal, navigate to the directory where you want to clone the repository.
+
 Enter the following command:
 ```
-https://github.com/nshakedsl/PitputitReact.git
+clone https://github.com/nshakedsl/Pitputit.git
+```
+Change your branch by writing :
+```
+git checkout -b milestone2
 ```
 To run the program, follow these steps:
 
