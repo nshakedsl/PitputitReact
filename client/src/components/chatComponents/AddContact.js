@@ -41,8 +41,6 @@ function AddContact({ show, onHide, setShow }) {
                 'body': JSON.stringify(data)
             })
 
-            //TODO: add user twice.
-
             if (res.status === 401) {
                 navigate('/login')
                 return

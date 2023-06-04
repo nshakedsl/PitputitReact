@@ -1,23 +1,24 @@
 const Chat = require('../models/chat');
-const { serviceMessage } = require('./message');
+const serviceMessage = require('./message');
 const { getUserByName } = require('./user');
-
+const { ObjectId } = require('mongodb');
 
 const getMessagesOfChat = async (id) => {
-    const chat = await getchatById(id);
+    const chat = await getChatById(id);
     if (!chat || !chat.messages) return null;
     return chat.messages;
 };
-const addMessage = async (id, senderName, content) => {
-    const chat = await getchatById(id);
+const addMessage = async (id, sender, content) => {
+    const chat = await getChatById(id);
     if (!chat || !chat.messages) return null;
-    const message = serviceMessage.createMessage(senderName, content);
+    const message = await serviceMessage.createMessage(sender, content);
     Chat.findOneAndUpdate(
         { _id: id },
         { $push: { messages: message } },
         { new: true }
     );
-    return true;
+    console.log(message);
+    return message;
 };
 const createChat = async (sender, reciever) => {
     let messages = [];
@@ -30,15 +31,34 @@ const createChat = async (sender, reciever) => {
     const chat = await Chat.create({ messages, users });
     return await chat.save();
 };
-const getChatById = async (id) => { return await Chat.findById(id); };
+const getChatById = async (id) => {
+    try {
+        return await Chat.findById(id);
+
+    } catch (err) {
+        console.log('err: ', err);
+        return null;
+    }
+
+};
 const getChats = async () => { return await Chat.find({}); };
 const deleteChatById = async (id) => {
-    const chat = await getchatById(id);
-    await chat.messages.map(message => {
-        return serviceMessage.deleteMessage(message._id);
+    const chat = await getChatById(id);
+    chat.messages.map(async (message) => {
+        return await serviceMessage.deleteMessage(message._id);
     });
     if (!chat) return null;
     await chat.remove();
     return chat;
 };
-module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage }
+const amInChat = (id, chat) => {
+    if (chat.users[0].equals(id)) {
+        return true;
+    }
+    if (chat.users[1].equals(id)) {
+        return true;
+    }
+    return false;
+};
+
+module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage, amInChat }

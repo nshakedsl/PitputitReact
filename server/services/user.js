@@ -1,4 +1,20 @@
 const User = require('../models/user');
+const jsonifyUser = async (userRef) => {
+    const userJson = {};
+    console.log("jsonifyUser");
+    console.log('userRef: ', userRef);
+    const user = await User.findOne({ _id: userRef });
+    console.log("tttt");
+    if (!user) {
+        console.log("here?!?!");
+        return {};
+    }
+    userJson["username"] = user.username;
+    userJson["displayName"] = user.displayName;
+    userJson["profilePic"] = user.profilePic;
+    console.log(userJson);
+    return userJson;
+}
 
 const getUserByName = async (username) => {
     const user = await User.findOne({ username });
@@ -21,4 +37,4 @@ const createUser = async (username, displayName, profilePic) => {
 
 };
 
-module.exports = { getUserByName, deleteUser, createUser }
+module.exports = { getUserByName, deleteUser, createUser, jsonifyUser }

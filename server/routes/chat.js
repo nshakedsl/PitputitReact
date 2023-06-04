@@ -9,8 +9,11 @@ router.route('/')
 
 
 router.route('/:id')
-    .get(chatsController.getChatMessages)
     .get(chatsController.getChat)
     .delete(chatsController.deleteChat);
+
+router.route('/:id/Messages')
+    .get(chatsController.getChatMessages)
+    .post(chatsController.addChatMessage);
 
 module.exports = router;
