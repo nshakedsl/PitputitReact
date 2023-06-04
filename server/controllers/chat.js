@@ -20,7 +20,6 @@ const JSONIFY = async (chat) => {
     else{
         result["lastMessage"] = lastMsgId;
     }
-    console.log(lastMsgId);
     return result;
 };
 const getChats = async (req, res) => {
@@ -83,7 +82,8 @@ const getChat = async (req, res) => {
     if (!chatService.amInChat(req.user.userObj._id, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request of Chat'] });
     }
-    res.json(chat);
+    const result = await chatService.jsonifyForGetChat(chat);
+    res.json(result);
 };
 const getChatMessages = async (req, res) => {
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {

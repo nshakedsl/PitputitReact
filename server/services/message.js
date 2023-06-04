@@ -1,4 +1,6 @@
 const Message = require('../models/message');
+const User = require('../models/user');
+const { jsonifyUser } = require('./user');
 
 const createMessage = async (sender, content) => {
     const created = new Date().getTime();
@@ -16,4 +18,16 @@ const deleteMessage = async (_id) => {
     await Message.deleteOne({ _id }).exec();
     return message;
 };
-module.exports = { getMessageById, deleteMessage, createMessage }
+
+const jsonifyMessage = async (id) => {
+    const msg = await Message.findOne({ _id: id });
+    const msgJson = {};
+    msgJson["id"] = msg._id;
+    console.log('msg: ', msg);
+    msgJson["created"] = msg.created;
+    msgJson["sender"] = await jsonifyUser(msg.sender);
+    msgJson["content"] = msg.content;
+    console.log('msgJson: ', msgJson);
+    return msgJson;
+}
+module.exports = { getMessageById, deleteMessage, createMessage, jsonifyMessage }
