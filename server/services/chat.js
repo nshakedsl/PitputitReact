@@ -118,9 +118,7 @@ const amInChat = (id, chat) => {
     return false;
 };
 
-<<<<<<< HEAD
-module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage,
-     amInChat, getLastMessage,jsonifyForGetChat, jsonifyForGetChatMessages }
-=======
-module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage, amInChat, getLastMessage, jsonifyForGetChat }
->>>>>>> f5085029a62aa7a72ce677dcea18371c1c9d51f7
+module.exports = {
+    getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage,
+    amInChat, getLastMessage, jsonifyForGetChat, jsonifyForGetChatMessages
+}
