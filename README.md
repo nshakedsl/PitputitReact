@@ -1,8 +1,8 @@
 # Pitputit
 
-**Milestone 1 B branch:**
+**Milestone 2 branch:**
 
-Targil 2 (Milestone 1 B) is on branch Milestone1b
+Targil 3 (Milestone 2) is on branch Milestone2
 ## Authors:
 ![Authors](/public/images/Authors.jpeg)
 1. Shaked Solomon
@@ -31,12 +31,16 @@ To run the program, follow these steps:
  ```
  npm i
  ```
-2. To rtun the project:
+2. To run the project- enter to server folder:
+```
+cd server
+```
+3. And run it by:
 ```
 npm start
 ```
-3. Navigate in the browser to localhost:3000
-4. Then you can create users and use the application.
+4. Navigate in the browser to localhost:3000
+5. Then you can create users and use the application.
 ### Switching Between Pages
 
 To move between the pages, click on "Not registered? Click here to register" on the Login page to access the register/signUp page. To go from the Login page to the Chats page, click on the Log in button after you entered the password and username you signed up with. 

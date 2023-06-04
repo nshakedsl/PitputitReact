@@ -27,7 +27,7 @@ const addMessage = async (id, sender, content) => {
     const chat = await getChatById(id);
     if (!chat || !chat.messages) return null;
     const message = await serviceMessage.createMessage(sender, content);
-    let updatedChat = await Chat.findOneAndUpdate(
+    await Chat.findOneAndUpdate(
         { _id: id },
         { $push: { messages: message } },
         { new: true }
