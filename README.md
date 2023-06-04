@@ -60,11 +60,11 @@ git checkout -b milestone2
 
 ### For example:
 
-    ```
-    CONNECTION_STRING="mongodb://localhost:27017/Pitputit"
-    PORT=8080
-    SECRET_KEY="_______"
-    ```
+```
+CONNECTION_STRING="mongodb://localhost:27017/Pitputit"
+PORT=8080
+SECRET_KEY="_______"
+```
 ### 4. To run the program:
 
 - To run the project- enter to server folder:
