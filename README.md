@@ -6,7 +6,7 @@ Targil 3 (Milestone 2) is on branch Milestone2.
 
 In this exercise, we transformed our static client code into a dynamic one by implementing a web server.
 ## Authors:
-![Authors](/public/images/Authors.jpeg)
+![Authors](/client/public/images/Authors.jpeg)
 1. Shaked Solomon
 2. Ofir Gurvits
 3. Naama Matzliach
@@ -25,39 +25,44 @@ This project is a React App for chatting between different users. We called the 
 
 
 1. Create a database using MongoDB.
-Detailed instructions on creating the database using MongoDB Compass (or through the shell) are provided below:
+- using MongoDB Compass are provided below (you can use also Mongosh):
 - Ensure that the MongoDB Compass application is installed.
-- Open the downloaded application and note the following message:
-"mongodb://localhost:27017" via the default URI.
+- Open the downloaded application and note the following message via the default URI:
+    ```
+    "mongodb://localhost:27017"
+    ```
+
 - Click the connect button.
-- Click the add button and fill in the Database Name field with "Pitputit"
-and the Collection Name field with "chats". 
-- Finally, click the create button.
 
 
 
 2. To clone the repository, follow these steps:
 
 In the terminal, navigate to the directory where you want to clone the repository.
+
 Enter the following command:
 ```
-https://github.com/nshakedsl/PitputitReact.git
+clone https://github.com/nshakedsl/Pitputit.git
+```
+Change your branch by writing :
+```
+git checkout -b milestone2
 ```
 To run the program, follow these steps:
 
-- To install the libraries:
- ```
- npm i
- ```
 - To run the project- enter to server folder:
 ```
 cd server
 ```
+- To install the libraries:
+ ```
+ npm i
+ ```
 - And run it by:
 ```
 npm start
 ```
-- Navigate in the browser to Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Navigate in the browser to Open [http://localhost:8080](http://localhost:8080) to view it in your browser.
 
 - Then you can create users and use the application.
 
