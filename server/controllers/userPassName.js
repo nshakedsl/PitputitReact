@@ -20,6 +20,10 @@ const registerUser = async (req, res) => {
     } else if (req.body.profilePic === 'images/user.png') {
         return res.status(400).json({ errors: ['image is a mandatory field'] });
 
+    } else if(!/\.(jpg|jpeg|png|gif|bmp)$/.test(req.body.profilePic)) {
+
+        return res.status(400).json({ errors: ['image is not valid'] });
+
     } else if (req.body.username.length < 2 || req.body.displayName.length < 2) {
         return res.status(400).json({ errors: ['inputs must contain at least 2 characters'] });
 
