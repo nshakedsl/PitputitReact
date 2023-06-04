@@ -1,23 +1,40 @@
 const Chat = require('../models/chat');
+const Message = require('../models/message');
 const serviceMessage = require('./message');
 const { getUserByName } = require('./user');
-const { ObjectId } = require('mongodb');
 
 const getMessagesOfChat = async (id) => {
     const chat = await getChatById(id);
     if (!chat || !chat.messages) return null;
     return chat.messages;
 };
+
+const getLastMessage = async (id) => {
+    const messages = await getMessagesOfChat(id);
+    console.log("messages is", messages);
+    if (!messages || messages.length === 0) {
+        return null;
+    }
+    const lastMsg = await Message.findOne({ _id: messages[messages.length - 1]._id });
+    console.log(lastMsg);
+    console.log("last message is: ", messages[messages.length - 1]);
+    const lastMsgJson = {};
+    lastMsgJson["id"] = lastMsg._id;
+    lastMsgJson["created"] = lastMsg.created;
+    lastMsgJson["content"] = lastMsg.content;
+    return lastMsgJson;
+}
+
 const addMessage = async (id, sender, content) => {
     const chat = await getChatById(id);
     if (!chat || !chat.messages) return null;
     const message = await serviceMessage.createMessage(sender, content);
-    Chat.findOneAndUpdate(
+    console.log(message);
+    await Chat.findOneAndUpdate(
         { _id: id },
         { $push: { messages: message } },
         { new: true }
-    );
-    console.log(message);
+    ).exec();
     return message;
 };
 const createChat = async (sender, reciever) => {
@@ -36,21 +53,31 @@ const getChatById = async (id) => {
         return await Chat.findById(id);
 
     } catch (err) {
-        console.log('err: ', err);
+        // console.log('err: ', err);
         return null;
     }
 
 };
 const getChats = async () => { return await Chat.find({}); };
-const deleteChatById = async (id) => {
-    const chat = await getChatById(id);
-    chat.messages.map(async (message) => {
-        return await serviceMessage.deleteMessage(message._id);
-    });
-    if (!chat) return null;
-    await chat.remove();
-    return chat;
+
+
+const deleteChatById = async (_id) => {
+    try {
+        const chat = await getChatById(_id);
+        if (!chat) return null;
+        await Promise.all(chat.messages.map(async (message) => {
+            return await serviceMessage.deleteMessage(message._id);
+        }
+        ))
+        await Chat.deleteOne({ _id }).exec();
+        return chat;
+    } catch (err) {
+        // console.log('err: ', err);
+    }
 };
+
+
+
 const amInChat = (id, chat) => {
     if (chat.users[0].equals(id)) {
         return true;
@@ -61,4 +88,4 @@ const amInChat = (id, chat) => {
     return false;
 };
 
-module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage, amInChat }
+module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage, amInChat, getLastMessage }

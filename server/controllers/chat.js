@@ -1,4 +1,3 @@
-const { findOne } = require('../models/userPassName');
 const chatService = require('../services/chat');
 const userService = require('../services/user');
 const JSONIFY = async (chat) => {
@@ -14,10 +13,17 @@ const JSONIFY = async (chat) => {
     }
     ))
     result["users"] = users;
+    const lastMsgId = await chatService.getLastMessage(chat);
+    if(!lastMsgId || lastMsgId==={}){
+        result["lastMessage"] = null;
+    }
+    else{
+        result["lastMessage"] = lastMsgId;
+    }
+    console.log(lastMsgId);
     return result;
 };
 const getChats = async (req, res) => {
-    console.log("getChats");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
@@ -28,12 +34,15 @@ const getChats = async (req, res) => {
     } else {
         chats = []
     }
-    let temp = await JSONIFY(chats[0])
-    res.json(temp);
+    jsonArr = [];
+    await Promise.all(chats.map(async (ref) => {
+        let temp = await JSONIFY(ref);
+        jsonArr.push(temp);
+    }
+    ))
+    res.json(jsonArr);
 };
 const addChatMessage = async (req, res) => {
-    console.log("addChatMessage");
-
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
@@ -42,6 +51,13 @@ const addChatMessage = async (req, res) => {
     }
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+    }
+    const chat = await chatService.getChatById(req.params.id);
+    if (!chat) {
+        return res.status(404).json({ errors: ['Chat not found'] });
+    }
+    if (!chatService.amInChat(req.user.userObj._id, chat)) {
+        return res.status(401).json({ errors: ['Unauthorized Request of Chat'] });
     }
     const sender = req.user.userObj
     const result = await chatService.addMessage(req.params.id, sender, req.body.msg);
@@ -69,12 +85,9 @@ const getChat = async (req, res) => {
     res.json(chat);
 };
 const getChatMessages = async (req, res) => {
-    console.log("getChatMessages");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
-
-    console.log('req.params.id: ', req.params.id);
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
@@ -93,7 +106,6 @@ const getChatMessages = async (req, res) => {
     }
 };
 const deleteChat = async (req, res) => {
-    console.log("deleteChat");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
@@ -108,7 +120,7 @@ const deleteChat = async (req, res) => {
     if (!chatService.amInChat(req.user.userObj._id, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request'] });
     }
-    res.json(chat);
+    res.status(200).json({})
 };
 const createChat = async (req, res) => {
     console.log("createChat");
