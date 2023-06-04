@@ -6,7 +6,7 @@ Targil 3 (Milestone 2) is on branch Milestone2.
 
 In this exercise, we transformed our static client code into a dynamic one by implementing a web server.
 ## Authors:
-![Authors](/public/images/Authors.jpeg)
+![Authors](/client/public/images/Authors.jpeg)
 1. Shaked Solomon
 2. Ofir Gurvits
 3. Naama Matzliach
