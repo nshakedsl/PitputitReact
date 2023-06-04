@@ -43,7 +43,7 @@ const createChat = async (sender, reciever) => {
     }
     const users = [user1, user2];
     const chat = await Chat.create({ messages, users });
-    return await chat.save();
+    return [chat, user1];
 };
 const getChatById = async (id) => {
     try {
@@ -105,4 +105,4 @@ const amInChat = (id, chat) => {
     return false;
 };
 
-module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage, amInChat, getLastMessage,jsonifyForGetChat }
+module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage, amInChat, getLastMessage, jsonifyForGetChat }

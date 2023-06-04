@@ -14,10 +14,10 @@ const JSONIFY = async (chat) => {
     ))
     result["users"] = users;
     const lastMsgId = await chatService.getLastMessage(chat);
-    if(!lastMsgId || lastMsgId==={}){
+    if (!lastMsgId || lastMsgId === {}) {
         result["lastMessage"] = null;
     }
-    else{
+    else {
         result["lastMessage"] = lastMsgId;
     }
     return result;
@@ -123,7 +123,6 @@ const deleteChat = async (req, res) => {
     res.status(200).json({})
 };
 const createChat = async (req, res) => {
-    console.log("createChat");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
@@ -139,9 +138,13 @@ const createChat = async (req, res) => {
         return res.status(400).json({ errors: ['User does not exists'] });
     }
     const chat = await chatService.createChat(req.body.username, me);
-    if (!chat) {
+    console.log('chat: ', chat);
+    if (!chat[0]) {
         return res.status(404).json({ errors: ['error when creating chat'] });
     }
-    return res.status(200).json(chat);
+    return res.status(200).json({
+        id: chat[0]._id,
+        user: chat[1]
+    });
 };
 module.exports = { addChatMessage, getChatMessages, createChat, getChats, getChat, deleteChat };
