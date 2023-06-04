@@ -125,28 +125,34 @@ const deleteChat = async (req, res) => {
     res.status(200).json({})
 };
 const createChat = async (req, res) => {
-    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
-        return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+    try {
+        if (!req.user || !req.user.username) {
+            return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+        }
+        if (!req.body.username) {
+            return res.status(402).json({ errors: ['username field is mandatory'] });
+        }
+        if (req.user.username === req.body.username) {
+            return res.status(403).json({ errors: ['stop talking to yourself you wierdo'] });
+        }
+        const retVal = await userService.getUserByName(req.body.username);
+        if (!retVal) {
+            return res.status(400).json({ errors: ['User does not exists'] });
+        }
+        const chat = await chatService.createChat(req.body.username, req.user.username);
+
+        if (!chat[0]) {
+            return res.status(404).json({ errors: ['error when creating chat'] });
+        }
+        return res.status(200).json({
+            id: chat[0]._id,
+            user: chat[1]
+        });
+    } catch (err) {
+        console.log('errrrrrrrrrr: ');
+
+
     }
-    const me = req.user.userObj.username;
-    if (!req.body.username) {
-        return res.status(402).json({ errors: ['username field is mandatory'] });
-    }
-    if (req.user.userObj.username === req.body.username) {
-        return res.status(403).json({ errors: ['stop talking to yourself you wierdo'] });
-    }
-    const retVal = await userService.getUserByName(req.body.username);
-    if (!retVal) {
-        return res.status(400).json({ errors: ['User does not exists'] });
-    }
-    const chat = await chatService.createChat(req.body.username, me);
-    console.log('chat: ', chat);
-    if (!chat[0]) {
-        return res.status(404).json({ errors: ['error when creating chat'] });
-    }
-    return res.status(200).json({
-        id: chat[0]._id,
-        user: chat[1]
-    });
+
 };
 module.exports = { addChatMessage, getChatMessages, createChat, getChats, getChat, deleteChat };

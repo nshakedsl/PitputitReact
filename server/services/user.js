@@ -25,10 +25,15 @@ const getUserByName = async (username) => {
     return user;
 };
 const deleteUser = async (username) => {
-    const user = await getUserByName(username);
-    if (!user) return null;
-    await user.remove();
-    return user;
+    try {
+        const user = await getUserByName(username);
+        if (!user) return null;
+        await user.remove();
+        return user;
+    } catch (err) {
+        console.log('err: !!!!!', err);
+
+    }
 };
 
 const createUser = async (username, displayName, profilePic) => {
