@@ -48,6 +48,13 @@ const addChatMessage = async (req, res) => {
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
+    const chat = await chatService.getChatById(req.params.id);
+    if(!chat){
+        return res.status(404).json({ errors: ['Chat not found'] });
+    }
+    if (!chatService.amInChat(req.user.userObj._id, chat)) {
+        return res.status(401).json({ errors: ['Unauthorized Request of Chat'] });
+    }
     const sender = req.user.userObj
     const result = await chatService.addMessage(req.params.id, sender, req.body.msg);
     if (!result) {
