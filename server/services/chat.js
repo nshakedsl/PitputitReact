@@ -13,7 +13,7 @@ const getLastMessage = async (id) => {
     const messages = await getMessagesOfChat(id);
     console.log("messages is", messages);
     if (!messages || messages.length === 0) {
-        return {};
+        return null;
     }
     const lastMsg = await Message.findOne({ _id: messages[messages.length - 1]._id });
     console.log(lastMsg);
