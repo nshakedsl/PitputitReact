@@ -1,7 +1,6 @@
 const Chat = require('../models/chat');
 const serviceMessage = require('./message');
 const { getUserByName } = require('./user');
-const { ObjectId } = require('mongodb');
 
 const getMessagesOfChat = async (id) => {
     const chat = await getChatById(id);
@@ -29,6 +28,7 @@ const addMessage = async (id, sender, content) => {
         { $push: { messages: message } },
         { new: true }
     ).exec();
+    console.log('updatedChat: ', updatedChat);
     return message;
 };
 const createChat = async (sender, reciever) => {
