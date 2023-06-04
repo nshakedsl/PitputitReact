@@ -53,12 +53,12 @@ git checkout -b milestone2
 ### 3. create env file: 
 - create `.env.local` file 
 - put the file into `server/config/` directory. 
-- fill the file by writiing the following data.
+- fill the file by writing the following data:
 - `CONNECTION_STRING`- Login details 
 - `PORT` - The port you want to run on  it.
 - `SECRET_KEY` - A random string
 
-### For example:
+#### For example:
 
 ```
 CONNECTION_STRING="mongodb://localhost:27017/Pitputit"
