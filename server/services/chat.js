@@ -11,13 +11,13 @@ const getMessagesOfChat = async (id) => {
 
 const getLastMessage = async (id) => {
     const messages = await getMessagesOfChat(id);
-    console.log("messages is",messages);
-    if(!messages || messages.length === 0){
+    console.log("messages is", messages);
+    if (!messages || messages.length === 0) {
         return {};
     }
     const lastMsg = await Message.findOne({ _id: messages[messages.length - 1]._id });
     console.log(lastMsg);
-    console.log("last message is: ",messages[messages.length - 1]);
+    console.log("last message is: ", messages[messages.length - 1]);
     const lastMsgJson = {};
     lastMsgJson["id"] = lastMsg._id;
     lastMsgJson["created"] = lastMsg.created;
@@ -54,7 +54,7 @@ const getChatById = async (id) => {
         return await Chat.findById(id);
 
     } catch (err) {
-        console.log('err: ', err);
+        // console.log('err: ', err);
         return null;
     }
 
@@ -63,14 +63,18 @@ const getChats = async () => { return await Chat.find({}); };
 
 
 const deleteChatById = async (_id) => {
-    const chat = await getChatById(_id);
-    if (!chat) return null;
-    await Promise.all(chat.messages.map(async (message) => {
-        return await serviceMessage.deleteMessage(message._id);
+    try {
+        const chat = await getChatById(_id);
+        if (!chat) return null;
+        await Promise.all(chat.messages.map(async (message) => {
+            return await serviceMessage.deleteMessage(message._id);
+        }
+        ))
+        await Chat.deleteOne({ _id }).exec();
+        return chat;
+    } catch (err) {
+        // console.log('err: ', err);
     }
-    ))
-    await Chat.deleteOne({ _id }).exec();
-    return chat;
 };
 
 

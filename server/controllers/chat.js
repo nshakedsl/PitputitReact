@@ -105,7 +105,7 @@ const deleteChat = async (req, res) => {
     if (!chatService.amInChat(req.user.userObj._id, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request'] });
     }
-    res.json(chat);
+    res.status(200).json({})
 };
 const createChat = async (req, res) => {
     console.log("createChat");
