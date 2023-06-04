@@ -46,6 +46,10 @@ function RegisterForm() {
       setError('image is a mandatory field❗');
       shakeAction();
 
+    }  else if (!/\.(jpg|jpeg|png|gif|bmp)$/.test(imageSrc)) {
+      setError('image is not valid❗');
+      shakeAction();
+
     } else if (username.length < 2 || nickname.length < 2) {
       setError('inputs must contain at least 2 characters❗');
       shakeAction();
