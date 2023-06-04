@@ -32,7 +32,7 @@ function AddContact({ show, onHide, setShow }) {
 
     const addContactToUser = async (data) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/Chats`, {
+            const res = await fetch(`http://localhost:8080/api/Chats`, {
                 'method': 'POST',
                 'headers': {
                     'Content-Type': 'application/json',

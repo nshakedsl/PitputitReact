@@ -25,7 +25,7 @@ function LoginForm() {
 
   const login = async (data) => {
     try {
-      const res = await fetch('http://localhost:5000/api/Tokens', {
+      const res = await fetch('http://localhost:8080/api/Tokens', {
         'method': 'POST',
         'headers': {
           'Content-Type': 'application/json',

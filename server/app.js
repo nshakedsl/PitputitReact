@@ -22,12 +22,15 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-// // Serve static files from the 'public' directory
+// Serve static files from the 'public' directory
 app.use(express.static('public'));
 
+// Add '/api' to all routes
+const apiRouter = express.Router();
+app.use('/api', apiRouter);
 
-app.use('/Chats', auth, chat);
-app.use('/Users', user);
-app.use('/Tokens', tokens);
+apiRouter.use('/Chats', auth, chat);
+apiRouter.use('/Users', user);
+apiRouter.use('/Tokens', tokens);
 
 app.listen(process.env.PORT);

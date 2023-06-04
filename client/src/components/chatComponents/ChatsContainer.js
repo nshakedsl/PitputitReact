@@ -15,7 +15,7 @@ function MessageContainer() {
     const getChat = async () => {
 
         try {
-            const res = await fetch(`http://localhost:5000/api/Chats/${Userctx.currentChatId}/Messages`, {
+            const res = await fetch(`http://localhost:8080/api/Chats/${Userctx.currentChatId}/Messages`, {
                 'method': 'GET',
                 'headers': {
                     'Content-Type': 'application/json',

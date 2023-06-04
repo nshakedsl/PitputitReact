@@ -55,7 +55,7 @@ function ChatPage() {
 
     const getContacts = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/Chats/`, {
+            const res = await fetch(`http://localhost:8080/api/Chats/`, {
                 'method': 'GET',
                 'headers': {
                     'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ function ChatPage() {
     }
     const getUserDetails = async (username) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/Users/${username}`, {
+            const res = await fetch(`http://localhost:8080/api/Users/${username}`, {
                 'method': 'GET',
                 'headers': {
                     'Content-Type': 'application/json',

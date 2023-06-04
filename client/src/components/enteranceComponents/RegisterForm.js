@@ -46,10 +46,6 @@ function RegisterForm() {
       setError('image is a mandatory field❗');
       shakeAction();
 
-    }  else if (!/\.(jpg|jpeg|png|gif|bmp)$/.test(imageSrc)) {
-      setError('image is not valid❗');
-      shakeAction();
-
     } else if (username.length < 2 || nickname.length < 2) {
       setError('inputs must contain at least 2 characters❗');
       shakeAction();
@@ -98,7 +94,7 @@ function RegisterForm() {
   const register = async (newUser) => {
     setLoading(true)
     try {
-      let res = await fetch('http://localhost:5000/api/Users', {
+      let res = await fetch('http://localhost:8080/api/Users', {
         'method': 'Post',
         'headers': {
           'Content-Type': 'application/json'
