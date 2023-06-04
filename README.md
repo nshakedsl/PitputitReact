@@ -2,7 +2,9 @@
 
 **Milestone 2 branch:**
 
-Targil 3 (Milestone 2) is on branch Milestone2
+Targil 3 (Milestone 2) is on branch Milestone2.
+
+In this exercise, we transformed our static client code into a dynamic one by implementing a web server.
 ## Authors:
 ![Authors](/public/images/Authors.jpeg)
 1. Shaked Solomon
@@ -17,8 +19,24 @@ There are 3 pages:
 
 This project is a React App for chatting between different users. We called the website Pitputit, which is similar to the Hebrew word for "to chat" or "to talk".
 
+
+
 ## Cloning and Running Instructions:
-To clone the repository, follow these steps:
+
+
+1. Create a database using MongoDB.
+Detailed instructions on creating the database using MongoDB Compass (or through the shell) are provided below:
+- Ensure that the MongoDB Compass application is installed.
+- Open the downloaded application and note the following message:
+"mongodb://localhost:27017" via the default URI.
+- Click the connect button.
+- Click the add button and fill in the Database Name field with "Pitputit"
+and the Collection Name field with "chats". 
+- Finally, click the create button.
+
+
+
+2. To clone the repository, follow these steps:
 
 In the terminal, navigate to the directory where you want to clone the repository.
 Enter the following command:
@@ -27,20 +45,37 @@ https://github.com/nshakedsl/PitputitReact.git
 ```
 To run the program, follow these steps:
 
-1. To install the libraries:
+- To install the libraries:
  ```
  npm i
  ```
-2. To run the project- enter to server folder:
+- To run the project- enter to server folder:
 ```
 cd server
 ```
-3. And run it by:
+- And run it by:
 ```
 npm start
 ```
-4. Navigate in the browser to localhost:3000
-5. Then you can create users and use the application.
+- Navigate in the browser to Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+- Then you can create users and use the application.
+
+
+
+### The assignment parts:
+In the first part:
+We modified the React code to enable communication with a built-in server.
+This step served as preparatory code for the subsequent parts.
+
+In the second part:
+We developed a web server using Node.js.
+As a result, when any input is entered through the login, the details are saved.
+We implemented a Node.js server following the MVC architecture, which offers the same functionality as the server in the first part. Additionally, it performs additional validation checks to ensure that the entered details are correct before saving them to MongoDB.
+
+In the third part:
+We established real-time communication.
+Users can log in through the login screen and send messages to each other while they are both logged in on their respective browsers. The recipient user immediately receives and sees the message without needing to request it.
 ### Switching Between Pages
 
 To move between the pages, click on "Not registered? Click here to register" on the Login page to access the register/signUp page. To go from the Login page to the Chats page, click on the Log in button after you entered the password and username you signed up with. 

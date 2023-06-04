@@ -43,7 +43,7 @@ const createChat = async (sender, reciever) => {
     }
     const users = [user1, user2];
     const chat = await Chat.create({ messages, users });
-    return await chat.save();
+    return [chat, user1];
 };
 const getChatById = async (id) => {
     try {
@@ -118,5 +118,9 @@ const amInChat = (id, chat) => {
     return false;
 };
 
+<<<<<<< HEAD
 module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage,
      amInChat, getLastMessage,jsonifyForGetChat, jsonifyForGetChatMessages }
+=======
+module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage, amInChat, getLastMessage, jsonifyForGetChat }
+>>>>>>> f5085029a62aa7a72ce677dcea18371c1c9d51f7
