@@ -14,10 +14,11 @@ const JSONIFY = async (chat) => {
     }
     ))
     result["users"] = users;
+    const lastmsg = await chatService.getLastMessage(chat);
+    console.log(lastmsg);
     return result;
 };
 const getChats = async (req, res) => {
-    console.log("getChats");
     if (!req.user || !req.user.userObj || !req.user.userObj.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }

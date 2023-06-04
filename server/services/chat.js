@@ -8,6 +8,17 @@ const getMessagesOfChat = async (id) => {
     if (!chat || !chat.messages) return null;
     return chat.messages;
 };
+
+const getLastMessage = async (id) => {
+    const messages = await getMessagesOfChat(id);
+    console.log("messages is",messages);
+    if(!messages || messages.length === 0){
+        return null;
+    }
+    console.log("last message is: ",messages[messages.length - 1]);
+    return messages[messages.length - 1];
+}
+
 const addMessage = async (id, sender, content) => {
     const chat = await getChatById(id);
     if (!chat || !chat.messages) return null;
@@ -17,7 +28,6 @@ const addMessage = async (id, sender, content) => {
         { $push: { messages: message } },
         { new: true }
     );
-    console.log(message);
     return message;
 };
 const createChat = async (sender, reciever) => {
@@ -61,4 +71,4 @@ const amInChat = (id, chat) => {
     return false;
 };
 
-module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage, amInChat }
+module.exports = { getMessagesOfChat, getChatById, getChats, deleteChatById, createChat, addMessage, amInChat,getLastMessage }
