@@ -1,4 +1,5 @@
 const Chat = require('../models/chat');
+const Message = require('../models/message');
 const serviceMessage = require('./message');
 const { getUserByName } = require('./user');
 const { ObjectId } = require('mongodb');
@@ -15,11 +16,13 @@ const getLastMessage = async (id) => {
     if(!messages || messages.length === 0){
         return {};
     }
+    const lastMsg = await Message.findOne({ _id: messages[messages.length - 1]._id });
+    console.log(lastMsg);
     console.log("last message is: ",messages[messages.length - 1]);
     const lastMsgJson = {};
-    lastMsgJson["id"] = messages[messages.length - 1]._id;
-    lastMsgJson["created"] = messages[messages.length - 1].created;
-    lastMsgJson["content"] = messages[messages.length - 1].content;
+    lastMsgJson["id"] = lastMsg._id;
+    lastMsgJson["created"] = lastMsg.created;
+    lastMsgJson["content"] = lastMsg.content;
     return lastMsgJson;
 }
 
