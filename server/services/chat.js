@@ -1,4 +1,5 @@
 const Chat = require('../models/chat');
+const Message = require('../models/message');
 const serviceMessage = require('./message');
 const { getUserByName } = require('./user');
 
@@ -10,12 +11,18 @@ const getMessagesOfChat = async (id) => {
 
 const getLastMessage = async (id) => {
     const messages = await getMessagesOfChat(id);
-    console.log("messages is", messages);
-    if (!messages || messages.length === 0) {
-        return null;
+    console.log("messages is",messages);
+    if(!messages || messages.length === 0){
+        return {};
     }
-    console.log("last message is: ", messages[messages.length - 1]);
-    return messages[messages.length - 1];
+    const lastMsg = await Message.findOne({ _id: messages[messages.length - 1]._id });
+    console.log(lastMsg);
+    console.log("last message is: ",messages[messages.length - 1]);
+    const lastMsgJson = {};
+    lastMsgJson["id"] = lastMsg._id;
+    lastMsgJson["created"] = lastMsg.created;
+    lastMsgJson["content"] = lastMsg.content;
+    return lastMsgJson;
 }
 
 const addMessage = async (id, sender, content) => {

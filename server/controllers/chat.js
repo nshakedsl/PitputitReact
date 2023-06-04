@@ -13,8 +13,10 @@ const JSONIFY = async (chat) => {
     }
     ))
     result["users"] = users;
-    const lastmsg = await chatService.getLastMessage(chat);
-    console.log(lastmsg);
+    const lastMsgId = await chatService.getLastMessage(chat);
+    result["lastMessage"] = lastMsgId;
+    console.log(lastMsgId);
+    //todo: deal with empty message
     return result;
 };
 const getChats = async (req, res) => {
@@ -33,7 +35,6 @@ const getChats = async (req, res) => {
 };
 const addChatMessage = async (req, res) => {
     console.log("addChatMessage");
-
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
