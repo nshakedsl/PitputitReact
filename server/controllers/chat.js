@@ -51,8 +51,9 @@ const addChatMessage = async (req, res) => {
     if (!req.user || !req.user.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
+
     const me = await userService.getUserByName(req.user.username);
-    if(!me){
+    if (!me) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
     const chat = await chatService.getChatById(req.params.id);
@@ -76,7 +77,7 @@ const getChat = async (req, res) => {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
     const me = await userService.getUserByName(req.user.username);
-    if(!me){
+    if (!me) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
     if (!req.params.id) {
@@ -97,7 +98,7 @@ const getChatMessages = async (req, res) => {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
     const me = await userService.getUserByName(req.user.username);
-    if(!me){
+    if (!me) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
     if (!req.params.id) {
