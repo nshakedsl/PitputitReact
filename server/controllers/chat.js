@@ -1,6 +1,6 @@
 const chatService = require('../services/chat');
 const userService = require('../services/user');
-const JSONIFY = async (chat) => {
+const JSONIFY = async (chat, me) => {
     if (!chat) {
         return {};
     }
@@ -8,11 +8,15 @@ const JSONIFY = async (chat) => {
     const users = [];
     result["id"] = chat._id;
     await Promise.all(chat.users.map(async (ref) => {
-        let temp = await userService.jsonifyUser(ref);
-        users.push(temp);
+        if(!ref.equals(me._id)){
+            let temp = await userService.jsonifyUser(ref);
+            users.push(temp);
+        }
     }
     ))
-    result["users"] = users;
+    if(!users.length()===0){
+        result["user"] = users[0];
+    }
     const lastMsgId = await chatService.getLastMessage(chat);
     if (!lastMsgId || lastMsgId === {}) {
         result["lastMessage"] = null;
@@ -35,7 +39,7 @@ const getChats = async (req, res) => {
     }
     jsonArr = [];
     await Promise.all(chats.map(async (ref) => {
-        let temp = await JSONIFY(ref);
+        let temp = await JSONIFY(ref, me);
         jsonArr.push(temp);
     }
     ))
