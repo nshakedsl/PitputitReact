@@ -102,7 +102,7 @@ const jsonifyForGetChatMessages = async (chat) => {
     const messages = [];
     await Promise.all(chat.map(async (ref) => {
         let temp = await serviceMessage.jsonifyMessageForMessageOnly(ref);
-        messages.push(temp);
+        messages.unshift(temp);
     }
     ))
     return messages;
