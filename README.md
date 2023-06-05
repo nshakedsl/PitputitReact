@@ -2,9 +2,12 @@
 
 **Milestone 2 branch:**
 
-Targil 3 (Milestone 2) is on branch Milestone2.
-
+Targil 3 (Milestone 2) is on branch Milestone2-
 In this exercise, we transformed our static client code into a dynamic one by implementing a web server.
+
+Targil 2 (Milestone 1 B) is on branch Milestone1b-
+This project is a React App for chatting between different users. We called the website Pitputit, which is similar to the Hebrew word for "to chat" or "to talk".
+
 ## Authors:
 ![Authors](/client/public/images/Authors.jpeg)
 1. Shaked Solomon
@@ -78,6 +81,11 @@ cd server
 - And run it by:
 ```
 npm start
+```
+
+- If you are on linux run it by:
+```
+npm start linux
 ```
 - Navigate in the browser to Open [http://localhost:8080](http://localhost:8080) to view it in your browser.
 
