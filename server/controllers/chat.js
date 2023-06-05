@@ -72,7 +72,6 @@ const addChatMessage = async (req, res) => {
 };
 
 const getChat = async (req, res) => {
-    console.log("getChat");
     if (!req.user || !req.user || !req.user.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
