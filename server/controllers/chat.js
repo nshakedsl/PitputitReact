@@ -1,6 +1,6 @@
 const chatService = require('../services/chat');
 const userService = require('../services/user');
-const JSONIFY = async (chat) => {
+const JSONIFY = async (chat, me) => {
     if (!chat) {
         return {};
     }
@@ -8,11 +8,15 @@ const JSONIFY = async (chat) => {
     const users = [];
     result["id"] = chat._id;
     await Promise.all(chat.users.map(async (ref) => {
-        let temp = await userService.jsonifyUser(ref);
-        users.push(temp);
+        if (!ref.equals(me._id)) {
+            let temp = await userService.jsonifyUser(ref);
+            users.push(temp);
+        }
     }
     ))
-    result["users"] = users;
+    if (users.length !== 0) {
+        result["user"] = users[0];
+    }
     const lastMsgId = await chatService.getLastMessage(chat);
     if (!lastMsgId || lastMsgId === {}) {
         result["lastMessage"] = null;
@@ -35,7 +39,7 @@ const getChats = async (req, res) => {
     }
     jsonArr = [];
     await Promise.all(chats.map(async (ref) => {
-        let temp = await JSONIFY(ref);
+        let temp = await JSONIFY(ref, me);
         jsonArr.push(temp);
     }
     ))
@@ -72,7 +76,6 @@ const addChatMessage = async (req, res) => {
 };
 
 const getChat = async (req, res) => {
-    console.log("getChat");
     if (!req.user || !req.user || !req.user.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
@@ -120,10 +123,9 @@ const getChatMessages = async (req, res) => {
     }
 };
 const deleteChat = async (req, res) => {
-    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
+    if (!req.user || !req.user.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
-
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
@@ -131,7 +133,9 @@ const deleteChat = async (req, res) => {
     if (!chat) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
-    if (!chatService.amInChat(req.user.userObj._id, chat)) {
+
+    const me = await userService.getUserByName(req.user.username);
+    if (!chatService.amInChat(me._id, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request'] });
     }
     res.status(200).json({})
