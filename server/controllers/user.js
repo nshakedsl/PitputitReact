@@ -1,10 +1,10 @@
 const userService = require('../services/user');
 
 const getUser = async (req, res) => {
-    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
+    if (!req.user || !req.user.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
-    const me = req.user.userObj.username;
+    const me = req.user.username;
     if (!req.params.username || req.params.username === "") {
         return res.status(400).json({ errors: ['Bad Request of User'] });
     }

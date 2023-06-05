@@ -23,10 +23,10 @@ const JSONIFY = async (chat) => {
     return result;
 };
 const getChats = async (req, res) => {
-    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
+    if (!req.user || !req.user.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
-    const me = req.user.userObj;
+    const me = await userService.getUserByName(req.user.username)
     let chats = await chatService.getChats()
     if (chats) {
         chats = chats.filter(element => chatService.amInChat(me._id, element))
@@ -48,17 +48,22 @@ const addChatMessage = async (req, res) => {
     if (!req.body.msg || !req.body.msg === '') {
         return res.status(403).json({ errors: ['illegal msg'] });
     }
-    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
+    if (!req.user || !req.user.username) {
+        return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+    }
+
+    const me = await userService.getUserByName(req.user.username);
+    if (!me) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
     const chat = await chatService.getChatById(req.params.id);
     if (!chat) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
-    if (!chatService.amInChat(req.user.userObj._id, chat)) {
+    if (!chatService.amInChat(me._id, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request of Chat'] });
     }
-    const sender = req.user.userObj
+    const sender = me;
     const result = await chatService.addMessage(req.params.id, sender, req.body.msg);
     if (!result) {
         return res.status(404).json({ errors: ['Chat not found'] });
@@ -68,7 +73,11 @@ const addChatMessage = async (req, res) => {
 
 const getChat = async (req, res) => {
     console.log("getChat");
-    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
+    if (!req.user || !req.user || !req.user.username) {
+        return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+    }
+    const me = await userService.getUserByName(req.user.username);
+    if (!me) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
     if (!req.params.id) {
@@ -78,14 +87,18 @@ const getChat = async (req, res) => {
     if (!chat) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
-    if (!chatService.amInChat(req.user.userObj._id, chat)) {
+    if (!chatService.amInChat(me._id, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request of Chat'] });
     }
     const result = await chatService.jsonifyForGetChat(chat);
     res.json(result);
 };
 const getChatMessages = async (req, res) => {
-    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
+    if (!req.user || !req.user || !req.user.username) {
+        return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+    }
+    const me = await userService.getUserByName(req.user.username);
+    if (!me) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
     if (!req.params.id) {
@@ -93,14 +106,13 @@ const getChatMessages = async (req, res) => {
     }
     const chat = await chatService.getChatById(req.params.id);
     if (chat) {
-        if (!chatService.amInChat(req.user.userObj._id, chat)) {
+        if (!chatService.amInChat(me._id, chat)) {
             return res.status(401).json({ errors: ['Unauthorized Request'] });
         }
         const chatMessages = await chatService.getMessagesOfChat(req.params.id);
         if (!chatMessages) {
             return res.status(404).json({ errors: ['Chat Messages not found'] });
         }
-        console.log(chatMessages)
         result = await chatService.jsonifyForGetChatMessages(chatMessages);
         return res.json(result);
     } else {
@@ -125,28 +137,34 @@ const deleteChat = async (req, res) => {
     res.status(200).json({})
 };
 const createChat = async (req, res) => {
-    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
-        return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+    try {
+        if (!req.user || !req.user.username) {
+            return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
+        }
+        if (!req.body.username) {
+            return res.status(402).json({ errors: ['username field is mandatory'] });
+        }
+        if (req.user.username === req.body.username) {
+            return res.status(403).json({ errors: ['stop talking to yourself you wierdo'] });
+        }
+        const retVal = await userService.getUserByName(req.body.username);
+        if (!retVal) {
+            return res.status(400).json({ errors: ['User does not exists'] });
+        }
+        const chat = await chatService.createChat(req.body.username, req.user.username);
+
+        if (!chat[0]) {
+            return res.status(404).json({ errors: ['error when creating chat'] });
+        }
+        return res.status(200).json({
+            id: chat[0]._id,
+            user: chat[1]
+        });
+    } catch (err) {
+        console.log('errrrrrrrrrr: ');
+
+
     }
-    const me = req.user.userObj.username;
-    if (!req.body.username) {
-        return res.status(402).json({ errors: ['username field is mandatory'] });
-    }
-    if (req.user.userObj.username === req.body.username) {
-        return res.status(403).json({ errors: ['stop talking to yourself you wierdo'] });
-    }
-    const retVal = await userService.getUserByName(req.body.username);
-    if (!retVal) {
-        return res.status(400).json({ errors: ['User does not exists'] });
-    }
-    const chat = await chatService.createChat(req.body.username, me);
-    console.log('chat: ', chat);
-    if (!chat[0]) {
-        return res.status(404).json({ errors: ['error when creating chat'] });
-    }
-    return res.status(200).json({
-        id: chat[0]._id,
-        user: chat[1]
-    });
+
 };
 module.exports = { addChatMessage, getChatMessages, createChat, getChats, getChat, deleteChat };

@@ -61,7 +61,6 @@ function MessageInput() {
 
 
     const handleMessageSent = async () => {
-        console.log("hiii");
         if (value.trim() != '') {
             let newMessage = { msg: value }
             setLoading(true)

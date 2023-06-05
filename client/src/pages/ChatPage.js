@@ -173,8 +173,8 @@ function ChatPage() {
                                     return lastMessage ?
                                         <Contact
                                             key={item.id}
-                                            otherName={item.user.displayName}
-                                            otherImg={item.user.profilePic}
+                                            otherName={item && item.user && item.user.displayName}
+                                            otherImg={item && item.user && item.user.profilePic}
                                             date={calcDisplayDate(lastMessage.created)}
                                             lastMsg={lastMessage.content}
                                             chatId={item.id}
