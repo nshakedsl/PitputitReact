@@ -120,10 +120,9 @@ const getChatMessages = async (req, res) => {
     }
 };
 const deleteChat = async (req, res) => {
-    if (!req.user || !req.user.userObj || !req.user.userObj.username) {
+    if (!req.user || !req.user.username) {
         return res.status(405).json({ errors: ['congradulations, you broke the code with your token'] });
     }
-
     if (!req.params.id) {
         return res.status(400).json({ errors: ['Bad Request of Chat'] });
     }
@@ -131,7 +130,9 @@ const deleteChat = async (req, res) => {
     if (!chat) {
         return res.status(404).json({ errors: ['Chat not found'] });
     }
-    if (!chatService.amInChat(req.user.userObj._id, chat)) {
+
+    const me = await userService.getUserByName(req.user.username);
+    if (!chatService.amInChat(me._id, chat)) {
         return res.status(401).json({ errors: ['Unauthorized Request'] });
     }
     res.status(200).json({})
