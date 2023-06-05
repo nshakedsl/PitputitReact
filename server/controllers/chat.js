@@ -8,13 +8,13 @@ const JSONIFY = async (chat, me) => {
     const users = [];
     result["id"] = chat._id;
     await Promise.all(chat.users.map(async (ref) => {
-        if(!ref.equals(me._id)){
+        if (!ref.equals(me._id)) {
             let temp = await userService.jsonifyUser(ref);
             users.push(temp);
         }
     }
     ))
-    if(!users.length()===0){
+    if (users.length !== 0) {
         result["user"] = users[0];
     }
     const lastMsgId = await chatService.getLastMessage(chat);
