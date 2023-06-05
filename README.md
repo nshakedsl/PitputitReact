@@ -8,6 +8,9 @@ In this exercise, we transformed our static client code into a dynamic one by im
 Targil 2 (Milestone 1 B) is on branch Milestone1b-
 This project is a React App for chatting between different users. We called the website Pitputit, which is similar to the Hebrew word for "to chat" or "to talk".
 
+Targil 1 (Main) is on branch Main-
+This reposetory, is a web user interface using HTML and CSS.
+
 ## Authors:
 ![Authors](/client/public/images/Authors.jpeg)
 1. Shaked Solomon
