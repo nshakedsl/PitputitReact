@@ -561,3 +561,18 @@ img {
 .gray_spinner {
     background-color: gray !important;
 }
+
+
+.alert {
+    margin-top: 10px;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+  }
+  
+  .alert-info {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
+  }
+  
