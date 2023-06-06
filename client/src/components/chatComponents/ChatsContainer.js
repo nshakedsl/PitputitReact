@@ -12,9 +12,14 @@ function MessageContainer() {
     useEffect(() => {
         Userctx.socket.on('receiveMessage', data => {
             Userctx.setCurrentChatId(prevCurrentChatId => {
-            
-                if (data.currentChatId === prevCurrentChatId)
+                Userctx.setUser((prevUser) => {
+                    let temp = { ...prevUser }
+                    temp.dialogList.find(item => item.user.username === Userctx.currentChatUser.username).lastMessage = data.responseData
+                    return temp
+                })
+                if (data.currentChatId === prevCurrentChatId) {
                     Userctx.setCurrentChat(prevCurrentChat => [...prevCurrentChat, data.responseData]);
+                }
                 return prevCurrentChatId
             })
         });
