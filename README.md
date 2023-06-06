@@ -1,8 +1,8 @@
 # Pitputit
 
-**Milestone 2 branch:**
+**milestone 2 branch:**
 
-Targil 3 (Milestone 2) is on branch Milestone2-
+Targil 3 (milestone 2) is on branch milestone2-
 In this exercise, we transformed our static client code into a dynamic one by implementing a web server.
 
 Targil 2 (Milestone 1 B) is on branch Milestone1b-
