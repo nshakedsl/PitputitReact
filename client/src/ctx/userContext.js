@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
     const [currentChat, setCurrentChat] = useState(undefined);
     const [currentChatId, setCurrentChatId] = useState(undefined);
     const [currentChatUser, setCurrentChatUser] = useState(undefined);
-
+    const [socket, setSocket] = useState(undefined)
     const [checkboxChecked, setCheckboxChecked] = useState(true)
 
     useEffect(() => {
@@ -35,8 +35,9 @@ export const UserProvider = ({ children }) => {
         currentChatUser,
         setCurrentChatUser,
         checkboxChecked,
-        setCheckboxChecked
-
+        setCheckboxChecked,
+        socket,
+        setSocket
     };
 
     return (

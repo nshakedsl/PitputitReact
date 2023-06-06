@@ -7,6 +7,8 @@ const chat = require('./routes/chat');
 const user = require('./routes/user');
 const tokens = require('./routes/tokens');
 const app = express();
+const http = require('http');
+const { Server } = require('socket.io');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -22,7 +24,32 @@ app.use(express.static('public'));
 
 mongoose.connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 });
 
-app.listen(process.env.PORT);
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: 'http://localhost:3000'
+    }
+});
+
+io.on('connection', (socket) => {
+    console.log('A user connected');
+    socket.on('myuser', user => {
+        socket.join(user)
+    })
+
+    socket.on('sendMessage', (data) => {
+        console.log('data: ', data);
+        io.to(data.username).emit('receiveMessage', data.responseData);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('A user disconnected');
+    });
+});
+
+server.listen(process.env.PORT, () => {
+    console.log(`Server listening on port ${process.env.PORT}`);
+});
