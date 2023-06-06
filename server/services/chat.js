@@ -90,6 +90,7 @@ const jsonifyForGetChat = async (chat) => {
         messages.unshift(temp);
     }
     ))
+
     result["messages"] = messages;
 
     return result;
@@ -105,7 +106,17 @@ const jsonifyForGetChatMessages = async (chat) => {
         messages.unshift(temp);
     }
     ))
-    return messages;
+    const newMessages = await messages.sort(function (a, b) {
+        let dateA = new Date(a.created);
+        let dateB = new Date(b.created)
+        if (dateA > dateB) {
+            return -1;
+        } else if (dateA < dateB) {
+            return 1;
+        }
+        return 0;
+    })
+    return newMessages;
 };
 
 const amInChat = (id, chat) => {

@@ -8,6 +8,20 @@ function MessageContainer() {
     const Userctx = useContext(UserContext);
     const navigate = useNavigate();
 
+
+    useEffect(() => {
+        Userctx.socket.on('receiveMessage', data => {
+            console.log("receiveMessage");
+            Userctx.setCurrentChat(prevCurrentChat => [...prevCurrentChat, data]);
+        });
+        Userctx.socket.emit('myuser', Userctx.userName)
+
+        return () => {
+            Userctx.socket.off('receiveMessage');
+        };
+    }, []);
+
+
     useEffect(() => {
         getChat()
     }
@@ -42,9 +56,9 @@ function MessageContainer() {
     return (
 
         <div className="chats-container" >
-            {Userctx && Userctx.currentChat && Userctx.currentChat && Userctx.currentChat.map((item) => (
-                <Mesage key={item.id} MessageInfo={item} />
-            ))}
+            {Userctx && Userctx.currentChat && Userctx.currentChat && Userctx.currentChat.map((item) => {
+                return <Mesage key={item.id} MessageInfo={item} />
+            })}
         </div>
     );
 }

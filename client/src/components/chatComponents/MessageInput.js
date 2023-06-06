@@ -30,6 +30,7 @@ function MessageInput() {
 
                 if (res.status === 200) {
                     const responseData = await res.json()
+                    Userctx.socket.emit('sendMessage', { responseData, username: Userctx.currentChatUser.username });
 
                     Userctx.setCurrentChat((prevCurrentChat) => {
                         let temp = [...prevCurrentChat]
