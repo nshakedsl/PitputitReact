@@ -3,7 +3,7 @@ import PasswordInput from './PasswordInput';
 import RegularInput from './RegularInput';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../../ctx/userContext"
-import GetMessage from'./GetMessage';
+import GetMessage from'../chatComponents/GetMessage';
 
 function LoginForm() {
   const Userctx = useContext(UserContext);
@@ -86,9 +86,9 @@ function LoginForm() {
 
   return (
     <form>
-      {/* <div>
+      <div>
         <GetMessage show="true" text= "hi"> </GetMessage>
-      </div> */}
+      </div>
       <div className="element_width slide-in-right">
         <h3 className="title"> Welcome Back👋</h3>
         
