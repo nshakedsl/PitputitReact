@@ -3,6 +3,7 @@ import PasswordInput from './PasswordInput';
 import RegularInput from './RegularInput';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../../ctx/userContext"
+import GetMessage from'./GetMessage';
 
 function LoginForm() {
   const Userctx = useContext(UserContext);
@@ -85,8 +86,12 @@ function LoginForm() {
 
   return (
     <form>
+      {/* <div>
+        <GetMessage show="true" text= "hi"> </GetMessage>
+      </div> */}
       <div className="element_width slide-in-right">
         <h3 className="title"> Welcome Back👋</h3>
+        
         <RegularInput
           placeholder="Username"
           value={username}
