@@ -41,8 +41,8 @@ io.on('connection', (socket) => {
     })
 
     socket.on('sendMessage', (data) => {
-        console.log('data: ', data);
-        io.to(data.username).emit('receiveMessage', data.responseData);
+        io.to(data.username).emit('receiveMessage',
+            { responseData: data.responseData, currentChatId: data.currentChatId });
     });
 
     socket.on('disconnect', () => {

@@ -14,7 +14,6 @@ function App() {
 
 
   useEffect(() => {
-    console.log("hi");
     const temp = io('http://localhost:8080')
     Userctx.setSocket(temp);
 

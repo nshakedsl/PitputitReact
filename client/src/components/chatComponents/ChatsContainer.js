@@ -11,8 +11,12 @@ function MessageContainer() {
 
     useEffect(() => {
         Userctx.socket.on('receiveMessage', data => {
-            console.log("receiveMessage");
-            Userctx.setCurrentChat(prevCurrentChat => [...prevCurrentChat, data]);
+            Userctx.setCurrentChatId(prevCurrentChatId => {
+            
+                if (data.currentChatId === prevCurrentChatId)
+                    Userctx.setCurrentChat(prevCurrentChat => [...prevCurrentChat, data.responseData]);
+                return prevCurrentChatId
+            })
         });
         Userctx.socket.emit('myuser', Userctx.userName)
 
