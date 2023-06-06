@@ -108,7 +108,6 @@ function RegisterForm() {
       }
       setLoading(false)
       return res;
-      //TODO: handle with wrong image format
     } catch (err) {
       console.log('err: ', err);
 
