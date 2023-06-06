@@ -1,22 +1,26 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Mesage from './Message';
 import { UserContext } from "../../ctx/userContext"
 import { useNavigate } from 'react-router-dom';
-
+import GetMessage from "./GetMessage"
 
 function MessageContainer() {
     const Userctx = useContext(UserContext);
     const navigate = useNavigate();
+    const [show, setShow] = useState(false);
+    const [text, setText] = useState('');
 
 
     useEffect(() => {
         Userctx.socket.on('receiveMessage', data => {
+            setShow(true)
+            setText(`${data.responseData.sender.displayName} : ${data.responseData.content}`)
+            Userctx.setUser((prevUser) => {
+                let temp = { ...prevUser }
+                temp.dialogList.find(item => item.user.username === Userctx.currentChatUser.username).lastMessage = data.responseData
+                return temp
+            })
             Userctx.setCurrentChatId(prevCurrentChatId => {
-                Userctx.setUser((prevUser) => {
-                    let temp = { ...prevUser }
-                    temp.dialogList.find(item => item.user.username === Userctx.currentChatUser.username).lastMessage = data.responseData
-                    return temp
-                })
                 if (data.currentChatId === prevCurrentChatId) {
                     Userctx.setCurrentChat(prevCurrentChat => [...prevCurrentChat, data.responseData]);
                 }
@@ -65,6 +69,7 @@ function MessageContainer() {
     return (
 
         <div className="chats-container" >
+            <GetMessage show={show} text={text} setShow={setShow} />
             {Userctx && Userctx.currentChat && Userctx.currentChat && Userctx.currentChat.map((item) => {
                 return <Mesage key={item.id} MessageInfo={item} />
             })}

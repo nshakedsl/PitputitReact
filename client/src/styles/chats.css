@@ -125,7 +125,7 @@
 }
 
 
-  
+
 
 ::-webkit-scrollbar {
     width: 6px !important;
@@ -242,7 +242,7 @@ body {
 .bubble_container .bubble .text {
     word-wrap: break-word;
     white-space: pre-wrap;
-  }
+}
 
 
 .triangle {
@@ -563,57 +563,58 @@ img {
 }
 
 
-  .alert {
+.alert {
     display: flex;
     align-items: center;
     padding: 10px;
-    border: 1px solid  #31708f;
+    border: 1px solid #31708f;
     border-radius: 4px;
     background-color: #bce8f1;
     color: #333;
-  }
+}
 
-  .alert {
+.alert {
     /* ... */
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-  }
-  
-  .alert.show {
-    opacity: 1;
-  }
-  
-  @keyframes fade-in {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .animation-container {
-    animation: fade-in 0.5s ease-in-out;
-  }
+}
 
-  @keyframes fade-out {
+.alert.show {
+    margin: 1vh;
+    z-index: 10;
+    opacity: 1;
+    position: fixed;
+}
+
+@keyframes fade-in {
     0% {
-      opacity: 1;
+        opacity: 0;
+        transform: translateY(-20px);
     }
+
     100% {
-      opacity: 0;
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
-  
-  .alert.hide {
+}
+
+.animation-container {
+    animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.alert.hide {
+    z-index: 10;
+    position: fixed;
     animation: fade-out 0.5s ease-in-out;
     animation-fill-mode: forwards;
-  }
-  
-  
-
-  
-
-  
+}
