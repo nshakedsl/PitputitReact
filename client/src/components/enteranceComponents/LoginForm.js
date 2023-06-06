@@ -86,9 +86,7 @@ function LoginForm() {
 
   return (
     <form>
-      <div>
-        <GetMessage show="true" text= "hi"> </GetMessage>
-      </div>
+
       <div className="element_width slide-in-right">
         <h3 className="title"> Welcome Back👋</h3>
         
